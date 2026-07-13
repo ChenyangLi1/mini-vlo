@@ -62,11 +62,46 @@ main limitation. Do not describe planned work as completed work.
 
 \chapter{Design and Implementation of the Four Modules}
 \section{The Rendering Module}
+In the end-to-end data flow of the Semantic-Motion system, the Rendering Module serves as a critical bridge connecting raw motion data with Vision-Language Models (VLMs). Traditional Motion Capture data (such as FBX or BVH formats) essentially consists of a series of 3D coordinate point clouds and skeletal rotation matrices that change over time. Because general-purpose VLMs lack the capability to directly parse pure 3D geometric data, a significant "representation gap" exists. The design objective of this module is to construct a fully automated, high-fidelity rendering pipeline that transforms abstract "digital signals" into VLM-perceptible "visual signals" (multi-view videos), while simultaneously exporting standardized 3D physical trajectories to provide high-quality data sources for downstream semantic perception and quality refinement. The core implementation of this module is built upon the Blender 5.1 Python API.
+
 \subsection{Motion Data Import and Scene Initialisation}
+To achieve zero-human-intervention processing for large-scale datasets, the rendering module first establishes a robust batch import and scene initialization mechanism. Upon pipeline initiation, the system iterates through the FBX or BVH motion files in the input directory, importing the armature and animation data via Blender's native interfaces. Addressing the issue of variable action lengths, the script automatically reads the \texttt{animation\_data.action.frame\_range} attribute of the armature to dynamically set the start and end frames of the current scene, thereby achieving adaptive animation durations.
+
+In industrial-grade batch processing, memory leaks and scene pollution are common issues. To address this, the module implements a whitelist-based Trace-free Cleanup Mechanism. Before importing each new action, the system automatically traverses the current scene, destroying the temporary meshes and skeletal data generated in the previous iteration, while strictly preserving foundational scene objects such as lights, cameras, and the ground plane. This state isolation strategy avoids the overhead of repeatedly creating the base environment, significantly enhancing throughput. Furthermore, considering that external motion data may be corrupted, the import phase encapsulates a Try-Except fault-tolerance mechanism. When encountering fatal errors such as an "invalid header," the system automatically logs the error and skips the file, ensuring that the entire engineering pipeline does not crash due to a single corrupted data point.
+
 \subsection{Scene Context Generation}
+To assist the VLM in focusing on the action itself and accurately recognizing macro-intents, the module incorporates a dynamic Scene Context Generation algorithm based on semantic parsing and skeletal dynamic tracking. Pure actions (e.g., sitting down in mid-air) are prone to trigger VLM hallucinations or misjudgments. Therefore, by parsing keywords in the motion filenames and combining them with the skeletal coordinates in physical space, the system dynamically injects minimalist geometric anchors:
+
+\textbf{Vault/Step:} When a vaulting or stepping semantic is identified, the system iterates through every frame of the animation to extract the highest point (peak of flight) of the Root/Hips bone along the Z-axis in the world coordinate system. Subsequently, the corresponding (X, Y) coordinates of that frame are projected onto the ground, and a rectangular cuboid obstacle is generated at this geometric center. This ensures that regardless of where the character initiates the jump, the obstacle perfectly aligns with its motion parabola.
+
+\textbf{Sit:} The system shifts to tracking the lowest point of the Hips bone along the Z-axis and generates a cubic chair directly beneath it, resolving the clipping issue where the character appears to "sit in mid-air" during linear displacement.
+
+\textbf{Drop/Jump Down:} For waterfall-type trajectories where the character drops downwards, the system reads the posture of the initial jump frame, iterates through bones such as the Ankle and Toe, and precisely locates the absolute lowest point of the sole. Simultaneously, the algorithm calculates the directional vector from the jump to the landing and applies a dynamic offset to the generated 2x2 meter platform in the opposite direction of the jump. This positions the character exactly at the edge of the platform in the initial frame, perfectly recreating the physical logic of "jumping down from a height."
+
 \subsection{Multi-view Video Synthesis}
+To meet the Semantic-Motion system's requirements for multi-granular semantic extraction, the rendering module deploys a dual-track virtual camera system within the 3D engine to simulate a real-world, integrated hardware-software capture environment:
+
+\textbf{Fixed View:} Deployed globally within the scene, this view is utilized to capture the character's full-body kinematics, movement trajectories, and macro-spatial relationships with the environmental context.
+
+\textbf{Ego View:} Aimed at simulating the robot's head-mounted perception. The script uses Python to traverse and lock onto key bones containing "Head" in their names, dynamically binding the camera to the character's head via the \texttt{parent\_bone} attribute. Subsequently, the viewing direction is corrected using Euler Rotation, enabling it to track the character's line of sight with zero distance. This perspective is crucial for the downstream Perception Module to capture micro-action details, such as Hand-Object Interactions (HOI).
+
+On the rendering output level, the system invokes the Blender EEVEE rendering engine to automatically overwrite the environment background with a solid color (mid-gray/black), eliminating ambient light noise. The output format is configured as a 1024 $\times$ 1024 resolution H.264 encoded MP4 video, ensuring that the VLM is provided with high-definition, interference-free visual inputs even under lower VRAM constraints.
+
 \subsection{3D Motion Trajectory Export}
+While generating visual signals, the rendering module is also tasked with extracting physical Ground Truths. Pure video data cannot directly provide precise physical metrics (e.g., jump height, acceleration), which are indispensable for validating motion quality.
+
+This section embeds a trajectory export algorithm within the rendering loop. The algorithm forces an update of the view layer via \texttt{bpy.context.view\_layer.update()} and reads the product of specific Pose Bones and the \texttt{matrix\_world} frame-by-frame to obtain absolute physical coordinates. To ensure compatibility with heterogeneous motion capture standards (e.g., Mixamo, CMU), the system features built-in skeletal mapping dictionaries that automatically match and extract the spatial coordinates of key nodes like the Root (center of mass), Hand\_R, and Hand\_L. The data is truncated to four decimal places to reduce storage redundancy and serialized into JSON format. This design bifurcates the pipeline: the rendered videos flow into the Perception Module, while the precise 3D trajectory data flows directly into the downstream Refinement Module, providing numerical bases for the final Motion Quality Scoring.
+
 \subsection{Rendering Outputs and Manifest}
+Following the automated processing of the aforementioned engineering pipeline, the Rendering Module stably generates three core deliverables in the output directory for every inputted raw motion file (e.g., \texttt{drop\_from\_roof.fbx}):
+
+\begin{itemize}
+    \item \textbf{Fixed\_View.mp4}: A third-person global video featuring the scene context.
+    \item \textbf{Ego\_View.mp4}: A first-person detail video closely following the character's head movements.
+    \item \texttt{\textless action\_name\textgreater \_trajectory.json}: A 3D motion trajectory file containing the frame-by-frame (X, Y, Z) coordinates of core bones.
+\end{itemize}
+
+These standardized outputs completely eliminate the representation barriers of the raw data, laying a solid underlying data foundation for the system's subsequent semantic generation and multimodal data refinement.
 
 \section{The Perception Module}
 \subsection{Paired-view Input and Synchronous Frame Sampling}
@@ -112,13 +147,73 @@ main limitation. Do not describe planned work as completed work.
 \section{Engineering Acceptance Summary}
 
 \chapter{Engineering Discussion}
+
 \section{Interpretation of System Results}
+From the perspective of end-to-end execution, the system demonstrates exceptional capabilities in "macro-task understanding," yet reveals clear performance bottlenecks in "micro-action and spatial parsing." The Vision-Language Model (VLM) achieves a high accuracy rate in recognizing macro-intents (e.g., "moving a box"), indicating that the large model's prior knowledge of general scenes generalizes well to the robotic rendering perspective. However, when processing spatial relationships and fine-grained operations (e.g., determining the exact distance and contact state between the end-effector and the object), the accuracy drops significantly.
+
+Furthermore, the system outputs reveal a strong presence of cascading errors. A perceptual error or hallucination by the VLM in a single frame directly propagates into the temporal boundary detection of the task, leading to over-segmentation or erroneous merging of action segments. This explains why relying solely on vision-based large model predictions is insufficient, and it validates the absolute necessity of the dual-channel refinement mechanism (incorporating both "motion trajectory quality" and "semantic consistency") in the Refinement Module. The dual-channel approach is significantly more effective at intercepting misleading data samples than relying on a single visual metric.
+
 \section{Engineering Strengths}
+The greatest engineering value of this project lies in the construction of a runnable, observable, and extensible closed-loop data infrastructure, rather than merely algorithmic fine-tuning:
+
+\textbf{Lightweight and Low Resource Dependency:} The pipeline design drastically lowers the computational threshold. By calling cloud-based VLM APIs for visual understanding tasks, the system can run smoothly without the need for local high-performance GPU clusters.
+
+\textbf{High Modularity and Multi-source Compatibility:} The four modules of the system are highly decoupled. This not only allows for seamless integration of more advanced VLMs or LLM rewriters in the future, but also enables the system to be compatible with highly divergent data sources. Whether processing raw FBX motion capture data with complex skeletal hierarchies or standardized LIBERO robotic trajectories, the system can clean and align them through unified data interfaces.
+
+\textbf{Strong Interpretability of Decisions:} The automated data refinement process is not a black box. The output from the Refinement Module is not just a binary keep/drop decision; it includes detailed motion anomaly penalties (e.g., \texttt{high\_jerk\_spikes}) and semantic mismatch reason codes, providing solid data support for subsequent manual review and system debugging.
+
 \section{Failure Mode Analysis}
+During actual engineering execution, the system exposed several typical failure modes:
+
+\textbf{Visual Feature Confusion and Object Misidentification:} The VLM often misidentifies interfering objects in the background as target objects, or experiences semantic confusion between visually similar components.
+
+\textbf{Information Loss due to Temporal Sampling:} The uniform frame sampling strategy, adopted to balance cost and efficiency, may inadvertently miss critical interaction moments that last only for a fraction of a second, resulting in gaps in the generated micro-instruction descriptions.
+
+\textbf{Spatial Alignment and Rendering Biases:} In the Rendering Module, when simple scene contexts (like obstacles or boxes in a vaulting action) are dynamically generated based on skeletal trajectories, spatial misalignments occasionally occur between the generated obstacle and the actual skeletal movement. This spatial dislocation in the rendered environment directly induces the VLM to produce false "non-contact" or "collision" hallucinations.
+
+\textbf{Boundary Collapse Triggered by Single-frame Hallucinations:} Even if the action itself is continuous, if the VLM hallucinates in a single frame (e.g., falsely concluding that the target object has changed), the temporal segmentation algorithm will misjudge it as the start of a new task, leading to a logical fragmentation of the entire task sequence.
+
 \section{Limitations}
+Although Semantic-Motion provides a complete end-to-end pipeline, the current system is still constrained by several key factors:
+
+\textbf{Embodiment Gap:} The Rendering Module currently processes human skeletal motion capture data. The degrees of freedom and kinematic characteristics of human motion possess an inherent embodiment gap compared to actual robotic arms (like UR5 or Franka). This implies that high-quality action descriptions refined based on human models may still require further alignment mapping before being directly transferred to robotic action generation models.
+
+\textbf{Lack of Large-scale Gold-label Data:} The evaluation of Module C is currently limited by a small scale of video cases and static benchmarks (predominantly synthetic images). The lack of large-scale, human-expert annotated datasets for real robotic operations makes it difficult to rigorously prove the absolute performance gain of the dual-channel refinement on the final VLA training efficacy from a statistical standpoint.
+
+\textbf{Uncontrollability of External Dependencies:} While heavily relying on cloud APIs brings convenience, it introduces risks regarding reproducibility. Silent updates to the underlying cloud models may result in different semantic outputs when feeding the exact same video input.
+
+\textbf{Limitations of Text Augmentation:} Although the current rule-template-based Augmentation Module guarantees zero-hallucination, it sacrifices the rich diversity of natural language. It cannot generate instruction variants encompassing complex environmental modifiers or tonal shifts like a native LLM.
+
 \section{Engineering Trade-offs}
+The core process of building this system is essentially a collection of engineering trade-offs:
+
+\textbf{Convenience of Cloud APIs vs. Controllability of Local Deployment:} Utilizing cloud APIs lowered the initial construction cost and hardware threshold but sacrificed local execution determinism and version-locked reproducibility.
+
+\textbf{Cost Advantage of Uniform Sampling vs. Temporal Information of Keyframes:} Frame-by-frame analysis carries an exorbitant computational overhead, making uniform sampling a necessary compromise. While it improves batch processing efficiency, it inevitably increases the risk of missing high-frequency motion details.
+
+\textbf{Safety of Template Augmentation vs. Diversity of LLMs:} Considering the strict accuracy requirements for VLA instructions, we opted for a template-based rewriting strategy, sacrificing linguistic diversity in exchange for 100\% semantic consistency.
+
+\textbf{Strict Aggregation (min) vs. Lenient Filtering (mean):} When processing multi-trajectory motion scoring, using min aggregation maximizes the interception of anomalous trajectories (high precision), but it is also prone to incorrectly discarding high-value samples that contain minor, localized noise (low recall). This requires dynamic adjustment based on dataset scale during the actual construction of training sets.
+
 \section{Evaluation Validity}
+The validity of the current system evaluation methods can be examined across the following four dimensions:
+
+\textbf{Internal Validity:} Through rigorous component ablation studies, we effectively validated the logical superiority of "dual-channel refinement" over "single-metric refinement."
+
+\textbf{External Validity:} The current static benchmarks focus on synthetic images and five specific categories of robotic tasks. The system's generalization capabilities in handling extreme lighting conditions or open-vocabulary long-tail real-world scenarios require further empirical validation.
+
+\textbf{Construct Validity:} Utilizing the ratio of jitter and jerk in motion trajectories as metrics for action data quality is theoretically sound in physics and control theory, effectively reflecting the smoothness and usability of the demonstration data.
+
+\textbf{Reproducibility:} Although the code architecture is fully open-source and data formats are standardized, achieving completely consistent reproducibility across different time periods remains inherently challenging due to the reliance on external large model APIs.
+
 \section{Implications for VLA Data Pipelines}
+The engineering practice of Semantic-Motion offers several core insights for data engineering of future large-scale VLA models:
+
+First, independent vision-language understanding validation is mandatory before feeding data into action generation models. Raw collected motion data contains significant amounts of unintentional wandering and trial-and-error; all trajectories cannot be blindly accepted.
+
+Second, automatically generated task labels must never be used directly (i.e., "nakedly"). Pseudo-labels generated by large models must undergo a controlled feedback loop for rigorous review.
+
+Finally, data refinement must move towards multimodal joint verification. Future filtering systems must evaluate not only whether the textual description matches the video (semantic dimension) but also whether the trajectory is physically smooth (physical dimension). Only samples where visual evidence and motion evidence corroborate each other can support the generalized learning of next-generation, high-performance robots.
 
 \chapter{Conclusion and Future Work}
 \section{Conclusion}
