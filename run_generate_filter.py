@@ -34,6 +34,9 @@ from src.semantic_motion import (
 
 ROOT = Path(__file__).parent
 RESULTS_DIR = ROOT / "results"
+PERCEPTION_OUTPUT_DIR = RESULTS_DIR / "perception_output"
+PREPARED_SAMPLE_OUTPUT_DIR = RESULTS_DIR / "c_prepare_sample"
+REFINEMENT_OUTPUT_DIR = RESULTS_DIR / "refinement_output"
 WORK_DIR = ROOT / ".semantic_motion_work"
 DEFAULT_CONFIG = ROOT / "configs" / "module_c_default.yaml"
 
@@ -244,7 +247,9 @@ def _write_json(path: Path, obj: dict[str, Any]) -> None:
 
 def main() -> None:
     args = parse_args()
-    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    PERCEPTION_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    PREPARED_SAMPLE_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    REFINEMENT_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
     recognizer = VLMRecognitionModel(
@@ -301,7 +306,7 @@ def main() -> None:
     perception_path = (
         Path(args.perception_output)
         if args.perception_output
-        else RESULTS_DIR / f"video_task_{timestamp}.json"
+        else PERCEPTION_OUTPUT_DIR / f"video_task_{timestamp}.json"
     )
     record_dict = record.model_dump()
     _write_json(perception_path, record_dict)
@@ -310,12 +315,13 @@ def main() -> None:
     samples_path = (
         Path(args.samples_output)
         if args.samples_output
-        else RESULTS_DIR / f"module_c_samples_{timestamp}.jsonl"
+        else PREPARED_SAMPLE_OUTPUT_DIR / f"module_c_samples_{timestamp}.jsonl"
     )
     samples_pretty_path = (
         Path(args.samples_pretty_output)
         if args.samples_pretty_output
-        else RESULTS_DIR / f"module_c_samples_{timestamp}.pretty.json"
+        else PREPARED_SAMPLE_OUTPUT_DIR
+        / f"module_c_samples_{timestamp}.pretty.json"
     )
     sample_options = PrepareSamplesOptions(
         text_source=args.text_source,
@@ -367,12 +373,12 @@ def main() -> None:
     refined_path = (
         Path(args.refined_output)
         if args.refined_output
-        else RESULTS_DIR / f"refined_{timestamp}.jsonl"
+        else REFINEMENT_OUTPUT_DIR / f"refined_{timestamp}.jsonl"
     )
     refined_pretty_path = (
         Path(args.refined_pretty_output)
         if args.refined_pretty_output
-        else RESULTS_DIR / f"refined_{timestamp}.pretty.json"
+        else REFINEMENT_OUTPUT_DIR / f"refined_{timestamp}.pretty.json"
     )
     save_results(results, refined_path)
     save_results_pretty(results, refined_pretty_path)

@@ -25,6 +25,7 @@ from src.semantic_motion import (
 
 ROOT = Path(__file__).parent
 RESULTS_DIR = ROOT / "results"
+PERCEPTION_OUTPUT_DIR = RESULTS_DIR / "perception_output"
 WORK_DIR = ROOT / ".semantic_motion_work"
 
 
@@ -168,12 +169,12 @@ def main():
             num_variants=args.variants,
         )
 
-    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    PERCEPTION_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_path = (
         Path(args.output)
         if args.output
-        else RESULTS_DIR / f"video_task_{timestamp}.json"
+        else PERCEPTION_OUTPUT_DIR / f"video_task_{timestamp}.json"
     )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w") as f:

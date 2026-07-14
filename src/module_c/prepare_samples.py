@@ -5,9 +5,13 @@ import importlib
 import json
 import re
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Callable
 
+
+ROOT_DIR = Path(__file__).resolve().parents[2]
+DEFAULT_OUTPUT_DIR = ROOT_DIR / "results" / "c_prepare_sample"
 
 MotionTuple = tuple[list[list[float]], list[float]]
 MotionTracks = dict[str, MotionTuple]
@@ -40,8 +44,11 @@ class PrepareSamplesResult:
 
 
 def _read_json(path: Path) -> dict[str, Any]:
-    with path.open("r", encoding="utf-8") as f:
-        return json.load(f)
+    try:
+        text = path.read_text(encoding="utf-8-sig")
+    except UnicodeDecodeError:
+        text = path.read_text(encoding="gbk")
+    return json.loads(text)
 
 
 def _is_valid_motion(positions: list[list[float]], timestamps: list[float]) -> bool:
@@ -752,7 +759,14 @@ def main() -> None:
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument("--perception-dir", help="Directory containing *.json files")
     source.add_argument("--perception-file", help="Single perception JSON file")
-    parser.add_argument("--output", required=True, help="Output JSONL path")
+    parser.add_argument(
+        "--output",
+        default="",
+        help=(
+            "Output JSONL path. Defaults to "
+            "results/c_prepare_sample/module_c_samples_<timestamp>.jsonl"
+        ),
+    )
     parser.add_argument(
         "--pretty-output",
         default="",
@@ -820,6 +834,12 @@ def main() -> None:
         help="Plugin in 'python.module:function_name' format.",
     )
     args = parser.parse_args()
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    output_path = (
+        Path(args.output)
+        if args.output
+        else DEFAULT_OUTPUT_DIR / f"module_c_samples_{timestamp}.jsonl"
+    )
 
     if args.perception_file:
         perception_file = Path(args.perception_file)
@@ -848,14 +868,14 @@ def main() -> None:
     )
     result = convert_perception_files(
         files,
-        output_path=args.output,
+        output_path=output_path,
         pretty_output_path=args.pretty_output or None,
         options=options,
     )
 
     print(f"Converted samples: {result.written}")
     print(f"Skipped entries: {result.skipped}")
-    print(f"Saved to: {args.output}")
+    print(f"Saved to: {output_path}")
     if args.pretty_output:
         print(f"Pretty JSON saved to: {args.pretty_output}")
 

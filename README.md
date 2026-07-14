@@ -9,7 +9,7 @@ Semantic-Motion pipeline:
 2. Overlapping 16 s / 8 s macro windows and dense 1–3 s micro windows produce
    fused loco-manipulation semantics.
 3. An LLM rewriter generates variants behind a deterministic fact-preservation gate.
-4. Module C applies fail-closed sync, motion and independent semantic checks.
+4. Module C applies sync and motion checks plus joint multi-view semantic verification.
 
 The legacy single-video path remains for compatibility, but formal refinement
 requires paired views and real motion. Module D still needs Blender and was not
@@ -220,7 +220,7 @@ If you already extracted frames, use:
 python run_video_task.py --frame-dir demos/task_frames --fps 2 --model qwen-vl-plus
 ```
 
-The output is saved to `results/video_task_*.json` as
+The output is saved to `results/perception_output/video_task_*.json` as
 `semantic-motion-video-task/v2`. It embeds the `ViewBundle`, synchronized
 evidence, task segments, fact-validation audit and reproducibility metadata.
 
@@ -228,40 +228,54 @@ evidence, task segments, fact-validation audit and reproducibility metadata.
 
 Module C converts `VideoTaskRecord` outputs into samples and applies three
 independent gates: deterministic synchronization/schema checks, 3D motion
-quality, and per-view semantic verification. Missing motion, API/parse failure,
-low confidence, missing paired views, mock verification, and dummy motion all
-drop by default.
+quality, and joint multi-view semantic verification. The current refinement
+implementation records failures and threshold diagnostics in `reason_codes`;
+quality gates are disabled, so `decision` remains `keep`.
 
-One-shot generate + filter:
+Run generation, sample preparation, and refinement as explicit stages. First,
+generate a named `VideoTaskRecord`:
 
 ```bash
-python run_generate_filter.py \
-  --manifest data/libero_goal/processed/manifest.json \
-  --sample-id put_the_bowl_on_the_plate_demo_0 \
+python run_video_task.py \
+  --manifest data/module_d_output/manifest.json \
+  --sample-id jump_down \
   --view-mode fused \
-  --vlm-model qwen3-vl-flash \
+  --model qwen3-vl-flash \
+  --rewriter llm \
   --rewrite-model qwen3-vl-flash \
-  --semantic-verifier qwen3-vl-flash \
-  --judge-model YOUR_INDEPENDENT_JUDGE_MODEL \
-  --refine-config configs/module_c_default.yaml \
-  --sample-level segment
+  --output results/perception_output/jump_down.json
 ```
 
-The manifest trajectory is used automatically. For a compatibility single-video
-debug run, pass real motion and explicitly disable only the paired-view gate:
+Next, convert the generated record into Module C samples and attach the real
+trajectory explicitly:
 
 ```bash
-python run_generate_filter.py \
-  --video demos/task.mp4 \
-  --vlm-model qwen3-vl-flash \
-  --motion-path path/to/trajectory_or_dir \
-  --allow-single-view-debug \
-  --sample-level segment
+python -m src.module_c.prepare_samples \
+  --perception-file results/perception_output/jump_down.json \
+  --motion-path data/module_d_output/jump_down/jump_down_trajectory.json \
+  --motion-fps 30 \
+  --motion-tracks Root,Hand_R,Hand_L \
+  --output results/c_prepare_sample/jump_down_samples.jsonl \
+  --pretty-output results/c_prepare_sample/jump_down_samples.pretty.json \
+  --sample-level video
 ```
 
-`--debug-dummy-motion`, `--allow-missing-motion`, `--allow-mock-debug`, and
-`--allow-single-view-debug` exist only for diagnostics. Outputs produced with
-those paths are excluded from formal evaluation.
+Finally, run synchronization, motion-quality, and joint multi-view semantic
+refinement. The semantic verifier is configured in
+`configs/module_c_default.yaml`:
+
+```bash
+python -m src.module_c.run_refinement \
+  --config configs/module_c_default.yaml \
+  --input results/c_prepare_sample/jump_down_samples.jsonl \
+  --output results/refinement_output/jump_down_refined.jsonl \
+  --pretty-output results/refinement_output/jump_down_refined.pretty.json
+```
+
+For a single-video debug run, use `run_video_task.py --video ...`, pass the real
+trajectory to `prepare_samples --motion-path ...`, and disable the paired-view
+requirement in a debug refinement config. Single-view or dummy-motion outputs
+must not be used as formal evaluation results.
 
 Outputs land in `results/`:
 
@@ -328,10 +342,10 @@ adjudicated:
 ```bash
 python tools/evaluate_semantic_motion.py \
   --gold data/gold/annotations/SAMPLE.json \
-  --prediction results/video_task_SAMPLE.json
+  --prediction results/perception_output/video_task_SAMPLE.json
 
 python -m src.module_c.evaluate \
-  --input results/refined_SAMPLE.jsonl \
+  --input results/refinement_output/refined_SAMPLE.jsonl \
   --output results/refinement_metrics.json
 
 python tools/evaluate_motion_corruptions.py \

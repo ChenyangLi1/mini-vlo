@@ -1,0 +1,2519 @@
+{
+  "schema_version": "semantic-motion-video-task/v2",
+  "video_path": "D:\\MyCode\\11_project\\mini-vlo\\data\\module_d_output\\jump_down\\Fixed_View.mp4",
+  "view_bundle": {
+    "schema_version": "semantic-motion-view-bundle/v1",
+    "sample_id": "jump_down",
+    "timebase": {
+      "fps": 30.0,
+      "frame_count": 70,
+      "frame_start": 0,
+      "duration_sec": 2.3333333333333335,
+      "time_unit": "seconds",
+      "frame_map": {
+        "video_frame_start": 0,
+        "source_frame_start": 0,
+        "frame_count": 70,
+        "step": 1,
+        "explicit_source_frames": []
+      }
+    },
+    "views": {
+      "fixed": {
+        "view_id": "fixed",
+        "video_path": "D:\\MyCode\\11_project\\mini-vlo\\data\\module_d_output\\jump_down\\Fixed_View.mp4",
+        "camera_name": "",
+        "camera_type": "fixed",
+        "fps": 30.0,
+        "frame_count": 70,
+        "duration_sec": 2.3333333333333335,
+        "metadata": {}
+      },
+      "ego": {
+        "view_id": "ego",
+        "video_path": "D:\\MyCode\\11_project\\mini-vlo\\data\\module_d_output\\jump_down\\Ego_View.mp4",
+        "camera_name": "",
+        "camera_type": "egocentric",
+        "fps": 30.0,
+        "frame_count": 70,
+        "duration_sec": 2.3333333333333335,
+        "metadata": {}
+      }
+    },
+    "trajectory": {
+      "path": "D:\\MyCode\\11_project\\mini-vlo\\data\\module_d_output\\jump_down\\jump_down_trajectory.json",
+      "source": "Module D",
+      "spatial_unit": "meters",
+      "coordinate_frame": "world",
+      "track_names": [
+        "Root",
+        "Hand_R",
+        "Hand_L"
+      ],
+      "metadata": {}
+    },
+    "provenance": {
+      "dataset": "Module D",
+      "source_id": "jump_down",
+      "generator": "src.semantic_motion.view_bundle",
+      "revision": "dab95c728b8c861a23f08723d22c4d3a5a97b047",
+      "config": {},
+      "checksums": {}
+    },
+    "metadata": {}
+  },
+  "source_instruction": "",
+  "frames": [],
+  "multi_view_frames": [
+    {
+      "frame_id": 0,
+      "timestamp_sec": 0.0,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 0,
+          "frame_index": 0,
+          "timestamp_sec": 0.0,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 0,
+          "frame_index": 0,
+          "timestamp_sec": 0.0,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "jump_down_macro_000",
+        "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object",
+          "white cube platform"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON white cube platform",
+          "gray low-poly object ON floor left of humanoid",
+          "humanoid figure facing gray low-poly object",
+          "humanoid figure jumps OFF platform toward gray object",
+          "humanoid figure lands ON floor",
+          "humanoid figure crouches ON floor"
+        ],
+        "macro_intent": {
+          "task_type": "jump_and_land",
+          "target_object": "floor",
+          "destination": "floor in front of platform",
+          "confidence": 0.92,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "crouch on platform",
+            "verb": "crouch",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              4
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "jump forward off platform",
+            "verb": "jump",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "legs",
+            "contact_state": "release",
+            "posture": "leaping",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "extend arms mid-air",
+            "verb": "extend",
+            "object": "air",
+            "confidence": 0.92,
+            "body_part": "arms",
+            "contact_state": "none",
+            "posture": "mid-jump",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              7
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "land on floor",
+            "verb": "land",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "feet",
+            "contact_state": "contact",
+            "posture": "landing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "crouch on floor",
+            "verb": "crouch",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              23
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\", \"white cube platform\"],\n  \"spatial_relations\": [\n    \"humanoid figure ON white cube platform\",\n    \"gray low-poly object ON floor left of humanoid\",\n    \"humanoid figure facing gray low-poly object\",\n    \"humanoid figure jumps OFF platform toward gray object\",\n    \"humanoid figure lands ON floor\",\n    \"humanoid figure crouches ON floor\"\n  ],\n  \"task_type\": \"jump_and_land\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"crouch on platform\",\n    \"jump forward off platform\",\n    \"extend arms mid-air\",\n    \"land on floor\",\n    \"crouch on floor\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"crouch on platform\",\n      \"verb\": \"crouch\",\n      \"object\": \"platform\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"jump forward off platform\",\n      \"verb\": \"jump\",\n      \"object\": \"platform\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"release\",\n      \"posture\": \"leaping\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"extend arms mid-air\",\n      \"verb\": \"extend\",\n      \"object\": \"air\",\n      \"body_part\": \"arms\",\n      \"contact_state\": \"none\",\n      \"posture\": \"mid-jump\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 7\n    },\n    {\n      \"text\": \"land on floor\",\n      \"verb\": \"land\",\n      \"object\": \"floor\",\n      \"body_part\": \"feet\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"landing\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"crouch on floor\",\n      \"verb\": \"crouch\",\n      \"object\": \"floor\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 23\n    }\n  ],\n  \"target_object\": \"floor\",\n  \"destination\": \"floor in front of platform\",\n  \"instruction\": \"The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.\",\n  \"transitions\": [4, 6, 10, 14],\n  \"confidence\": 0.92\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.92,
+          "prediction_instruction": "The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.",
+          "transitions": [
+            4,
+            6,
+            10,
+            14
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000069.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000069.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 1,
+      "timestamp_sec": 0.2,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 1,
+          "frame_index": 6,
+          "timestamp_sec": 0.2,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000006.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 1,
+          "frame_index": 6,
+          "timestamp_sec": 0.2,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000006.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "jump_down_macro_000",
+        "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object",
+          "white cube platform"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON white cube platform",
+          "gray low-poly object ON floor left of humanoid",
+          "humanoid figure facing gray low-poly object",
+          "humanoid figure jumps OFF platform toward gray object",
+          "humanoid figure lands ON floor",
+          "humanoid figure crouches ON floor"
+        ],
+        "macro_intent": {
+          "task_type": "jump_and_land",
+          "target_object": "floor",
+          "destination": "floor in front of platform",
+          "confidence": 0.92,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "crouch on platform",
+            "verb": "crouch",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              4
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "jump forward off platform",
+            "verb": "jump",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "legs",
+            "contact_state": "release",
+            "posture": "leaping",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "extend arms mid-air",
+            "verb": "extend",
+            "object": "air",
+            "confidence": 0.92,
+            "body_part": "arms",
+            "contact_state": "none",
+            "posture": "mid-jump",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              7
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "land on floor",
+            "verb": "land",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "feet",
+            "contact_state": "contact",
+            "posture": "landing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "crouch on floor",
+            "verb": "crouch",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              23
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\", \"white cube platform\"],\n  \"spatial_relations\": [\n    \"humanoid figure ON white cube platform\",\n    \"gray low-poly object ON floor left of humanoid\",\n    \"humanoid figure facing gray low-poly object\",\n    \"humanoid figure jumps OFF platform toward gray object\",\n    \"humanoid figure lands ON floor\",\n    \"humanoid figure crouches ON floor\"\n  ],\n  \"task_type\": \"jump_and_land\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"crouch on platform\",\n    \"jump forward off platform\",\n    \"extend arms mid-air\",\n    \"land on floor\",\n    \"crouch on floor\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"crouch on platform\",\n      \"verb\": \"crouch\",\n      \"object\": \"platform\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"jump forward off platform\",\n      \"verb\": \"jump\",\n      \"object\": \"platform\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"release\",\n      \"posture\": \"leaping\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"extend arms mid-air\",\n      \"verb\": \"extend\",\n      \"object\": \"air\",\n      \"body_part\": \"arms\",\n      \"contact_state\": \"none\",\n      \"posture\": \"mid-jump\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 7\n    },\n    {\n      \"text\": \"land on floor\",\n      \"verb\": \"land\",\n      \"object\": \"floor\",\n      \"body_part\": \"feet\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"landing\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"crouch on floor\",\n      \"verb\": \"crouch\",\n      \"object\": \"floor\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 23\n    }\n  ],\n  \"target_object\": \"floor\",\n  \"destination\": \"floor in front of platform\",\n  \"instruction\": \"The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.\",\n  \"transitions\": [4, 6, 10, 14],\n  \"confidence\": 0.92\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.92,
+          "prediction_instruction": "The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.",
+          "transitions": [
+            4,
+            6,
+            10,
+            14
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000069.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000069.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 2,
+      "timestamp_sec": 0.4,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 2,
+          "frame_index": 12,
+          "timestamp_sec": 0.4,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000012.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 2,
+          "frame_index": 12,
+          "timestamp_sec": 0.4,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000012.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "jump_down_macro_000",
+        "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object",
+          "white cube platform"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON white cube platform",
+          "gray low-poly object ON floor left of humanoid",
+          "humanoid figure facing gray low-poly object",
+          "humanoid figure jumps OFF platform toward gray object",
+          "humanoid figure lands ON floor",
+          "humanoid figure crouches ON floor"
+        ],
+        "macro_intent": {
+          "task_type": "jump_and_land",
+          "target_object": "floor",
+          "destination": "floor in front of platform",
+          "confidence": 0.92,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "crouch on platform",
+            "verb": "crouch",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              4
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "jump forward off platform",
+            "verb": "jump",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "legs",
+            "contact_state": "release",
+            "posture": "leaping",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "extend arms mid-air",
+            "verb": "extend",
+            "object": "air",
+            "confidence": 0.92,
+            "body_part": "arms",
+            "contact_state": "none",
+            "posture": "mid-jump",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              7
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "land on floor",
+            "verb": "land",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "feet",
+            "contact_state": "contact",
+            "posture": "landing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "crouch on floor",
+            "verb": "crouch",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              23
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\", \"white cube platform\"],\n  \"spatial_relations\": [\n    \"humanoid figure ON white cube platform\",\n    \"gray low-poly object ON floor left of humanoid\",\n    \"humanoid figure facing gray low-poly object\",\n    \"humanoid figure jumps OFF platform toward gray object\",\n    \"humanoid figure lands ON floor\",\n    \"humanoid figure crouches ON floor\"\n  ],\n  \"task_type\": \"jump_and_land\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"crouch on platform\",\n    \"jump forward off platform\",\n    \"extend arms mid-air\",\n    \"land on floor\",\n    \"crouch on floor\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"crouch on platform\",\n      \"verb\": \"crouch\",\n      \"object\": \"platform\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"jump forward off platform\",\n      \"verb\": \"jump\",\n      \"object\": \"platform\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"release\",\n      \"posture\": \"leaping\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"extend arms mid-air\",\n      \"verb\": \"extend\",\n      \"object\": \"air\",\n      \"body_part\": \"arms\",\n      \"contact_state\": \"none\",\n      \"posture\": \"mid-jump\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 7\n    },\n    {\n      \"text\": \"land on floor\",\n      \"verb\": \"land\",\n      \"object\": \"floor\",\n      \"body_part\": \"feet\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"landing\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"crouch on floor\",\n      \"verb\": \"crouch\",\n      \"object\": \"floor\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 23\n    }\n  ],\n  \"target_object\": \"floor\",\n  \"destination\": \"floor in front of platform\",\n  \"instruction\": \"The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.\",\n  \"transitions\": [4, 6, 10, 14],\n  \"confidence\": 0.92\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.92,
+          "prediction_instruction": "The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.",
+          "transitions": [
+            4,
+            6,
+            10,
+            14
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000069.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000069.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 3,
+      "timestamp_sec": 0.6,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 3,
+          "frame_index": 18,
+          "timestamp_sec": 0.6,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000018.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 3,
+          "frame_index": 18,
+          "timestamp_sec": 0.6,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000018.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "jump_down_macro_000",
+        "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object",
+          "white cube platform"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON white cube platform",
+          "gray low-poly object ON floor left of humanoid",
+          "humanoid figure facing gray low-poly object",
+          "humanoid figure jumps OFF platform toward gray object",
+          "humanoid figure lands ON floor",
+          "humanoid figure crouches ON floor"
+        ],
+        "macro_intent": {
+          "task_type": "jump_and_land",
+          "target_object": "floor",
+          "destination": "floor in front of platform",
+          "confidence": 0.92,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "crouch on platform",
+            "verb": "crouch",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              4
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "jump forward off platform",
+            "verb": "jump",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "legs",
+            "contact_state": "release",
+            "posture": "leaping",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "extend arms mid-air",
+            "verb": "extend",
+            "object": "air",
+            "confidence": 0.92,
+            "body_part": "arms",
+            "contact_state": "none",
+            "posture": "mid-jump",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              7
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "land on floor",
+            "verb": "land",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "feet",
+            "contact_state": "contact",
+            "posture": "landing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "crouch on floor",
+            "verb": "crouch",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              23
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\", \"white cube platform\"],\n  \"spatial_relations\": [\n    \"humanoid figure ON white cube platform\",\n    \"gray low-poly object ON floor left of humanoid\",\n    \"humanoid figure facing gray low-poly object\",\n    \"humanoid figure jumps OFF platform toward gray object\",\n    \"humanoid figure lands ON floor\",\n    \"humanoid figure crouches ON floor\"\n  ],\n  \"task_type\": \"jump_and_land\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"crouch on platform\",\n    \"jump forward off platform\",\n    \"extend arms mid-air\",\n    \"land on floor\",\n    \"crouch on floor\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"crouch on platform\",\n      \"verb\": \"crouch\",\n      \"object\": \"platform\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"jump forward off platform\",\n      \"verb\": \"jump\",\n      \"object\": \"platform\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"release\",\n      \"posture\": \"leaping\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"extend arms mid-air\",\n      \"verb\": \"extend\",\n      \"object\": \"air\",\n      \"body_part\": \"arms\",\n      \"contact_state\": \"none\",\n      \"posture\": \"mid-jump\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 7\n    },\n    {\n      \"text\": \"land on floor\",\n      \"verb\": \"land\",\n      \"object\": \"floor\",\n      \"body_part\": \"feet\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"landing\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"crouch on floor\",\n      \"verb\": \"crouch\",\n      \"object\": \"floor\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 23\n    }\n  ],\n  \"target_object\": \"floor\",\n  \"destination\": \"floor in front of platform\",\n  \"instruction\": \"The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.\",\n  \"transitions\": [4, 6, 10, 14],\n  \"confidence\": 0.92\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.92,
+          "prediction_instruction": "The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.",
+          "transitions": [
+            4,
+            6,
+            10,
+            14
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000069.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000069.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 4,
+      "timestamp_sec": 0.8333333333333334,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 4,
+          "frame_index": 25,
+          "timestamp_sec": 0.8333333333333334,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 4,
+          "frame_index": 25,
+          "timestamp_sec": 0.8333333333333334,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "jump_down_macro_000",
+        "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object",
+          "white cube platform"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON white cube platform",
+          "gray low-poly object ON floor left of humanoid",
+          "humanoid figure facing gray low-poly object",
+          "humanoid figure jumps OFF platform toward gray object",
+          "humanoid figure lands ON floor",
+          "humanoid figure crouches ON floor"
+        ],
+        "macro_intent": {
+          "task_type": "jump_and_land",
+          "target_object": "floor",
+          "destination": "floor in front of platform",
+          "confidence": 0.92,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "crouch on platform",
+            "verb": "crouch",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              4
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "jump forward off platform",
+            "verb": "jump",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "legs",
+            "contact_state": "release",
+            "posture": "leaping",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "extend arms mid-air",
+            "verb": "extend",
+            "object": "air",
+            "confidence": 0.92,
+            "body_part": "arms",
+            "contact_state": "none",
+            "posture": "mid-jump",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              7
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "land on floor",
+            "verb": "land",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "feet",
+            "contact_state": "contact",
+            "posture": "landing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "crouch on floor",
+            "verb": "crouch",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              23
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\", \"white cube platform\"],\n  \"spatial_relations\": [\n    \"humanoid figure ON white cube platform\",\n    \"gray low-poly object ON floor left of humanoid\",\n    \"humanoid figure facing gray low-poly object\",\n    \"humanoid figure jumps OFF platform toward gray object\",\n    \"humanoid figure lands ON floor\",\n    \"humanoid figure crouches ON floor\"\n  ],\n  \"task_type\": \"jump_and_land\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"crouch on platform\",\n    \"jump forward off platform\",\n    \"extend arms mid-air\",\n    \"land on floor\",\n    \"crouch on floor\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"crouch on platform\",\n      \"verb\": \"crouch\",\n      \"object\": \"platform\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"jump forward off platform\",\n      \"verb\": \"jump\",\n      \"object\": \"platform\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"release\",\n      \"posture\": \"leaping\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"extend arms mid-air\",\n      \"verb\": \"extend\",\n      \"object\": \"air\",\n      \"body_part\": \"arms\",\n      \"contact_state\": \"none\",\n      \"posture\": \"mid-jump\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 7\n    },\n    {\n      \"text\": \"land on floor\",\n      \"verb\": \"land\",\n      \"object\": \"floor\",\n      \"body_part\": \"feet\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"landing\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"crouch on floor\",\n      \"verb\": \"crouch\",\n      \"object\": \"floor\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 23\n    }\n  ],\n  \"target_object\": \"floor\",\n  \"destination\": \"floor in front of platform\",\n  \"instruction\": \"The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.\",\n  \"transitions\": [4, 6, 10, 14],\n  \"confidence\": 0.92\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.92,
+          "prediction_instruction": "The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.",
+          "transitions": [
+            4,
+            6,
+            10,
+            14
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000069.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000069.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 5,
+      "timestamp_sec": 1.0333333333333334,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 5,
+          "frame_index": 31,
+          "timestamp_sec": 1.0333333333333334,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 5,
+          "frame_index": 31,
+          "timestamp_sec": 1.0333333333333334,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000031.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "jump_down_macro_000",
+        "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object",
+          "white cube platform"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON white cube platform",
+          "gray low-poly object ON floor left of humanoid",
+          "humanoid figure facing gray low-poly object",
+          "humanoid figure jumps OFF platform toward gray object",
+          "humanoid figure lands ON floor",
+          "humanoid figure crouches ON floor"
+        ],
+        "macro_intent": {
+          "task_type": "jump_and_land",
+          "target_object": "floor",
+          "destination": "floor in front of platform",
+          "confidence": 0.92,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "crouch on platform",
+            "verb": "crouch",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              4
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "jump forward off platform",
+            "verb": "jump",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "legs",
+            "contact_state": "release",
+            "posture": "leaping",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "extend arms mid-air",
+            "verb": "extend",
+            "object": "air",
+            "confidence": 0.92,
+            "body_part": "arms",
+            "contact_state": "none",
+            "posture": "mid-jump",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              7
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "land on floor",
+            "verb": "land",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "feet",
+            "contact_state": "contact",
+            "posture": "landing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "crouch on floor",
+            "verb": "crouch",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              23
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\", \"white cube platform\"],\n  \"spatial_relations\": [\n    \"humanoid figure ON white cube platform\",\n    \"gray low-poly object ON floor left of humanoid\",\n    \"humanoid figure facing gray low-poly object\",\n    \"humanoid figure jumps OFF platform toward gray object\",\n    \"humanoid figure lands ON floor\",\n    \"humanoid figure crouches ON floor\"\n  ],\n  \"task_type\": \"jump_and_land\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"crouch on platform\",\n    \"jump forward off platform\",\n    \"extend arms mid-air\",\n    \"land on floor\",\n    \"crouch on floor\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"crouch on platform\",\n      \"verb\": \"crouch\",\n      \"object\": \"platform\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"jump forward off platform\",\n      \"verb\": \"jump\",\n      \"object\": \"platform\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"release\",\n      \"posture\": \"leaping\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"extend arms mid-air\",\n      \"verb\": \"extend\",\n      \"object\": \"air\",\n      \"body_part\": \"arms\",\n      \"contact_state\": \"none\",\n      \"posture\": \"mid-jump\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 7\n    },\n    {\n      \"text\": \"land on floor\",\n      \"verb\": \"land\",\n      \"object\": \"floor\",\n      \"body_part\": \"feet\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"landing\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"crouch on floor\",\n      \"verb\": \"crouch\",\n      \"object\": \"floor\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 23\n    }\n  ],\n  \"target_object\": \"floor\",\n  \"destination\": \"floor in front of platform\",\n  \"instruction\": \"The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.\",\n  \"transitions\": [4, 6, 10, 14],\n  \"confidence\": 0.92\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.92,
+          "prediction_instruction": "The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.",
+          "transitions": [
+            4,
+            6,
+            10,
+            14
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000069.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000069.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 6,
+      "timestamp_sec": 1.2333333333333334,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 6,
+          "frame_index": 37,
+          "timestamp_sec": 1.2333333333333334,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000037.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 6,
+          "frame_index": 37,
+          "timestamp_sec": 1.2333333333333334,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000037.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "jump_down_macro_000",
+        "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object",
+          "white cube platform"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON white cube platform",
+          "gray low-poly object ON floor left of humanoid",
+          "humanoid figure facing gray low-poly object",
+          "humanoid figure jumps OFF platform toward gray object",
+          "humanoid figure lands ON floor",
+          "humanoid figure crouches ON floor"
+        ],
+        "macro_intent": {
+          "task_type": "jump_and_land",
+          "target_object": "floor",
+          "destination": "floor in front of platform",
+          "confidence": 0.92,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "crouch on platform",
+            "verb": "crouch",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              4
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "jump forward off platform",
+            "verb": "jump",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "legs",
+            "contact_state": "release",
+            "posture": "leaping",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "extend arms mid-air",
+            "verb": "extend",
+            "object": "air",
+            "confidence": 0.92,
+            "body_part": "arms",
+            "contact_state": "none",
+            "posture": "mid-jump",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              7
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "land on floor",
+            "verb": "land",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "feet",
+            "contact_state": "contact",
+            "posture": "landing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "crouch on floor",
+            "verb": "crouch",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              23
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\", \"white cube platform\"],\n  \"spatial_relations\": [\n    \"humanoid figure ON white cube platform\",\n    \"gray low-poly object ON floor left of humanoid\",\n    \"humanoid figure facing gray low-poly object\",\n    \"humanoid figure jumps OFF platform toward gray object\",\n    \"humanoid figure lands ON floor\",\n    \"humanoid figure crouches ON floor\"\n  ],\n  \"task_type\": \"jump_and_land\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"crouch on platform\",\n    \"jump forward off platform\",\n    \"extend arms mid-air\",\n    \"land on floor\",\n    \"crouch on floor\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"crouch on platform\",\n      \"verb\": \"crouch\",\n      \"object\": \"platform\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"jump forward off platform\",\n      \"verb\": \"jump\",\n      \"object\": \"platform\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"release\",\n      \"posture\": \"leaping\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"extend arms mid-air\",\n      \"verb\": \"extend\",\n      \"object\": \"air\",\n      \"body_part\": \"arms\",\n      \"contact_state\": \"none\",\n      \"posture\": \"mid-jump\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 7\n    },\n    {\n      \"text\": \"land on floor\",\n      \"verb\": \"land\",\n      \"object\": \"floor\",\n      \"body_part\": \"feet\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"landing\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"crouch on floor\",\n      \"verb\": \"crouch\",\n      \"object\": \"floor\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 23\n    }\n  ],\n  \"target_object\": \"floor\",\n  \"destination\": \"floor in front of platform\",\n  \"instruction\": \"The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.\",\n  \"transitions\": [4, 6, 10, 14],\n  \"confidence\": 0.92\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.92,
+          "prediction_instruction": "The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.",
+          "transitions": [
+            4,
+            6,
+            10,
+            14
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000069.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000069.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 7,
+      "timestamp_sec": 1.4333333333333333,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 7,
+          "frame_index": 43,
+          "timestamp_sec": 1.4333333333333333,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000043.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 7,
+          "frame_index": 43,
+          "timestamp_sec": 1.4333333333333333,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000043.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "jump_down_macro_000",
+        "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object",
+          "white cube platform"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON white cube platform",
+          "gray low-poly object ON floor left of humanoid",
+          "humanoid figure facing gray low-poly object",
+          "humanoid figure jumps OFF platform toward gray object",
+          "humanoid figure lands ON floor",
+          "humanoid figure crouches ON floor"
+        ],
+        "macro_intent": {
+          "task_type": "jump_and_land",
+          "target_object": "floor",
+          "destination": "floor in front of platform",
+          "confidence": 0.92,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "crouch on platform",
+            "verb": "crouch",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              4
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "jump forward off platform",
+            "verb": "jump",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "legs",
+            "contact_state": "release",
+            "posture": "leaping",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "extend arms mid-air",
+            "verb": "extend",
+            "object": "air",
+            "confidence": 0.92,
+            "body_part": "arms",
+            "contact_state": "none",
+            "posture": "mid-jump",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              7
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "land on floor",
+            "verb": "land",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "feet",
+            "contact_state": "contact",
+            "posture": "landing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "crouch on floor",
+            "verb": "crouch",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              23
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\", \"white cube platform\"],\n  \"spatial_relations\": [\n    \"humanoid figure ON white cube platform\",\n    \"gray low-poly object ON floor left of humanoid\",\n    \"humanoid figure facing gray low-poly object\",\n    \"humanoid figure jumps OFF platform toward gray object\",\n    \"humanoid figure lands ON floor\",\n    \"humanoid figure crouches ON floor\"\n  ],\n  \"task_type\": \"jump_and_land\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"crouch on platform\",\n    \"jump forward off platform\",\n    \"extend arms mid-air\",\n    \"land on floor\",\n    \"crouch on floor\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"crouch on platform\",\n      \"verb\": \"crouch\",\n      \"object\": \"platform\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"jump forward off platform\",\n      \"verb\": \"jump\",\n      \"object\": \"platform\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"release\",\n      \"posture\": \"leaping\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"extend arms mid-air\",\n      \"verb\": \"extend\",\n      \"object\": \"air\",\n      \"body_part\": \"arms\",\n      \"contact_state\": \"none\",\n      \"posture\": \"mid-jump\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 7\n    },\n    {\n      \"text\": \"land on floor\",\n      \"verb\": \"land\",\n      \"object\": \"floor\",\n      \"body_part\": \"feet\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"landing\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"crouch on floor\",\n      \"verb\": \"crouch\",\n      \"object\": \"floor\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 23\n    }\n  ],\n  \"target_object\": \"floor\",\n  \"destination\": \"floor in front of platform\",\n  \"instruction\": \"The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.\",\n  \"transitions\": [4, 6, 10, 14],\n  \"confidence\": 0.92\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.92,
+          "prediction_instruction": "The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.",
+          "transitions": [
+            4,
+            6,
+            10,
+            14
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000069.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000069.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 8,
+      "timestamp_sec": 1.6666666666666667,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 8,
+          "frame_index": 50,
+          "timestamp_sec": 1.6666666666666667,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000050.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 8,
+          "frame_index": 50,
+          "timestamp_sec": 1.6666666666666667,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000050.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "jump_down_macro_000",
+        "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object",
+          "white cube platform"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON white cube platform",
+          "gray low-poly object ON floor left of humanoid",
+          "humanoid figure facing gray low-poly object",
+          "humanoid figure jumps OFF platform toward gray object",
+          "humanoid figure lands ON floor",
+          "humanoid figure crouches ON floor"
+        ],
+        "macro_intent": {
+          "task_type": "jump_and_land",
+          "target_object": "floor",
+          "destination": "floor in front of platform",
+          "confidence": 0.92,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "crouch on platform",
+            "verb": "crouch",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              4
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "jump forward off platform",
+            "verb": "jump",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "legs",
+            "contact_state": "release",
+            "posture": "leaping",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "extend arms mid-air",
+            "verb": "extend",
+            "object": "air",
+            "confidence": 0.92,
+            "body_part": "arms",
+            "contact_state": "none",
+            "posture": "mid-jump",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              7
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "land on floor",
+            "verb": "land",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "feet",
+            "contact_state": "contact",
+            "posture": "landing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "crouch on floor",
+            "verb": "crouch",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              23
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\", \"white cube platform\"],\n  \"spatial_relations\": [\n    \"humanoid figure ON white cube platform\",\n    \"gray low-poly object ON floor left of humanoid\",\n    \"humanoid figure facing gray low-poly object\",\n    \"humanoid figure jumps OFF platform toward gray object\",\n    \"humanoid figure lands ON floor\",\n    \"humanoid figure crouches ON floor\"\n  ],\n  \"task_type\": \"jump_and_land\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"crouch on platform\",\n    \"jump forward off platform\",\n    \"extend arms mid-air\",\n    \"land on floor\",\n    \"crouch on floor\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"crouch on platform\",\n      \"verb\": \"crouch\",\n      \"object\": \"platform\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"jump forward off platform\",\n      \"verb\": \"jump\",\n      \"object\": \"platform\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"release\",\n      \"posture\": \"leaping\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"extend arms mid-air\",\n      \"verb\": \"extend\",\n      \"object\": \"air\",\n      \"body_part\": \"arms\",\n      \"contact_state\": \"none\",\n      \"posture\": \"mid-jump\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 7\n    },\n    {\n      \"text\": \"land on floor\",\n      \"verb\": \"land\",\n      \"object\": \"floor\",\n      \"body_part\": \"feet\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"landing\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"crouch on floor\",\n      \"verb\": \"crouch\",\n      \"object\": \"floor\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 23\n    }\n  ],\n  \"target_object\": \"floor\",\n  \"destination\": \"floor in front of platform\",\n  \"instruction\": \"The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.\",\n  \"transitions\": [4, 6, 10, 14],\n  \"confidence\": 0.92\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.92,
+          "prediction_instruction": "The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.",
+          "transitions": [
+            4,
+            6,
+            10,
+            14
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000069.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000069.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 9,
+      "timestamp_sec": 1.8666666666666667,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 9,
+          "frame_index": 56,
+          "timestamp_sec": 1.8666666666666667,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000056.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 9,
+          "frame_index": 56,
+          "timestamp_sec": 1.8666666666666667,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000056.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "jump_down_macro_000",
+        "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object",
+          "white cube platform"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON white cube platform",
+          "gray low-poly object ON floor left of humanoid",
+          "humanoid figure facing gray low-poly object",
+          "humanoid figure jumps OFF platform toward gray object",
+          "humanoid figure lands ON floor",
+          "humanoid figure crouches ON floor"
+        ],
+        "macro_intent": {
+          "task_type": "jump_and_land",
+          "target_object": "floor",
+          "destination": "floor in front of platform",
+          "confidence": 0.92,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "crouch on platform",
+            "verb": "crouch",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              4
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "jump forward off platform",
+            "verb": "jump",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "legs",
+            "contact_state": "release",
+            "posture": "leaping",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "extend arms mid-air",
+            "verb": "extend",
+            "object": "air",
+            "confidence": 0.92,
+            "body_part": "arms",
+            "contact_state": "none",
+            "posture": "mid-jump",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              7
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "land on floor",
+            "verb": "land",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "feet",
+            "contact_state": "contact",
+            "posture": "landing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "crouch on floor",
+            "verb": "crouch",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              23
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\", \"white cube platform\"],\n  \"spatial_relations\": [\n    \"humanoid figure ON white cube platform\",\n    \"gray low-poly object ON floor left of humanoid\",\n    \"humanoid figure facing gray low-poly object\",\n    \"humanoid figure jumps OFF platform toward gray object\",\n    \"humanoid figure lands ON floor\",\n    \"humanoid figure crouches ON floor\"\n  ],\n  \"task_type\": \"jump_and_land\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"crouch on platform\",\n    \"jump forward off platform\",\n    \"extend arms mid-air\",\n    \"land on floor\",\n    \"crouch on floor\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"crouch on platform\",\n      \"verb\": \"crouch\",\n      \"object\": \"platform\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"jump forward off platform\",\n      \"verb\": \"jump\",\n      \"object\": \"platform\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"release\",\n      \"posture\": \"leaping\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"extend arms mid-air\",\n      \"verb\": \"extend\",\n      \"object\": \"air\",\n      \"body_part\": \"arms\",\n      \"contact_state\": \"none\",\n      \"posture\": \"mid-jump\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 7\n    },\n    {\n      \"text\": \"land on floor\",\n      \"verb\": \"land\",\n      \"object\": \"floor\",\n      \"body_part\": \"feet\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"landing\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"crouch on floor\",\n      \"verb\": \"crouch\",\n      \"object\": \"floor\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 23\n    }\n  ],\n  \"target_object\": \"floor\",\n  \"destination\": \"floor in front of platform\",\n  \"instruction\": \"The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.\",\n  \"transitions\": [4, 6, 10, 14],\n  \"confidence\": 0.92\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.92,
+          "prediction_instruction": "The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.",
+          "transitions": [
+            4,
+            6,
+            10,
+            14
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000069.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000069.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 10,
+      "timestamp_sec": 2.066666666666667,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 10,
+          "frame_index": 62,
+          "timestamp_sec": 2.066666666666667,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000062.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 10,
+          "frame_index": 62,
+          "timestamp_sec": 2.066666666666667,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000062.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "jump_down_macro_000",
+        "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object",
+          "white cube platform"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON white cube platform",
+          "gray low-poly object ON floor left of humanoid",
+          "humanoid figure facing gray low-poly object",
+          "humanoid figure jumps OFF platform toward gray object",
+          "humanoid figure lands ON floor",
+          "humanoid figure crouches ON floor"
+        ],
+        "macro_intent": {
+          "task_type": "jump_and_land",
+          "target_object": "floor",
+          "destination": "floor in front of platform",
+          "confidence": 0.92,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "crouch on platform",
+            "verb": "crouch",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              4
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "jump forward off platform",
+            "verb": "jump",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "legs",
+            "contact_state": "release",
+            "posture": "leaping",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "extend arms mid-air",
+            "verb": "extend",
+            "object": "air",
+            "confidence": 0.92,
+            "body_part": "arms",
+            "contact_state": "none",
+            "posture": "mid-jump",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              7
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "land on floor",
+            "verb": "land",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "feet",
+            "contact_state": "contact",
+            "posture": "landing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "crouch on floor",
+            "verb": "crouch",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              23
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\", \"white cube platform\"],\n  \"spatial_relations\": [\n    \"humanoid figure ON white cube platform\",\n    \"gray low-poly object ON floor left of humanoid\",\n    \"humanoid figure facing gray low-poly object\",\n    \"humanoid figure jumps OFF platform toward gray object\",\n    \"humanoid figure lands ON floor\",\n    \"humanoid figure crouches ON floor\"\n  ],\n  \"task_type\": \"jump_and_land\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"crouch on platform\",\n    \"jump forward off platform\",\n    \"extend arms mid-air\",\n    \"land on floor\",\n    \"crouch on floor\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"crouch on platform\",\n      \"verb\": \"crouch\",\n      \"object\": \"platform\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"jump forward off platform\",\n      \"verb\": \"jump\",\n      \"object\": \"platform\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"release\",\n      \"posture\": \"leaping\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"extend arms mid-air\",\n      \"verb\": \"extend\",\n      \"object\": \"air\",\n      \"body_part\": \"arms\",\n      \"contact_state\": \"none\",\n      \"posture\": \"mid-jump\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 7\n    },\n    {\n      \"text\": \"land on floor\",\n      \"verb\": \"land\",\n      \"object\": \"floor\",\n      \"body_part\": \"feet\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"landing\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"crouch on floor\",\n      \"verb\": \"crouch\",\n      \"object\": \"floor\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 23\n    }\n  ],\n  \"target_object\": \"floor\",\n  \"destination\": \"floor in front of platform\",\n  \"instruction\": \"The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.\",\n  \"transitions\": [4, 6, 10, 14],\n  \"confidence\": 0.92\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.92,
+          "prediction_instruction": "The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.",
+          "transitions": [
+            4,
+            6,
+            10,
+            14
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000069.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000069.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 11,
+      "timestamp_sec": 2.3,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 11,
+          "frame_index": 69,
+          "timestamp_sec": 2.3,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000069.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 11,
+          "frame_index": 69,
+          "timestamp_sec": 2.3,
+          "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000069.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "jump_down_macro_000",
+        "image_path": "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object",
+          "white cube platform"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON white cube platform",
+          "gray low-poly object ON floor left of humanoid",
+          "humanoid figure facing gray low-poly object",
+          "humanoid figure jumps OFF platform toward gray object",
+          "humanoid figure lands ON floor",
+          "humanoid figure crouches ON floor"
+        ],
+        "macro_intent": {
+          "task_type": "jump_and_land",
+          "target_object": "floor",
+          "destination": "floor in front of platform",
+          "confidence": 0.92,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "crouch on platform",
+            "verb": "crouch",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              4
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "jump forward off platform",
+            "verb": "jump",
+            "object": "platform",
+            "confidence": 0.92,
+            "body_part": "legs",
+            "contact_state": "release",
+            "posture": "leaping",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "extend arms mid-air",
+            "verb": "extend",
+            "object": "air",
+            "confidence": 0.92,
+            "body_part": "arms",
+            "contact_state": "none",
+            "posture": "mid-jump",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              7
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "land on floor",
+            "verb": "land",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "feet",
+            "contact_state": "contact",
+            "posture": "landing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "crouch on floor",
+            "verb": "crouch",
+            "object": "floor",
+            "confidence": 0.92,
+            "body_part": "full_body",
+            "contact_state": "contact",
+            "posture": "crouched",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              23
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\", \"white cube platform\"],\n  \"spatial_relations\": [\n    \"humanoid figure ON white cube platform\",\n    \"gray low-poly object ON floor left of humanoid\",\n    \"humanoid figure facing gray low-poly object\",\n    \"humanoid figure jumps OFF platform toward gray object\",\n    \"humanoid figure lands ON floor\",\n    \"humanoid figure crouches ON floor\"\n  ],\n  \"task_type\": \"jump_and_land\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"crouch on platform\",\n    \"jump forward off platform\",\n    \"extend arms mid-air\",\n    \"land on floor\",\n    \"crouch on floor\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"crouch on platform\",\n      \"verb\": \"crouch\",\n      \"object\": \"platform\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"jump forward off platform\",\n      \"verb\": \"jump\",\n      \"object\": \"platform\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"release\",\n      \"posture\": \"leaping\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"extend arms mid-air\",\n      \"verb\": \"extend\",\n      \"object\": \"air\",\n      \"body_part\": \"arms\",\n      \"contact_state\": \"none\",\n      \"posture\": \"mid-jump\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 7\n    },\n    {\n      \"text\": \"land on floor\",\n      \"verb\": \"land\",\n      \"object\": \"floor\",\n      \"body_part\": \"feet\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"landing\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"crouch on floor\",\n      \"verb\": \"crouch\",\n      \"object\": \"floor\",\n      \"body_part\": \"full_body\",\n      \"contact_state\": \"contact\",\n      \"posture\": \"crouched\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 23\n    }\n  ],\n  \"target_object\": \"floor\",\n  \"destination\": \"floor in front of platform\",\n  \"instruction\": \"The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.\",\n  \"transitions\": [4, 6, 10, 14],\n  \"confidence\": 0.92\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.92,
+          "prediction_instruction": "The humanoid figure crouches on a platform, jumps forward toward a low-poly object, lands on the floor, and assumes a crouched posture.",
+          "transitions": [
+            4,
+            6,
+            10,
+            14
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\fixed\\frame_00000069.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000006.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000012.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000018.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000031.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000037.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000043.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000050.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000056.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000062.jpg",
+            "D:\\MyCode\\11_project\\mini-vlo\\.semantic_motion_work\\jump_down\\fused\\macro\\window_000\\ego\\frame_00000069.jpg"
+          ]
+        }
+      }
+    }
+  ],
+  "task_segments": [
+    {
+      "segment_id": "segment_000",
+      "start_time_sec": 0.0,
+      "end_time_sec": 1.1666666666666667,
+      "frame_ids": [
+        0,
+        11,
+        22,
+        34
+      ],
+      "task_instruction": "the humanoid figure crouches on a block, jumps upward, reaches with both hands, and catches a floating low-poly head-like object.",
+      "objects": [
+        "humanoid figure",
+        "gray block",
+        "low-poly head-like object",
+        "hands (ego)"
+      ],
+      "spatial_relations": [
+        "humanoid figure ON gray block",
+        "low-poly head-like object ON floor, left of block",
+        "hands (ego) BELOW floating low-poly head-like object"
+      ],
+      "macro_intent": {
+        "task_type": "jump_and_catch",
+        "target_object": "low-poly head-like object",
+        "destination": null,
+        "confidence": 0.85,
+        "domain": "mixed"
+      },
+      "micro_instructions": [
+        {
+          "step_id": 1,
+          "text": "crouch on block",
+          "verb": "crouch",
+          "object": "gray block",
+          "confidence": 0.85,
+          "body_part": "full body",
+          "contact_state": "contact",
+          "posture": "bent knees, hands near floor",
+          "observed_trajectory": {
+            "track_names": [
+              "Root",
+              "Hand_R",
+              "Hand_L"
+            ],
+            "start_time_sec": 0.0,
+            "end_time_sec": 1.1666666666666667,
+            "coordinate_frame": "world"
+          },
+          "evidence_frame_ids": [
+            0,
+            11,
+            22,
+            34
+          ]
+        },
+        {
+          "step_id": 2,
+          "text": "jump upward from block",
+          "verb": "jump",
+          "object": "gray block",
+          "confidence": 0.85,
+          "body_part": "legs",
+          "contact_state": "release",
+          "posture": "mid-air, legs extended",
+          "observed_trajectory": {
+            "track_names": [
+              "Root",
+              "Hand_R",
+              "Hand_L"
+            ],
+            "start_time_sec": 0.0,
+            "end_time_sec": 1.1666666666666667,
+            "coordinate_frame": "world"
+          },
+          "evidence_frame_ids": [
+            0,
+            11,
+            22,
+            34
+          ]
+        },
+        {
+          "step_id": 3,
+          "text": "reach upward with both hands",
+          "verb": "reach",
+          "object": "low-poly head-like object",
+          "confidence": 0.85,
+          "body_part": "arms/hands",
+          "contact_state": "approach",
+          "posture": "arms raised, body airborne",
+          "observed_trajectory": {
+            "track_names": [
+              "Root",
+              "Hand_R",
+              "Hand_L"
+            ],
+            "start_time_sec": 0.0,
+            "end_time_sec": 1.1666666666666667,
+            "coordinate_frame": "world"
+          },
+          "evidence_frame_ids": [
+            0,
+            11,
+            22,
+            34
+          ]
+        },
+        {
+          "step_id": 4,
+          "text": "catch low-poly head-like object",
+          "verb": "grasp",
+          "object": "low-poly head-like object",
+          "confidence": 0.85,
+          "body_part": "hands",
+          "contact_state": "grasp",
+          "posture": "hands closed around object",
+          "observed_trajectory": {
+            "track_names": [
+              "Root",
+              "Hand_R",
+              "Hand_L"
+            ],
+            "start_time_sec": 0.0,
+            "end_time_sec": 1.1666666666666667,
+            "coordinate_frame": "world"
+          },
+          "evidence_frame_ids": [
+            0,
+            11,
+            22,
+            34
+          ]
+        }
+      ],
+      "augmented_instructions": [
+        {
+          "text": "From a crouched position on the gray block, the humanoid figure leaps upward, extends both arms toward the floating low-poly head-like object, and secures it mid-air.",
+          "strategy": "temporal compression + active voice",
+          "source_step_ids": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "metadata": {
+            "rewriter": "llm",
+            "model": "qwen3-vl-plus",
+            "prompt_version": "ungated_rewriter_v1",
+            "prompt_file": "D:\\MyCode\\11_project\\mini-vlo\\src\\semantic_motion\\llm_augmentation_prompt.txt",
+            "validation": "disabled",
+            "raw_response": "{\n  \"variants\": [\n    {\n      \"text\": \"From a crouched position on the gray block, the humanoid figure leaps upward, extends both arms toward the floating low-poly head-like object, and secures it mid-air.\",\n      \"strategy\": \"temporal compression + active voice\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    },\n    {\n      \"text\": \"The humanoid figure initiates a jump-and-catch maneuver: first crouching on the block for momentum, then propelling upward while raising hands to intercept and grasp the low-poly head-like object hovering above and to the left of the block.\",\n      \"strategy\": \"goal-oriented framing + spatial context enrichment\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    },\n    {\n      \"text\": \"Starting in contact with the gray block, the humanoid figure transitions through four phases！crouch, launch, reach, and grasp！to successfully catch the low-poly head-like object before it descends.\",\n      \"strategy\": \"phase-based decomposition + predictive constraint\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    }\n  ]\n}"
+          }
+        },
+        {
+          "text": "The humanoid figure initiates a jump-and-catch maneuver: first crouching on the block for momentum, then propelling upward while raising hands to intercept and grasp the low-poly head-like object hovering above and to the left of the block.",
+          "strategy": "goal-oriented framing + spatial context enrichment",
+          "source_step_ids": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "metadata": {
+            "rewriter": "llm",
+            "model": "qwen3-vl-plus",
+            "prompt_version": "ungated_rewriter_v1",
+            "prompt_file": "D:\\MyCode\\11_project\\mini-vlo\\src\\semantic_motion\\llm_augmentation_prompt.txt",
+            "validation": "disabled",
+            "raw_response": "{\n  \"variants\": [\n    {\n      \"text\": \"From a crouched position on the gray block, the humanoid figure leaps upward, extends both arms toward the floating low-poly head-like object, and secures it mid-air.\",\n      \"strategy\": \"temporal compression + active voice\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    },\n    {\n      \"text\": \"The humanoid figure initiates a jump-and-catch maneuver: first crouching on the block for momentum, then propelling upward while raising hands to intercept and grasp the low-poly head-like object hovering above and to the left of the block.\",\n      \"strategy\": \"goal-oriented framing + spatial context enrichment\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    },\n    {\n      \"text\": \"Starting in contact with the gray block, the humanoid figure transitions through four phases！crouch, launch, reach, and grasp！to successfully catch the low-poly head-like object before it descends.\",\n      \"strategy\": \"phase-based decomposition + predictive constraint\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    }\n  ]\n}"
+          }
+        },
+        {
+          "text": "Starting in contact with the gray block, the humanoid figure transitions through four phases！crouch, launch, reach, and grasp！to successfully catch the low-poly head-like object before it descends.",
+          "strategy": "phase-based decomposition + predictive constraint",
+          "source_step_ids": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "metadata": {
+            "rewriter": "llm",
+            "model": "qwen3-vl-plus",
+            "prompt_version": "ungated_rewriter_v1",
+            "prompt_file": "D:\\MyCode\\11_project\\mini-vlo\\src\\semantic_motion\\llm_augmentation_prompt.txt",
+            "validation": "disabled",
+            "raw_response": "{\n  \"variants\": [\n    {\n      \"text\": \"From a crouched position on the gray block, the humanoid figure leaps upward, extends both arms toward the floating low-poly head-like object, and secures it mid-air.\",\n      \"strategy\": \"temporal compression + active voice\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    },\n    {\n      \"text\": \"The humanoid figure initiates a jump-and-catch maneuver: first crouching on the block for momentum, then propelling upward while raising hands to intercept and grasp the low-poly head-like object hovering above and to the left of the block.\",\n      \"strategy\": \"goal-oriented framing + spatial context enrichment\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    },\n    {\n      \"text\": \"Starting in contact with the gray block, the humanoid figure transitions through four phases！crouch, launch, reach, and grasp！to successfully catch the low-poly head-like object before it descends.\",\n      \"strategy\": \"phase-based decomposition + predictive constraint\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    }\n  ]\n}"
+          }
+        }
+      ],
+      "confidence": 0.85,
+      "start_frame": 0,
+      "end_frame": 35,
+      "evidence_by_view": {
+        "fixed": [
+          0,
+          11,
+          22,
+          34
+        ],
+        "ego": [
+          0,
+          11,
+          22,
+          34
+        ]
+      },
+      "metadata": {
+        "micro_window_count": 1,
+        "view_mode": "fused",
+        "trajectory_linked": true,
+        "augmentation_audit": [
+          {
+            "text": "From a crouched position on the gray block, the humanoid figure leaps upward, extends both arms toward the floating low-poly head-like object, and secures it mid-air.",
+            "included": true,
+            "validation": "disabled"
+          },
+          {
+            "text": "The humanoid figure initiates a jump-and-catch maneuver: first crouching on the block for momentum, then propelling upward while raising hands to intercept and grasp the low-poly head-like object hovering above and to the left of the block.",
+            "included": true,
+            "validation": "disabled"
+          },
+          {
+            "text": "Starting in contact with the gray block, the humanoid figure transitions through four phases！crouch, launch, reach, and grasp！to successfully catch the low-poly head-like object before it descends.",
+            "included": true,
+            "validation": "disabled"
+          }
+        ],
+        "alternative_micro_observations": []
+      }
+    },
+    {
+      "segment_id": "segment_001",
+      "start_time_sec": 1.1666666666666667,
+      "end_time_sec": 2.3333333333333335,
+      "frame_ids": [
+        35,
+        46,
+        57,
+        69
+      ],
+      "task_instruction": "the humanoid figure transitions from standing to a low crouched posture supported by hands and feet, without interacting with other objects.",
+      "objects": [
+        "humanoid figure",
+        "gray cube",
+        "low-poly rock-like object"
+      ],
+      "spatial_relations": [
+        "humanoid figure ON floor",
+        "gray cube ON floor",
+        "rock-like object ON floor",
+        "humanoid figure NEAR gray cube",
+        "humanoid figure NEAR rock-like object"
+      ],
+      "macro_intent": {
+        "task_type": "crouch",
+        "target_object": "humanoid figure",
+        "destination": null,
+        "confidence": 0.95,
+        "domain": "locomotion"
+      },
+      "micro_instructions": [
+        {
+          "step_id": 1,
+          "text": "stand upright with arms raised",
+          "verb": "stand",
+          "object": "humanoid figure",
+          "confidence": 0.95,
+          "body_part": "full body",
+          "contact_state": "none",
+          "posture": "upright",
+          "observed_trajectory": {
+            "track_names": [
+              "Root",
+              "Hand_R",
+              "Hand_L"
+            ],
+            "start_time_sec": 1.1666666666666667,
+            "end_time_sec": 2.3333333333333335,
+            "coordinate_frame": "world"
+          },
+          "evidence_frame_ids": [
+            35,
+            46,
+            57,
+            69
+          ]
+        },
+        {
+          "step_id": 2,
+          "text": "bend forward at waist, arms extended",
+          "verb": "bend",
+          "object": "humanoid figure",
+          "confidence": 0.95,
+          "body_part": "torso, arms",
+          "contact_state": "none",
+          "posture": "forward lean",
+          "observed_trajectory": {
+            "track_names": [
+              "Root",
+              "Hand_R",
+              "Hand_L"
+            ],
+            "start_time_sec": 1.1666666666666667,
+            "end_time_sec": 2.3333333333333335,
+            "coordinate_frame": "world"
+          },
+          "evidence_frame_ids": [
+            35,
+            46,
+            57,
+            69
+          ]
+        },
+        {
+          "step_id": 3,
+          "text": "lower body into crouch, hands approaching floor",
+          "verb": "crouch",
+          "object": "humanoid figure",
+          "confidence": 0.95,
+          "body_part": "legs, hands",
+          "contact_state": "approach",
+          "posture": "partial crouch",
+          "observed_trajectory": {
+            "track_names": [
+              "Root",
+              "Hand_R",
+              "Hand_L"
+            ],
+            "start_time_sec": 1.1666666666666667,
+            "end_time_sec": 2.3333333333333335,
+            "coordinate_frame": "world"
+          },
+          "evidence_frame_ids": [
+            35,
+            46,
+            57,
+            69
+          ]
+        },
+        {
+          "step_id": 4,
+          "text": "support weight on hands and feet in full crouch",
+          "verb": "crouch",
+          "object": "humanoid figure",
+          "confidence": 0.95,
+          "body_part": "hands, feet",
+          "contact_state": "contact",
+          "posture": "quadrupedal crouch",
+          "observed_trajectory": {
+            "track_names": [
+              "Root",
+              "Hand_R",
+              "Hand_L"
+            ],
+            "start_time_sec": 1.1666666666666667,
+            "end_time_sec": 2.3333333333333335,
+            "coordinate_frame": "world"
+          },
+          "evidence_frame_ids": [
+            35,
+            46,
+            57,
+            69
+          ]
+        }
+      ],
+      "augmented_instructions": [
+        {
+          "text": "The humanoid figure performs a controlled descent from an upright stance into a quadrupedal crouch, placing hands and feet on the floor while maintaining proximity to the gray cube and rock-like object.",
+          "strategy": "spatial_context_enhancement",
+          "source_step_ids": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "metadata": {
+            "rewriter": "llm",
+            "model": "qwen3-vl-plus",
+            "prompt_version": "ungated_rewriter_v1",
+            "prompt_file": "D:\\MyCode\\11_project\\mini-vlo\\src\\semantic_motion\\llm_augmentation_prompt.txt",
+            "validation": "disabled",
+            "raw_response": "{\n  \"variants\": [\n    {\n      \"text\": \"The humanoid figure performs a controlled descent from an upright stance into a quadrupedal crouch, placing hands and feet on the floor while maintaining proximity to the gray cube and rock-like object.\",\n      \"strategy\": \"spatial_context_enhancement\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    },\n    {\n      \"text\": \"Initiating from a standing position with arms raised, the humanoid bends forward, lowers its torso and knees, and finally stabilizes in a full crouch supported by both hands and feet！no contact with surrounding objects occurs.\",\n      \"strategy\": \"temporal_sequence_expansion\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    },\n    {\n      \"text\": \"Execute a locomotive crouch: begin upright, lean forward with extended arms, transition through partial crouch as hands near the floor, and conclude in a stable hand-and-foot-supported low posture.\",\n      \"strategy\": \"instructional_verb_focus\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    }\n  ]\n}"
+          }
+        },
+        {
+          "text": "Initiating from a standing position with arms raised, the humanoid bends forward, lowers its torso and knees, and finally stabilizes in a full crouch supported by both hands and feet！no contact with surrounding objects occurs.",
+          "strategy": "temporal_sequence_expansion",
+          "source_step_ids": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "metadata": {
+            "rewriter": "llm",
+            "model": "qwen3-vl-plus",
+            "prompt_version": "ungated_rewriter_v1",
+            "prompt_file": "D:\\MyCode\\11_project\\mini-vlo\\src\\semantic_motion\\llm_augmentation_prompt.txt",
+            "validation": "disabled",
+            "raw_response": "{\n  \"variants\": [\n    {\n      \"text\": \"The humanoid figure performs a controlled descent from an upright stance into a quadrupedal crouch, placing hands and feet on the floor while maintaining proximity to the gray cube and rock-like object.\",\n      \"strategy\": \"spatial_context_enhancement\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    },\n    {\n      \"text\": \"Initiating from a standing position with arms raised, the humanoid bends forward, lowers its torso and knees, and finally stabilizes in a full crouch supported by both hands and feet！no contact with surrounding objects occurs.\",\n      \"strategy\": \"temporal_sequence_expansion\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    },\n    {\n      \"text\": \"Execute a locomotive crouch: begin upright, lean forward with extended arms, transition through partial crouch as hands near the floor, and conclude in a stable hand-and-foot-supported low posture.\",\n      \"strategy\": \"instructional_verb_focus\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    }\n  ]\n}"
+          }
+        },
+        {
+          "text": "Execute a locomotive crouch: begin upright, lean forward with extended arms, transition through partial crouch as hands near the floor, and conclude in a stable hand-and-foot-supported low posture.",
+          "strategy": "instructional_verb_focus",
+          "source_step_ids": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "metadata": {
+            "rewriter": "llm",
+            "model": "qwen3-vl-plus",
+            "prompt_version": "ungated_rewriter_v1",
+            "prompt_file": "D:\\MyCode\\11_project\\mini-vlo\\src\\semantic_motion\\llm_augmentation_prompt.txt",
+            "validation": "disabled",
+            "raw_response": "{\n  \"variants\": [\n    {\n      \"text\": \"The humanoid figure performs a controlled descent from an upright stance into a quadrupedal crouch, placing hands and feet on the floor while maintaining proximity to the gray cube and rock-like object.\",\n      \"strategy\": \"spatial_context_enhancement\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    },\n    {\n      \"text\": \"Initiating from a standing position with arms raised, the humanoid bends forward, lowers its torso and knees, and finally stabilizes in a full crouch supported by both hands and feet！no contact with surrounding objects occurs.\",\n      \"strategy\": \"temporal_sequence_expansion\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    },\n    {\n      \"text\": \"Execute a locomotive crouch: begin upright, lean forward with extended arms, transition through partial crouch as hands near the floor, and conclude in a stable hand-and-foot-supported low posture.\",\n      \"strategy\": \"instructional_verb_focus\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    }\n  ]\n}"
+          }
+        }
+      ],
+      "confidence": 0.95,
+      "start_frame": 35,
+      "end_frame": 70,
+      "evidence_by_view": {
+        "fixed": [
+          35,
+          46,
+          57,
+          69
+        ],
+        "ego": [
+          35,
+          46,
+          57,
+          69
+        ]
+      },
+      "metadata": {
+        "micro_window_count": 1,
+        "view_mode": "fused",
+        "trajectory_linked": true,
+        "augmentation_audit": [
+          {
+            "text": "The humanoid figure performs a controlled descent from an upright stance into a quadrupedal crouch, placing hands and feet on the floor while maintaining proximity to the gray cube and rock-like object.",
+            "included": true,
+            "validation": "disabled"
+          },
+          {
+            "text": "Initiating from a standing position with arms raised, the humanoid bends forward, lowers its torso and knees, and finally stabilizes in a full crouch supported by both hands and feet！no contact with surrounding objects occurs.",
+            "included": true,
+            "validation": "disabled"
+          },
+          {
+            "text": "Execute a locomotive crouch: begin upright, lean forward with extended arms, transition through partial crouch as hands near the floor, and conclude in a stable hand-and-foot-supported low posture.",
+            "included": true,
+            "validation": "disabled"
+          }
+        ],
+        "alternative_micro_observations": []
+      }
+    }
+  ],
+  "metadata": {
+    "method": "paired_overlapping_macro_dense_micro_v1",
+    "view_mode": "fused",
+    "macro_window_sec": 16.0,
+    "macro_step_sec": 8.0,
+    "macro_frames": 12,
+    "micro_window_sec": 2.0,
+    "micro_step_sec": 1.0,
+    "micro_frames": 4,
+    "cut_frames": [
+      35
+    ],
+    "macro_window_count": 1,
+    "provenance": {
+      "dataset": "Module D",
+      "source_id": "jump_down",
+      "generator": "src.semantic_motion.view_bundle",
+      "revision": "dab95c728b8c861a23f08723d22c4d3a5a97b047",
+      "config": {},
+      "checksums": {}
+    },
+    "validation_diagnostics": [],
+    "validation_enforced": false,
+    "generation_model": "qwen3-vl-plus",
+    "rewriter": "LLMInstructionRewriter",
+    "rewrite_prompt_version": "ungated_rewriter_v1"
+  }
+}

@@ -34,7 +34,7 @@ Paired ViewBundle（Fixed + Ego + shared timebase + trajectory）
   -> prepare_samples 转换成 sample JSONL
   -> deterministic sync/schema/unit gate
   -> 解析并归一化真实 motion
-  -> independent per-view semantic judge + 3D motion scoring
+  -> joint multi-view semantic judge + 3D motion scoring
   -> 输出 refined JSONL / pretty JSON
 ```
 
@@ -187,20 +187,23 @@ python run_generate_filter.py `
 输出默认写入 `results/`：
 
 - `video_task_*.json`：Mini-VLO 生成结果。
-- `module_c_samples_*.jsonl`：Module C 输入样本。
-- `module_c_samples_*.pretty.json`：可读样本。
-- `refined_*.jsonl`：过滤结果。
-- `refined_*.pretty.json`：可读过滤结果。
+- `results/c_prepare_sample/module_c_samples_*.jsonl`：Module C 输入样本。
+- `results/c_prepare_sample/module_c_samples_*.pretty.json`：可读样本。
+- `results/refinement_output/refined_*.jsonl`：过滤结果。
+- `results/refinement_output/refined_*.pretty.json`：可读过滤结果。
 
 ## 2. 只转换已有生成结果
 
-如果已经有 `results/video_task_*.json`：
+如果已经有 `results/perception_output/video_task_*.json`：
+
+省略 `--output` 时，默认写入
+`results/c_prepare_sample/module_c_samples_<timestamp>.jsonl`。
 
 ```powershell
 python -m src.module_c.prepare_samples `
-  --perception-file results\video_task_xxx.json `
-  --output results\module_c_samples_xxx.jsonl `
-  --pretty-output results\module_c_samples_xxx.pretty.json `
+  --perception-file results\perception_output\video_task_xxx.json `
+  --output results\c_prepare_sample\module_c_samples_xxx.jsonl `
+  --pretty-output results\c_prepare_sample\module_c_samples_xxx.pretty.json `
   --sample-level video
 ```
 
@@ -208,9 +211,9 @@ python -m src.module_c.prepare_samples `
 
 ```powershell
 python -m src.module_c.prepare_samples `
-  --perception-file results\video_task_xxx.json `
-  --output results\module_c_samples_xxx.jsonl `
-  --pretty-output results\module_c_samples_xxx.pretty.json `
+  --perception-file results\perception_output\video_task_xxx.json `
+  --output results\c_prepare_sample\module_c_samples_xxx.jsonl `
+  --pretty-output results\c_prepare_sample\module_c_samples_xxx.pretty.json `
   --motion-path ..\processed_libero_goal\xxx\demo_0_traj.json `
   --sample-level segment
 ```
@@ -219,9 +222,9 @@ python -m src.module_c.prepare_samples `
 
 ```powershell
 python -m src.module_c.prepare_samples `
-  --perception-file results\video_task_jumping_down.json `
-  --output results\module_c_samples_jumping_down.jsonl `
-  --pretty-output results\module_c_samples_jumping_down.pretty.json `
+  --perception-file results\perception_output\video_task_jumping_down.json `
+  --output results\c_prepare_sample\module_c_samples_jumping_down.jsonl `
+  --pretty-output results\c_prepare_sample\module_c_samples_jumping_down.pretty.json `
   --motion-path ..\module_d\output `
   --motion-fps 24 `
   --motion-tracks Root,Hand_R,Hand_L `
@@ -232,9 +235,9 @@ python -m src.module_c.prepare_samples `
 
 ```powershell
 python -m src.module_c.prepare_samples `
-  --perception-dir results `
-  --output results\module_c_samples_batch.jsonl `
-  --pretty-output results\module_c_samples_batch.pretty.json `
+  --perception-dir results\perception_output `
+  --output results\c_prepare_sample\module_c_samples_batch.jsonl `
+  --pretty-output results\c_prepare_sample\module_c_samples_batch.pretty.json `
   --motion-path ..\module_d\output `
   --motion-fps 24 `
   --sample-level video
@@ -244,12 +247,15 @@ python -m src.module_c.prepare_samples `
 
 使用默认配置过滤 samples JSONL：
 
+省略 `--output` 时，默认写入
+`results/refinement_output/refined_<timestamp>.jsonl`。
+
 ```powershell
 python -m src.module_c.run_refinement `
   --config configs\module_c_default.yaml `
-  --input results\module_c_samples_xxx.jsonl `
-  --output results\refined_xxx.jsonl `
-  --pretty-output results\refined_xxx.pretty.json
+  --input results\c_prepare_sample\module_c_samples_xxx.jsonl `
+  --output results\refinement_output\refined_xxx.jsonl `
+  --pretty-output results\refinement_output\refined_xxx.pretty.json
 ```
 
 可用 `--motion-aggregation` 覆盖多轨迹聚合方式：
@@ -257,9 +263,9 @@ python -m src.module_c.run_refinement `
 ```powershell
 python -m src.module_c.run_refinement `
   --config configs\module_c_default.yaml `
-  --input results\module_c_samples_xxx.jsonl `
-  --output results\refined_xxx.jsonl `
-  --pretty-output results\refined_xxx.pretty.json `
+  --input results\c_prepare_sample\module_c_samples_xxx.jsonl `
+  --output results\refinement_output\refined_xxx.jsonl `
+  --pretty-output results\refinement_output\refined_xxx.pretty.json `
   --motion-aggregation min
 ```
 
@@ -328,7 +334,7 @@ motion_quality:
 ## 6. 查看过滤结果分布
 
 ```powershell
-python -m src.module_c.evaluate --input results\refined_xxx.jsonl
+python -m src.module_c.evaluate --input results\refinement_output\refined_xxx.jsonl
 ```
 
 ## 7. 常用参数

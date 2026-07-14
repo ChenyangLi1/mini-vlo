@@ -43,6 +43,13 @@ class SemanticVerifier(Protocol):
     def verify(self, video_path: str, text: str) -> dict[str, object]:
         ...
 
+    def verify_many(
+        self,
+        video_paths: dict[str, str],
+        text: str,
+    ) -> dict[str, object]:
+        ...
+
 
 def _heuristic_result(text: str) -> dict[str, object]:
     text_len = len(text.strip())
@@ -125,6 +132,16 @@ class MockVLMVerifier:
         result["verifier"] = "mock"
         return result
 
+    def verify_many(
+        self,
+        video_paths: dict[str, str],
+        text: str,
+    ) -> dict[str, object]:
+        result = self.verify(next(iter(video_paths.values()), ""), text)
+        result["fusion_strategy"] = "joint_multiview_mock"
+        result["views"] = sorted(video_paths)
+        return result
+
 
 class _HTTPJSONVerifier:
     def __init__(
@@ -169,6 +186,47 @@ class _HTTPJSONVerifier:
             with request.urlopen(req, timeout=self.timeout_s) as resp:
                 raw = json.loads(resp.read().decode("utf-8"))
             return _normalize_result(raw, self.provider)
+        except (error.URLError, error.HTTPError, TimeoutError, json.JSONDecodeError):
+            return _failure_result(
+                self.provider,
+                f"{self.provider}_request_failed",
+            )
+
+    def verify_many(
+        self,
+        video_paths: dict[str, str],
+        text: str,
+    ) -> dict[str, object]:
+        if not self.endpoint:
+            return _failure_result(
+                self.provider,
+                f"{self.provider}_endpoint_missing",
+            )
+
+        payload = {
+            "video_paths": video_paths,
+            "text": text,
+            "task": "joint_multiview_semantic_consistency",
+            "instruction": self.prompt_text,
+        }
+        headers = {"Content-Type": "application/json"}
+        api_key = os.getenv(self.api_key_env, "")
+        if api_key:
+            headers["Authorization"] = f"Bearer {api_key}"
+
+        req = request.Request(
+            self.endpoint,
+            data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
+            headers=headers,
+            method="POST",
+        )
+        try:
+            with request.urlopen(req, timeout=self.timeout_s) as resp:
+                raw = json.loads(resp.read().decode("utf-8"))
+            result = _normalize_result(raw, self.provider)
+            result["fusion_strategy"] = "joint_multiview"
+            result["views"] = sorted(video_paths)
+            return result
         except (error.URLError, error.HTTPError, TimeoutError, json.JSONDecodeError):
             return _failure_result(
                 self.provider,
@@ -347,7 +405,21 @@ class _DashScopeCompatVerifier:
         except json.JSONDecodeError:
             return None
 
-    def verify(self, video_path: str, text: str) -> dict[str, object]:
+    def _media_content(
+        self,
+        video_path: str,
+    ) -> tuple[list[dict[str, Any]], str | None]:
+        if video_path.startswith(("http://", "https://")):
+            return [
+                {"type": "video_url", "video_url": {"url": video_path}}
+            ], None
+        return self._build_local_video_content(video_path)
+
+    def _request(
+        self,
+        user_content: list[dict[str, Any]],
+        text: str,
+    ) -> dict[str, object]:
         if not self.base_url:
             return self._fallback(text, f"{self.provider}_base_url_missing")
 
@@ -358,33 +430,6 @@ class _DashScopeCompatVerifier:
         endpoint = self.base_url
         if not endpoint.endswith("/chat/completions"):
             endpoint = f"{endpoint}/chat/completions"
-
-        user_content: list[dict[str, Any]] = [
-            {
-                "type": "text",
-                "text": (
-                    f"{self.prompt_text}\n\n"
-                    "Please evaluate the semantic consistency between the video and "
-                    "text.\n"
-                    "Return ONLY a JSON object with keys: label "
-                    "(consistent|uncertain|inconsistent), confidence (0-1), "
-                    "error_types (list), suggested_text (string).\n"
-                    f"Text: {text}"
-                ),
-            }
-        ]
-        local_media_reason: str | None = None
-        if isinstance(video_path, str) and video_path.startswith(("http://", "https://")):
-            user_content.append(
-                {"type": "video_url", "video_url": {"url": video_path}}
-            )
-        else:
-            local_content, local_media_reason = self._build_local_video_content(
-                video_path
-            )
-            if local_media_reason:
-                return self._fallback(text, local_media_reason)
-            user_content.extend(local_content)
 
         payload = {
             "model": self.model,
@@ -418,10 +463,77 @@ class _DashScopeCompatVerifier:
             parsed = self._parse_json_object(msg_content)
             if parsed is None:
                 return self._fallback(text, f"{self.provider}_response_parse_failed")
-            result = _normalize_result(parsed, self.provider)
-            return result
+            return _normalize_result(parsed, self.provider)
         except (error.URLError, error.HTTPError, TimeoutError, json.JSONDecodeError):
             return self._fallback(text, f"{self.provider}_request_failed")
+
+    def verify(self, video_path: str, text: str) -> dict[str, object]:
+        user_content: list[dict[str, Any]] = [
+            {
+                "type": "text",
+                "text": (
+                    f"{self.prompt_text}\n\n"
+                    "Please evaluate the semantic consistency between the video and "
+                    "text.\n"
+                    "Return ONLY a JSON object with keys: label "
+                    "(consistent|uncertain|inconsistent), confidence (0-1), "
+                    "error_types (list), suggested_text (string).\n"
+                    f"Text: {text}"
+                ),
+            }
+        ]
+        media_content, media_reason = self._media_content(video_path)
+        if media_reason:
+            return self._fallback(text, media_reason)
+        user_content.extend(media_content)
+        return self._request(user_content, text)
+
+    def verify_many(
+        self,
+        video_paths: dict[str, str],
+        text: str,
+    ) -> dict[str, object]:
+        ordered_views = sorted(video_paths.items())
+        if not ordered_views:
+            return self._fallback(text, "multiview_paths_missing")
+
+        user_content: list[dict[str, Any]] = [
+            {
+                "type": "text",
+                "text": (
+                    f"{self.prompt_text}\n\n"
+                    "Jointly evaluate the candidate text against ALL synchronized "
+                    "camera views below. Treat the views as complementary evidence "
+                    "of the same event, not as independent samples. A claim may be "
+                    "supported by one view even when it is occluded or outside the "
+                    "frame in another view. Return one fused judgment only.\n"
+                    "Return ONLY a JSON object with keys: label "
+                    "(consistent|uncertain|inconsistent), confidence (0-1), "
+                    "error_types (list), suggested_text (string).\n"
+                    f"Candidate text: {text}\n"
+                    f"Available views: {', '.join(view_id for view_id, _ in ordered_views)}"
+                ),
+            }
+        ]
+        for view_id, video_path in ordered_views:
+            user_content.append(
+                {
+                    "type": "text",
+                    "text": (
+                        f"VIEW {view_id}: synchronized camera stream for the same "
+                        "manipulation event."
+                    ),
+                }
+            )
+            media_content, media_reason = self._media_content(video_path)
+            if media_reason:
+                return self._fallback(text, f"{view_id}:{media_reason}")
+            user_content.extend(media_content)
+
+        result = self._request(user_content, text)
+        result["fusion_strategy"] = "joint_multiview"
+        result["views"] = [view_id for view_id, _ in ordered_views]
+        return result
 
 
 def _resolve_prompt_path(prompt_file: str) -> Path:
@@ -505,43 +617,37 @@ def verify_multiview_semantic_consistency(
     text: str,
     verifier: SemanticVerifier,
 ) -> tuple[dict[str, object], list[str]]:
-    """Judge each synchronized view independently and combine fail-closed."""
-    per_view: dict[str, dict[str, object]] = {}
-    reasons: list[str] = []
-    for view_id, video_path in sorted(video_paths.items()):
-        result, view_reasons = verify_semantic_consistency(
-            video_path=video_path,
-            text=text,
-            verifier=verifier,
-        )
-        per_view[view_id] = result
-        reasons.extend(f"{view_id}:{reason}" for reason in view_reasons)
-
-    labels = [str(result.get("label", "uncertain")) for result in per_view.values()]
-    confidences = []
-    for result in per_view.values():
-        try:
-            confidences.append(float(result.get("confidence", 0.0)))
-        except (TypeError, ValueError):
-            confidences.append(0.0)
-    if not labels or "inconsistent" in labels:
-        label = "inconsistent" if labels else "uncertain"
-    elif "uncertain" in labels:
-        label = "uncertain"
-    else:
-        label = "consistent"
-    confidence = min(confidences) if confidences else 0.0
-    combined: dict[str, object] = {
-        "label": label,
-        "confidence": confidence,
-        "error_types": sorted(set(reasons)),
-        "suggested_text": text if label == "consistent" else "",
-        "verifier": "independent_multiview",
-        "per_view": per_view,
+    """Judge all synchronized views jointly in one multimodal request."""
+    normalized_paths = {
+        str(view_id): str(video_path)
+        for view_id, video_path in sorted(video_paths.items())
+        if str(video_path).strip()
     }
+    verify_many = getattr(verifier, "verify_many", None)
+    if not normalized_paths:
+        result = _failure_result("joint_multiview", "multiview_paths_missing")
+    elif not callable(verify_many):
+        result = _failure_result(
+            "joint_multiview",
+            "joint_multiview_verifier_unsupported",
+        )
+    else:
+        result = verify_many(video_paths=normalized_paths, text=text)
+
+    result["fusion_strategy"] = "joint_multiview"
+    result["views"] = sorted(normalized_paths)
+    reasons: list[str] = list(result.get("error_types", []))
+    verifier_name = str(result.get("verifier", ""))
+    if result.get("request_failed") or verifier_name.endswith(
+        ("_failed", "_fallback")
+    ):
+        result["label"] = "uncertain"
+        result["confidence"] = 0.0
+        reasons.append("semantic_verifier_failed")
+    label = result.get("label")
     if label == "uncertain":
         reasons.append("semantic_uncertain")
     if label == "inconsistent":
         reasons.append("semantic_mismatch")
-    return combined, sorted(set(reasons))
+    return result, sorted(set(reasons))
 
