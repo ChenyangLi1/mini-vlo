@@ -109,44 +109,39 @@
 \newcommand{\ProgrammeName}[1]{\renewcommand{\sm@programme}{#1}}
 \newcommand{\InstitutionName}[1]{\renewcommand{\sm@institution}{#1}}
 \newcommand{\SubmissionDate}[1]{\renewcommand{\sm@date}{#1}}
-% --- 重新定义接收信息的变量 ---
+
 \def\ProjectTitle#1{\gdef\@ProjectTitle{#1}}
 \def\ProjectSubtitle#1{\gdef\@ProjectSubtitle{#1}}
 \def\AuthorName#1{\gdef\@AuthorName{#1}}
 \def\StudentID#1{\gdef\@StudentID{#1}}
 \def\SupervisorName#1{\gdef\@SupervisorName{#1}}
 \def\SubmissionDate#1{\gdef\@SubmissionDate{#1}}
-% ------------------------------
+
 \newcommand{\makeprojecttitle}{
     \begin{titlepage}
         \centering 
 
-        % 1. 插入校徽
         \includegraphics[width=4.5cm]{hku_logo.png} \par
         \vspace{0.8cm}
 
-        % 2. 学校与学院信息
         {\large The University of Hong Kong \par}
         \vspace{0.2cm}
         {\large School of Computing and Data Science \par}
 
-        \vspace{2.5cm} % 中间的大块留白
+        \vspace{2.5cm} 
 
-        % 3. 课程与项目名称 (紧凑排列)
         {\large COMP7705 \par}
         \vspace{0.2cm}
         {\large Project Report \par}
         {\large \@ProjectTitle \par}
 
-        \vspace{2.5cm} % 中间的大块留白
+        \vspace{2.5cm} 
 
-        % 4. 提交声明
         {\normalsize Submitted in partial fulfillment of the requirements for the admission to the degree of \par}
         {\normalsize Master of Science in Computer Science \par}
 
-        \vspace{2.5cm} % 中间的大块留白
+        \vspace{2.5cm} 
 
-        % 5. 学生信息、导师与日期 (取消到底部的强制对齐，紧跟在后)
         {\normalsize By \par}
         \vspace{0.5cm}
         {\normalsize \@AuthorName\ (\@StudentID) \par}
