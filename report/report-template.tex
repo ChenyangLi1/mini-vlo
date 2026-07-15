@@ -33,31 +33,674 @@ main limitation. Do not describe planned work as completed work.
 
 \chapter{Introduction}
 \section{Project Context: From Motion Data to VLA-ready Multimodal Data}
+Recent vision-language-action (VLA) systems seek to map visual observations and
+natural-language instructions directly to robot actions. Representative systems
+such as RT-2 encode actions as tokens and co-train on web-scale vision-language
+data and robot trajectories \cite{zitkovich2023rt2}, while OpenVLA provides an
+open 7-billion-parameter implementation trained on a large and diverse
+collection of robot demonstrations \cite{kim2024openvla}. These developments
+make the availability of aligned multimodal training examples increasingly
+important. A useful demonstration is no longer only a video or a joint
+trajectory; it is a traceable tuple linking what was observed, how the body or
+robot moved, what task was performed, and which temporal interval supports the
+description.
+
+The motivating data source for this project is loco-manipulation motion:
+whole-body movement in which locomotion, posture change, reaching and
+interaction may occur in the same sequence. The Master Proposal identifies a
+representation gap between such motion data and the inputs expected by
+vision-language systems. Raw FBX/BVH animation and frame-wise 3D joint
+coordinates are useful for kinematic analysis, but a general-purpose VLM does
+not directly consume these representations. Conversely, video alone hides the
+precise trajectory information required to assess smoothness, acceleration,
+jerk and temporal coverage. The project therefore treats video, motion and
+language as complementary views of one sample rather than as interchangeable
+data products.
+
+This motivation is consistent with the broader move towards heterogeneous
+robot data. Open X-Embodiment aggregates data from many institutions and
+embodiments to study cross-robot transfer \cite{openx2024}, while Being-H0.5
+explicitly investigates human-centric pre-training and cross-embodiment
+generalisation \cite{luo2026beingh05}. Semantic-Motion does not attempt to
+reproduce those large policy-training systems. It addresses an earlier
+engineering question: how can raw or rendered demonstrations be converted into
+auditable \emph{candidate} Video--Motion--Text records before they are admitted
+to a VLA training corpus?
+
+The implemented system answers this question through four modules. In
+operational order, Module D renders motion into synchronized fixed and
+egocentric videos and exports 3D trajectories; Module A extracts temporally
+grounded macro-intents and micro-instructions; Module B rewrites those
+instructions into language variants; and Module C reconstructs standardized
+samples and evaluates physical motion quality and text--video consistency.
+The modules are joined by explicit JSON/JSONL interfaces and are exposed through
+both command-line entry points and a Web-based orchestration dashboard.
+
 \section{Engineering Problem and Motivation}
+The central engineering problem is not simply video captioning. It is the
+construction of a repeatable data transformation in which evidence remains
+aligned across camera views, time, motion and generated language. Five coupled
+failure sources make this difficult.
+
+\begin{enumerate}
+    \item \textbf{Representation mismatch.} Motion-capture files and simulation
+    trajectories are not directly interpretable by a VLM, whereas a rendered
+    video does not preserve exact physical derivatives.
+    \item \textbf{Temporal ambiguity.} A long demonstration can contain several
+    tasks and transitions. Uniformly assigning one caption to the whole video
+    can merge unrelated actions, while isolated frame captions lose action
+    order and task boundaries.
+    \item \textbf{View-dependent evidence.} A fixed camera is effective for
+    whole-body displacement and scene geometry, but an egocentric view can
+    better expose local interaction. Treating either view as complete can
+    produce unsupported semantic claims.
+    \item \textbf{Generative uncertainty.} VLM annotations and LLM rewrites can
+    omit actions, invent objects, reverse temporal order, or add plausible but
+    unobserved details.
+    \item \textbf{Silent data-quality failure.} A linguistically plausible
+    description may be paired with a noisy or incomplete trajectory.
+    Conversely, a smooth trajectory does not guarantee that the generated text
+    describes the corresponding video.
+\end{enumerate}
+
+Large demonstration datasets illustrate why scalable processing matters.
+BridgeData V2 collects diverse manipulation trajectories across multiple
+environments \cite{walke2023bridgedatav2}; MimicGen shows how a small number of
+human demonstrations can be transformed into much larger simulated datasets
+\cite{mandlekar2023mimicgen}. At such scales, manual inspection of every
+Video--Motion--Text tuple is impractical. The required solution is therefore a
+modular and observable pipeline that rejects malformed interfaces
+deterministically, attaches machine-readable reasons to suspicious samples, and
+retains enough provenance for later human audit.
+
 \section{Project Aim and Engineering Deliverables}
+The project aim is to design and implement an end-to-end engineering pipeline
+that converts paired visual and physical motion evidence into structured,
+language-annotated demonstration samples and evaluates whether those samples
+are suitable candidates for downstream VLA research.
+
+The intended deliverables are:
+
+\begin{itemize}
+    \item a Blender-based rendering workflow for FBX/BVH motion that produces
+    synchronized \path{Fixed_View.mp4} and
+    \path{Ego_View.mp4} streams together with a real 3D trajectory;
+    \item a manifest generator that assigns a stable \texttt{sample\_id} and
+    joins each pair of views to its trajectory;
+    \item a paired-view semantic perception pipeline with overlapping macro
+    windows, weighted transition aggregation, dense micro windows and
+    structured task records;
+    \item a language augmentation interface supporting source-only,
+    deterministic template and API-backed LLM rewriting modes, with provenance
+    and audit metadata;
+    \item a Module C preparation and refinement workflow that normalizes motion
+    tracks, verifies cross-modal alignment, computes motion-quality indicators,
+    performs multi-view semantic verification and emits decisions with stable
+    reason codes;
+    \item independent per-sample JSON and JSONL artifacts, avoiding hidden
+    concatenation or filename collisions;
+    \item a FastAPI and React/Vite control surface for asynchronous execution,
+    progress polling, captured subprocess logs and visualization of Motion
+    Quality, Semantic Consistency, Keep/Discard decisions and reason codes; and
+    \item tests and explicit metadata sufficient to distinguish automatically
+    verified behavior from API-dependent, Blender-dependent and
+    human-annotation-dependent evidence.
+\end{itemize}
+
 \section{System Requirements}
+The requirements below are phrased as engineering acceptance criteria. Where
+the present implementation only partially meets a criterion, the limitation is
+stated explicitly rather than treating planned work as completed.
+
+\subsection*{Functional requirements}
+\requirement{FR1: Rendered evidence}{
+For each valid source motion, the rendering stage shall produce fixed and
+egocentric videos plus a trajectory containing frame-wise positions for
+configured tracks such as Root, Hand\_R and Hand\_L.}
+\requirement{FR2: Manifest indexing}{
+Each sample shall have a unique identifier, two resolvable view paths and a
+resolvable trajectory path. Invalid directories shall be reported rather than
+silently indexed.}
+\requirement{FR3: Shared temporal contract}{
+All views shall be represented against one FPS, frame count, duration and frame
+map. Perception shall sample identical source-frame indices from selected
+views.}
+\requirement{FR4: Multi-granularity perception}{
+The system shall represent high-level task intent, temporally ordered
+micro-instructions, objects, spatial relations, body part, contact state,
+posture, confidence and evidence-frame references.}
+\requirement{FR5: Controlled augmentation}{
+Every generated instruction variant shall retain its source-step references,
+rewriter identity, model and prompt provenance. The design objective is
+fact-preserving augmentation. The current API-backed rewriter relies on prompt
+constraints and records \texttt{validation=disabled}; a deterministic
+post-generation fact gate remains an acceptance gap.}
+\requirement{FR6: Multimodal refinement}{
+Module C shall load the real trajectory, normalize supported spatial units,
+check paired-view/time/motion coverage, score motion tracks, and independently
+judge text--video consistency.}
+\requirement{FR7: Explainable output}{
+Refinement shall emit
+\texttt{motion\_quality\_score}, \texttt{semantic\_label},
+\texttt{semantic\_confidence}, \texttt{decision}, \texttt{reason\_codes} and
+diagnostic auxiliary data.}
+\requirement{FR8: Independent artifacts}{
+Perception, prepared-sample and refined outputs shall be written under
+sample-specific filenames.}
+\requirement{FR9: Selective and batch execution}{
+The orchestrator shall process all manifest entries by default and optionally
+restrict execution to a validated \texttt{target\_sample\_id}.}
+\requirement{FR10: Observability}{
+An operator shall be able to start a task, poll its state, inspect stage
+progress and logs, and retrieve available refined results without blocking the
+browser request for the duration of model inference.}
+
+\subsection*{Non-functional requirements}
+\requirement{NFR1: Traceability}{
+Outputs shall preserve sample identifiers, source paths, dataset identity,
+generator, Git revision, evidence intervals and configuration metadata where
+available.}
+\requirement{NFR2: Modularity}{
+Rendering, perception, augmentation and refinement shall remain callable as
+separate stages with file-based contracts.}
+\requirement{NFR3: Robust failure reporting}{
+Missing files, unsupported units, unreadable videos, subprocess failures and
+API failures shall be surfaced through exceptions, task status or reason codes.}
+\requirement{NFR4: Reproducibility}{
+Deterministic windowing and scoring shall be configuration-driven. External
+VLM/LLM responses must be marked as model- and API-dependent.}
+\requirement{NFR5: Resource accessibility}{
+The semantic stages shall be runnable without local model training by using an
+OpenAI-compatible cloud endpoint, while acknowledging the resulting cost and
+reproducibility trade-offs.}
+
 \section{Scope and Boundaries}
+Semantic-Motion is a data engineering and evaluation system, not a robot
+controller. It does not train an action policy, execute actions on hardware, or
+claim that accepted samples improve downstream task success. The VLA-ready
+designation means that records expose aligned modalities and auditable
+metadata; it is not a certification of compatibility with every policy
+architecture.
+
+The formal paired-view path requires real fixed/ego videos and a real motion
+trajectory. Single-video, source-only, template-rewriter, dummy-motion and mock
+semantic-verifier modes are useful for debugging, but they do not constitute
+formal multimodal evidence. Module D depends on Blender and an appropriately
+configured scene, while semantic generation and verification depend on an
+external Qwen-compatible endpoint. These dependencies are outside the
+repository's deterministic test boundary.
+
+The current evaluation assets are small and partly synthetic. LIBERO task names
+are weak task-level labels, not human gold labels for temporal boundaries,
+contact states or keep/drop decisions. Human annotation packets must be
+independently completed and adjudicated before formal precision, recall or
+calibration claims are made. In addition, although the project objective is
+fail-closed refinement, the current binary decision in
+\codepath{src/module_c/refinement.py} drops a sample when the motion score is
+below threshold or the semantic label is not \texttt{consistent}. Synchrony,
+semantic-confidence and mock-verifier findings are recorded in
+\texttt{reason\_codes}, but not all currently alter the binary decision. This
+is treated as an explicit implementation gap.
+
 \section{Contributions}
+The principal contribution is a runnable and inspectable interface between
+motion rendering, video semantics, language generation and quality control.
+More specifically, the project contributes:
+
+\begin{enumerate}
+    \item a versioned \texttt{ViewBundle} contract that links synchronized
+    camera streams, a shared clock, a motion reference and provenance;
+    \item a paired-view temporal perception implementation that interleaves
+    fixed/ego evidence at common timestamps, combines overlapping macro-window
+    transition votes using Hanning weights, and derives dense micro-level
+    descriptions;
+    \item a common augmentation interface with explicit source-only, template
+    and LLM-backed modes and auditable rewrite metadata;
+    \item a standardized Module C schema and multi-track motion-quality
+    calculation that exposes velocity, acceleration, jerk, jitter and temporal
+    regularity diagnostics;
+    \item joint multi-view semantic verification and machine-readable
+    explanations for refinement outcomes;
+    \item a per-sample automation layer that validates manifest paths, preserves
+    independent artifacts and records subprocess output; and
+    \item a Web dashboard that exposes orchestration state and final evaluation
+    dimensions without replacing the underlying command-line interfaces.
+\end{enumerate}
+
+These contributions are primarily architectural and engineering contributions.
+The report does not claim a new foundation model, a new policy-learning
+algorithm, or statistically established superiority over large-scale VLA
+systems.
+
 \section{Report Organisation}
+Chapter 2 reviews VLA systems, embodied VLMs, robot-learning benchmarks,
+video-to-task generation and demonstration-quality systems. Chapter 3 derives
+the system architecture and interface contracts from the requirements.
+Chapter 4 describes the implementation of the rendering, perception,
+augmentation and refinement modules. Chapter 5 reports integration and
+evaluation evidence. Chapter 6 discusses strengths, failure modes, limitations
+and engineering trade-offs, and Chapter 7 concludes with future work.
 
 \chapter{Technical Background and Related Systems}
 \section{Vision-Language-Action Models}
+VLA models extend vision-language reasoning to action generation by conditioning
+a policy on observations and language. RT-2 demonstrates one influential
+approach: robot actions are discretized into text tokens so that a
+vision-language model can be co-fine-tuned on robot trajectories and web data
+\cite{zitkovich2023rt2}. OpenVLA instead emphasizes accessibility, releasing a
+7B-parameter VLA and training infrastructure based on a large collection of
+real robot demonstrations \cite{kim2024openvla}. Open X-Embodiment further
+shows the scale and heterogeneity of data required to study transfer across
+institutions and robot embodiments \cite{openx2024}.
+
+These systems motivate Semantic-Motion in two ways. First, language-conditioned
+control assumes that instructions are grounded in the corresponding visual and
+physical sequence. Second, pooling data across sources increases the importance
+of explicit identifiers, coordinate conventions, timebases and provenance.
+Semantic-Motion therefore operates upstream of policy learning: it creates and
+checks candidate multimodal records but does not generate control actions.
+
+Being-H0.5 is particularly relevant to the proposal because it frames
+human-centric data as a resource for cross-embodiment transfer
+\cite{luo2026beingh05}. The present project adopts the motivation, but not the
+claimed scale or policy architecture. Human skeletal trajectories rendered in
+Blender remain separated from robot action spaces, and the embodiment gap is a
+core limitation rather than an assumed solved problem.
+
 \section{Robot Learning Benchmarks}
+LIBERO provides 130 procedurally generated manipulation tasks organized into
+four suites and is designed to study declarative and procedural knowledge
+transfer in lifelong robot learning \cite{liu2023libero}. RoboCasa supplies a
+large-scale household simulation platform with diverse tasks, scenes and
+objects \cite{nasiriany2024robocasa}. Both are useful references for task
+categories and structured demonstrations, but neither directly supplies gold
+labels for the temporal micro-actions and semantic consistency decisions
+defined by this project.
+
+Semantic-Motion uses benchmark resources at two levels. A small synthetic image
+benchmark supports static tests of object recognition, task classification,
+action sequence, semantic similarity and spatial reasoning. Separately,
+selected LIBERO Goal demonstrations can be converted into paired agent-view and
+eye-in-hand videos with end-effector trajectories. The latter are more
+representative of the system's contracts, but the BDDL task title is only a
+weak video-level label. It cannot validate contact state, precise temporal
+boundaries or refinement decisions without additional human annotation.
+
+Open X-Embodiment \cite{openx2024} and BridgeData V2
+\cite{walke2023bridgedatav2} provide a broader data-engineering context. Their
+diversity demonstrates the value of normalized interfaces, but the current
+project does not claim direct ingestion of all their native formats. Its
+implemented adapters cover Module D trajectories, selected LIBERO exports and
+standard single- or multi-track motion JSON.
+
 \section{Vision-Language Models for Robotics}
+VLMs provide a practical interface between visual evidence and structured
+language. PaLM-E interleaves continuous sensor representations and text within
+an embodied language model and demonstrates transfer across embodied reasoning,
+visual question answering and planning tasks \cite{driess2023palme}. RT-2 uses
+vision-language pre-training more directly for action prediction
+\cite{zitkovich2023rt2}. Semantic-Motion uses the same general grounding
+capability for a narrower purpose: observation and verification.
+
+In Module A, a Qwen-compatible VLM receives sampled frames and is prompted to
+return objects, spatial relations, task type, action order, transition indices,
+body part, posture and contact information. In Module C, an independently
+configured verifier receives the candidate text together with one or both
+views and returns a normalized label, confidence and error types. This
+separation is important: generation confidence is not treated as proof that a
+description is faithful.
+
+However, an API response is neither deterministic nor self-validating. Model
+updates, sampling, image compression, prompt changes and service failures can
+alter outputs. The system consequently stores raw responses and model/prompt
+metadata where possible and distinguishes deterministic schema checks from
+model-mediated judgments.
+
 \section{Video-to-Task Generation}
+Long demonstration videos create a joint segmentation and labelling problem.
+Video2Tasks is an open-source system that processes overlapping windows, uses a
+VLM to propose task transitions and instructions, and aggregates transition
+evidence with Hanning weights \cite{video2tasks2025}. It is a software baseline
+rather than a peer-reviewed benchmark, so comparisons must pin the upstream
+revision and invoke its actual algorithmic functions rather than compare prompt
+snippets alone.
+
+Semantic-Motion adopts the overlapping-window principle but extends the data
+contract. Macro windows propose task boundaries and high-level intent; dense
+micro windows describe shorter action primitives within each accepted segment.
+For paired input, frames from fixed and ego views are extracted at identical
+source indices and interleaved by timestamp before inference. Segment records
+retain frame intervals, evidence by view, macro intent, micro-instructions,
+trajectory references and augmentation metadata. This richer output is needed
+for later synchronization and semantic checks.
+
 \section{Demonstration Data Quality}
+Demonstration scale does not remove the need for quality control. BridgeData V2
+shows the value of task and environment diversity for scalable robot learning
+\cite{walke2023bridgedatav2}, and MimicGen demonstrates how object-centric
+subtask structure can expand a small set of demonstrations into a larger
+dataset \cite{mandlekar2023mimicgen}. Diffusion Policy further illustrates that
+modern visuomotor policies learn distributions over temporally structured
+actions \cite{chi2023diffusionpolicy}; corrupted timing or physically implausible
+trajectories are therefore not benign metadata defects.
+
+For this project, quality has at least three dimensions. \emph{Contract
+quality} concerns file availability, paired-view synchronization, coordinate
+units and motion coverage. \emph{Physical quality} concerns velocity,
+acceleration, jerk, directional oscillation and timestamp regularity.
+\emph{Semantic quality} concerns whether the text identifies the observed
+actors, objects, task and temporal order without hallucination. A useful filter
+must keep these dimensions separate in diagnostics even if it ultimately emits
+a binary decision.
+
 \section{Engineering Gap}
+Existing systems tend to optimize one part of the chain. VLA models focus on
+policy learning; benchmark suites focus on standardized tasks; scalable data
+generation systems focus on obtaining more trajectories; and video-to-task
+tools focus on segmentation and instruction generation. The project materials
+identify a gap between these components: there is no lightweight, local,
+auditable path that starts with human or simulated motion, creates synchronized
+multi-view evidence, generates multi-granularity language, attaches real motion
+and returns explainable quality decisions.
+
+Semantic-Motion addresses this gap through explicit file and schema contracts
+rather than a monolithic model. The resulting design can be tested stage by
+stage, can retain independent artifacts for audit, and can expose failure
+reasons to both scripts and a Web dashboard. Its remaining gap is equally
+important: prompt-constrained augmentation is not yet deterministically
+fact-checked, and not every recorded synchronization or confidence diagnostic
+currently changes the final decision. Chapters 3 and 4 therefore distinguish
+the target fail-closed architecture from the precise behavior of the present
+implementation.
 
 \chapter{System Requirements and Overall Design}
 \section{Inputs, Outputs and Use Cases}
+The system accepts three principal source forms:
+
+\begin{enumerate}
+    \item Module D directories containing the required fixed-view video,
+    ego-view video and sample-specific trajectory;
+    \item a versioned \texttt{ViewBundle} or dataset manifest referencing
+    paired views and a trajectory; and
+    \item compatibility inputs consisting of a single video or a directory of
+    pre-extracted frames, which are restricted to debugging unless paired-view
+    requirements are explicitly relaxed.
+\end{enumerate}
+
+For each manifest sample, the automated path writes three independent artifact
+pairs: a perception JSON, a machine-readable sample JSONL with a pretty JSON
+equivalent, and a refined JSONL with a pretty JSON equivalent. The refined
+record exposes the dimensions required by the dashboard:
+\texttt{motion\_quality\_score}, \texttt{semantic\_label},
+\texttt{semantic\_confidence}, \texttt{decision},
+\texttt{reason\_codes} and nested diagnostics.
+
+The main use cases are:
+
+\begin{itemize}
+    \item \textbf{Batch dataset preparation}: process every sample in a Module D
+    manifest while retaining independent outputs;
+    \item \textbf{Targeted debugging}: execute one
+    \texttt{target\_sample\_id} and inspect its intermediate artifacts;
+    \item \textbf{Controlled view study}: run fixed, ego and fused perception
+    modes for ablation;
+    \item \textbf{Quality review}: sort or inspect samples by motion score,
+    semantic label, decision and reason code;
+    \item \textbf{Regression evaluation}: run deterministic contract tests,
+    motion corruptions and, where gold labels exist, temporal and decision
+    metrics; and
+    \item \textbf{Operator monitoring}: launch the pipeline through the Web
+    interface and poll progress without holding one synchronous HTTP request
+    open.
+\end{itemize}
+
 \section{Design Goals}
+The architecture is guided by six design goals.
+
+\begin{description}
+    \item[Evidence alignment.] Fixed video, ego video, motion and text must refer
+    to one sample and one temporal interval.
+    \item[Explicit contracts.] Cross-module communication must use versioned,
+    validated models or documented JSON/JSONL fields rather than implicit
+    filename assumptions alone.
+    \item[Independent auditability.] Each processing stage must retain its own
+    per-sample artifact so that a final decision can be traced backwards.
+    \item[Conservative quality control.] Missing physical or semantic evidence
+    should be visible and should ultimately lead to fail-closed policy behavior.
+    The current decision wiring is assessed against this target.
+    \item[Replaceable components.] Recognition models, instruction rewriters,
+    semantic verifiers and motion sources must be replaceable behind narrow
+    interfaces.
+    \item[Operational observability.] Long-running external API calls must expose
+    status, progress, current stage and captured logs.
+\end{description}
+
 \section{Overall Architecture}
+The architecture is a staged transformation with a feedback interpretation
+rather than an online control loop. Module C reason codes can inform later
+changes to prompts, rendering and thresholds, but they do not automatically
+modify upstream models during one execution.
+
+\begin{table}[htbp]
+\centering
+\caption{End-to-end architecture and principal artifacts.}
+\label{tab:overall-architecture}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{0.15\textwidth} p{0.20\textwidth} X p{0.22\textwidth}}
+\toprule
+Stage & Primary implementation & Transformation & Principal output \\
+\midrule
+Rendering (D) &
+\path{module_d/render_pipeline.py} &
+Imports FBX/BVH motion, constructs scene context, renders fixed/ego video and
+exports selected bone trajectories. &
+Two MP4 files and one trajectory JSON per action. \\
+Indexing &
+\path{tools/prepare_module_d_manifest.py} &
+Validates expected files and creates portable sample references. &
+\path{data/module_d_output/manifest.json}. \\
+Perception (A) &
+\path{src/semantic_motion/video_task.py} &
+Performs paired temporal sampling, VLM recognition, transition voting and
+macro/micro aggregation. &
+\texttt{VideoTaskRecord} v2 JSON. \\
+Augmentation (B) &
+\path{src/semantic_motion/augmentation.py} &
+Produces source, template or LLM instruction variants with source-step and
+prompt provenance. &
+Augmented instructions embedded in task segments. \\
+Preparation (C1) &
+\path{src/module_c/prepare_samples.py} &
+Converts task records to standardized samples and loads real motion tracks. &
+Per-sample JSONL and pretty JSON. \\
+Refinement (C2) &
+\path{src/module_c/run_refinement.py} &
+Checks alignment, scores motion, verifies semantics and emits explanations. &
+Per-sample refined JSONL and pretty JSON. \\
+Orchestration &
+\path{app.py}, \path{dashboard/src/App.jsx} &
+Runs selected stages asynchronously, reports progress and visualizes refined
+records. &
+Task-status API and Web dashboard. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The Python process remains the system of record. The React dashboard does not
+recompute scientific metrics; it normalizes scores for display and maps
+\texttt{keep}/\texttt{drop} to operator-facing labels.
+
 \section{Module Responsibilities and Boundaries}
+\begin{table}[htbp]
+\centering
+\caption{Module responsibilities and exclusions.}
+\label{tab:module-boundaries}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{0.12\textwidth} X X}
+\toprule
+Module & Responsible for & Explicitly not responsible for \\
+\midrule
+Rendering &
+Visual representation of raw motion, camera placement, simple scene context,
+video encoding and trajectory export. &
+Semantic labels, motion acceptance decisions or robot control. \\
+Perception &
+Visual grounding, candidate boundaries, macro intent, micro-actions and
+evidence references. &
+Guaranteeing linguistic factuality or physical trajectory quality. \\
+Augmentation &
+Instruction-style diversity, source-step linkage and rewrite provenance. &
+Changing observed actions or certifying final sample acceptance. \\
+Refinement &
+Sample normalization, synchronization diagnostics, physical scoring, semantic
+verification, decisions and reason codes. &
+Repairing corrupted source motion or retraining upstream models. \\
+Web layer &
+Task orchestration, polling, log exposure and visualization. &
+Changing model outputs, thresholds or scientific metrics. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The practical Module A/B boundary is an in-process boundary:
+\texttt{VideoTaskPipeline} owns a \texttt{PerceptionStream} and an
+\texttt{AugmentationStream}, and \codepath{run_video_task.py} serializes their
+combined result. The Module C boundary is deliberately file-based so that
+perception records can be inspected or replaced before refinement.
+
 \section{Data Models and Interface Contracts}
+Pydantic models in \codepath{src/semantic_motion/models.py} define the upstream
+contracts, while dataclasses in \codepath{src/module_c/schema.py} define the
+refinement input and output. Every contract carries a stable
+\texttt{sample\_id}; temporal segments add start/end frames and seconds; and
+provenance records the dataset, source, generator and Git revision. JSONL is
+used for streaming and machine processing, while pretty JSON is written as an
+equivalent inspection artifact.
+
+\begin{table}[htbp]
+\centering
+\caption{Critical cross-module fields.}
+\label{tab:data-contracts}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{0.22\textwidth} p{0.24\textwidth} X}
+\toprule
+Contract & Required core fields & Purpose \\
+\midrule
+\texttt{ViewBundle} &
+\texttt{sample\_id}, \texttt{timebase}, \texttt{views},
+\texttt{trajectory}, \texttt{provenance} &
+Associates synchronized visual and physical evidence. \\
+\texttt{TaskSegment} &
+frame/second interval, task text, macro intent, micro-instructions, confidence,
+evidence by view &
+Represents one temporally grounded semantic task. \\
+\texttt{Sample} &
+\texttt{sample\_id}, video/views, text, motion tracks, interval, provenance &
+Provides the normalized unit consumed by Module C. \\
+\texttt{RefinementResult} &
+motion score, semantic label/confidence, decision, reason codes, auxiliary data &
+Supports acceptance, audit and visualization. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
 \subsection{Paired Multi-view Video Contract}
+A formal sample contains at least the keys \texttt{fixed} and \texttt{ego}.
+Each maps to a \texttt{ViewStream} with a path, camera type, FPS, frame count
+and duration. \codepath{build_view_bundle} probes videos rather than trusting
+filenames, constructs a shared timebase from a reference stream, and records
+validation diagnostics for mismatched metadata. During fused perception,
+identical source-frame indices are extracted from each view and ordered
+fixed-then-ego for every timestamp. This ordering is stated in the VLM prompt so
+that transition indices refer to timestamps rather than individual images.
+
+It is important to distinguish diagnosis from enforcement. At perception time,
+\path{validate_view_bundle} returns stable synchronization reasons, but
+\path{run_view_bundle} stores them with
+\path{validation_enforced=false}. Module C later probes the files again and
+adds missing-view, unreadable-view, FPS, frame-count and duration reason codes.
+
 \subsection{Shared Timebase and Motion Trajectory Contract}
+\texttt{SharedTimebase} contains FPS, frame count, duration in seconds and a
+\texttt{FrameMap} relating encoded frames to source frames. A
+\texttt{MotionReference} contains the trajectory path, source, spatial unit,
+coordinate frame and track names. The application-level orchestrator further
+requires the Module D convention
+\codepath{data/module_d_output/<sample_id>/<sample_id>_trajectory.json}; it
+rejects unexpected or escaping paths before starting model inference.
+
+Module C converts supported Module D, LIBERO or standard JSON trajectories into
+named \texttt{MotionTrack} arrays containing positions and timestamps. Formal
+checks require increasing timestamps, supported units, real rather than dummy
+motion, and coverage of the sample interval. Track positions are normalized to
+metres before velocity, acceleration, jerk and jitter indicators are computed.
+The default configuration uses minimum aggregation across tracks, so the
+weakest configured track determines the aggregate motion score.
+
 \section{Observability and Visualisation Design}
+VLM and semantic-verifier calls can take substantially longer than an ordinary
+HTTP request. The FastAPI service therefore returns a UUID task identifier from
+\texttt{POST /run-pipeline} and executes the blocking command sequence as a
+background task. A lock-protected in-memory dictionary stores
+\texttt{queued}, \texttt{running}, \texttt{completed} or \texttt{failed}
+state, percentage progress, current step, selected sample, captured
+\texttt{stdout}/\texttt{stderr} and any error.
+
+The React client polls \texttt{GET /get-status/\{task\_id\}} every 1.5 seconds.
+It displays a progress bar, current stage and log count, then retrieves
+\texttt{GET /get-results} after completion. Results are read from independent
+\codepath{*_refined.pretty.json} files; the API combines records in memory for
+display but does not overwrite them as one evaluation artifact.
+
+The dashboard presents processed count, keep rate, mean Motion Quality and
+Semantic Consistency rate. Motion scores are mapped from $[0,1]$ to a 0--100
+display scale and coloured red for 0--35, amber for 36--59 and green for
+60--100. These colours are visual categories only and do not redefine the YAML
+threshold. The table retains the backend semantic label, confidence, decision
+and all reason codes.
+
+This implementation is suitable for local single-process operation. Task state
+is lost when the server restarts and is not shared across workers. Durable
+deployment would require persistent task storage, authentication, restricted
+CORS configuration and a dedicated job queue.
+
 \section{End-to-End Workflow}
+The automated formal path is:
+
+\begin{enumerate}
+    \item Module D renders each source motion into fixed and ego videos and
+    exports Root/Hand trajectories.
+    \item \codepath{prepare_module_d_manifest.py} validates each directory and
+    writes one manifest entry per valid sample.
+    \item The orchestrator reads the manifest, optionally selects one
+    \texttt{target\_sample\_id}, validates its trajectory convention and creates
+    independent output paths.
+    \item \codepath{run_video_task.py} loads the \texttt{ViewBundle}. It creates
+    overlapping 16-second macro windows with 8-second stride and 16 sampled
+    timestamps by default.
+    \item The VLM proposes macro semantics and local transition indices.
+    Hanning-weighted votes from overlapping windows are clustered into global
+    cuts, subject to minimum segment duration.
+    \item Within each segment, dense 2-second micro windows with 1-second stride
+    and four sampled timestamps produce ordered action primitives. The segment
+    aggregates macro intent, micro-instructions, confidence, evidence and
+    trajectory linkage.
+    \item Module B produces the configured number of source/template/LLM
+    variants. Current LLM variants carry prompt and source-step provenance but
+    are explicitly marked as not deterministically validated.
+    \item \codepath{prepare_samples.py} selects the configured segment- or
+    video-level text, attaches the sample's real trajectory and writes
+    independent JSONL/pretty JSON.
+    \item \codepath{run_refinement.py} checks cross-modal metadata, scores
+    motion, invokes multi-view semantic verification and writes an independent
+    refined record with explanations.
+    \item The task status is marked complete and the dashboard refreshes the
+    available per-sample results.
+\end{enumerate}
+
+The filename pattern is deliberately stable:
+\codepath{<sample_id>.json},
+\codepath{<sample_id>_samples.jsonl} and
+\codepath{<sample_id>_refined.jsonl}, each with a corresponding pretty JSON
+where applicable. This preserves the semantic lineage from one manifest entry
+to one set of auditable downstream artifacts.
 
 \chapter{Design and Implementation of the Four Modules}
 \section{The Rendering Module}
@@ -121,20 +764,247 @@ These standardized outputs completely eliminate the representation barriers of t
 \subsection{Output and Provenance}
 
 \section{The Refinement Module}
+
+The Refinement Module is the final quality-control layer in the Semantic-Motion pipeline. The front modules render simulation data into videos, infer structured task text based on videos and generate augmented text. However, the generated description may contain an incorrect object, action, temporal order or target state. Meanwhile, the motion trajectory may contain spikes, jitter, invalid timestamps or insufficient observation. These samples are not suitable for downstream VLA training. The role of the refinement module is to ensure that only reliable samples are kept for downstream learning. 
+
+The refinement module filters samples containing video, motion and text through two perspectives, namely numerical analysis of motion quality and VLM-based verification of semantic consistency. The outputs of two channels are combined into an explainable keep or drop decision.
 \subsection{Sample Construction}
+
+The module first converts the task texts with corresponding videos produced the Perception and Augmentation Modules into a common JSONL representation. Each sample contains a unique sample id, a collection of one or more video paths indexed by views, the texts to be verified, and optional motion tracks.
+
+This intermediate representation allows the refinement process independent from the internal structure of the earlier modules and enables the same procedure to operate on demonstrations of single view, rendering videos of multiple views, and externally prepared datasets.
+
+Two sample granularities are supported. At segment level, every detected task segment becomes an independent sample. Its identifier combines the source demonstration name and segment identifier, and its motion data are restricted to the segment's start and end times. All synchronized views associated with that demonstration remain attached to the same sample. This mode is appropriate when deciding keep or drop individual sub actions. At video level, the complete video contents are included in the sample regardless of whether the demonstration has one view or multiple views. This mode is more suitable for checking whether a description correctly summarizes the overall tasks.
+
+The text can be selected from the task instruction or augmented instructions. Empty texts, records without any valid video path, and records without task texts are skipped. The absence of one optional view does not make a sample invalid, as long as at least one usable view remains. If no motion track is contained in the sample, the refinement module can operate in semantic-only mode, determining to keep or drop the sample based solely on the task text and the corresponding video. Samples are written both in line-delimited JSON for machine processing, and optionally in indented JSON for manual inspection. This separation between processing and inspection formats improves batch efficiency and ensures observability.
+
 \subsection{Motion Data Normalisation}
+
+Motion data from heterogeneous systems must be converted to consistent formats before a common quality metric can be applied. The refinement module represents motion as a dictionary of named tracks. Each position is converted to a three-dimensional float vector. A valid track must contain at least four observations, have the same number of positions and timestamps, and use strictly increasing timestamps. Invalid tracks are dropped during preparation.
+
+Four input formats are currently supported. Firstly, LIBERO trajectories provide the position of agent’s end effector in each action step. These positions are converted into a continuous end-effector track. If the source includes an FPS value, timestamps are derived from the step time and FPS. Secondly, trajectories generated by the rendering module are composed by the three-dimensional location of each selected body joint in every animation frame. The refinement module sorts the frames in chronological order and converts their frame numbers into times, then constructs separate trajectories for the body root, right hand and left hand. Thirdly, a standard single-trajectory file directly provides an ordered list of three-dimensional positions together with the corresponding observation times. The module treats this list as an unnamed trajectory. Finally, a standard multi-trajectory file provides several named position sequences and their observation times. These trajectories and their original names are retained.
+
+For segment-level samples, every track is temporally cropped to the corresponding segment interval and evaluated again. The loader also supports a plug-in interface for additional motion formats. If no real trajectory can be resolved, the pipeline can generate a short linear placeholder trajectory to keep the engineering workflow executable. This placeholder will not be interpreted as evidence of genuine motion quality. By default, the refinement module only verifies semantic analysis when there is no motion track in the sample.
+
 \subsection{Motion Quality Scoring}
+
+For a valid track with positions $\mathbf{p}_i$ at times $t_i$, let $\Delta t_i=t_{i+1}-t_i$. The implementation clips each time interval from below by $\varepsilon=10^{-6}$ for numerical safety and computes discrete velocity, acceleration, and jerk as
+
+\[
+\mathbf{v}_i =
+\frac{\mathbf{p}_{i+1}-\mathbf{p}_i}
+{\max(\Delta t_i,\varepsilon)},
+\qquad
+\mathbf{a}_i =
+\frac{\mathbf{v}_{i+1}-\mathbf{v}_i}
+{\max(\Delta t_{i+1},\varepsilon)},
+\qquad
+\mathbf{j}_i =
+\frac{\mathbf{a}_{i+1}-\mathbf{a}_i}
+{\max(\Delta t_{i+2},\varepsilon)}.
+\]
+
+For uniformly sampled motion, all intervals equal the constant sampling period $\Delta t$, so the three denominators above have the same numerical value. The velocity, acceleration, and jerk abnormality ratios are the proportions of their Euclidean magnitudes that exceed the configured limits:
+
+\[
+r_v =
+\frac{1}{N_v}\sum_i
+\mathbb{I}\!\left(\lVert\mathbf{v}_i\rVert_2>v_{\max}\right),
+\quad
+r_a =
+\frac{1}{N_a}\sum_i
+\mathbb{I}\!\left(\lVert\mathbf{a}_i\rVert_2>a_{\max}\right),
+\quad
+r_j =
+\frac{1}{N_j}\sum_i
+\mathbb{I}\!\left(\lVert\mathbf{j}_i\rVert_2>j_{\max}\right).
+\]
+
+Here, $\mathbb{I}(\cdot)$ is the indicator function. The default limits are $v_{\max}=2.5$, $a_{\max}=6.0$, and $j_{\max}=20.0$. They represent the largest motion magnitudes treated as normal for an individual sample. Exceeding a threshold marks that sample as abnormal, but does not by itself reject the entire track. The limits are configurable and should be adjusted when the expected motion scale or sampling characteristics of a dataset differ.
+
+Jitter is measured from changes in the full three-dimensional velocity direction. For every velocity satisfying $\lVert\mathbf{v}_i\rVert_2>10^{-8}$, define
+
+\[
+\mathbf{u}_i =
+\frac{\mathbf{v}_i}{\lVert\mathbf{v}_i\rVert_2},
+\]
+
+and let
+
+\[
+\mathcal{D} =
+\left\{
+i:
+\lVert\mathbf{v}_i\rVert_2>10^{-8}
+\ \land\
+\lVert\mathbf{v}_{i+1}\rVert_2>10^{-8}
+\right\}.
+\]
+
+The jitter ratio is the proportion of valid adjacent velocity pairs whose
+directions differ by more than $90^\circ$:
+
+\[
+r_d =
+\begin{cases}
+\displaystyle
+\frac{1}{|\mathcal{D}|}
+\sum_{i\in\mathcal{D}}
+\mathbb{I}\!\left(
+\mathbf{u}_i^\top\mathbf{u}_{i+1}<0
+\right),
+& |\mathcal{D}|>0, \\[6pt]
+0,
+& |\mathcal{D}|=0.
+\end{cases}
+\]
+
+Normalization $\mathbf{v}_i$ removes the influence of magnitude, so this measure responds only to changes in direction. Velocities below $10^{-8}$ are excluded because their directions are undefined or numerically unstable. Since both $\mathbf{u}_i$ and $\mathbf{u}_{i+1}$ are unit vectors, their dot product equals the cosine of the angle $\theta_i$ between them:
+
+\[
+\mathbf{u}_i^\top\mathbf{u}_{i+1}=\cos\theta_i.
+\]
+
+A negative dot product therefore indicates $\theta_i>90^\circ$, which the implementation counts as a rapid direction reversal. Consequently, for $r_d\in[0,1]$, a value near zero indicates few such reversals, while a larger value indicates more frequent directional oscillations. If there is no valid adjacent velocity pair, $r_d$ is defined as zero.
+
+Two additional measures detect timing anomalies. The interval coefficient of variation $c_t$ and the largest-gap ratio $g_t$ are
+
+\[
+c_t =
+\frac{\operatorname{std}(\Delta t)}
+{\max\!\left(\operatorname{mean}(\Delta t),\varepsilon\right)},
+\qquad
+g_t =
+\frac{\max_i\Delta t_i}
+{\max\!\left(\operatorname{median}(\Delta t),\varepsilon\right)}.
+\]
+
+The coefficient $c_t$ measures the overall relative variation of the sampling intervals. It is zero when all intervals are equal and increases as the sampling schedule becomes less regular. The ratio $g_t$ compares the largest interval with the median, which represents the typical frame interval and is less sensitive to isolated gaps than the mean. Thus, $g_t=1$ for uniform sampling, while a significantly larger value indicates an unusually long interval that may result from a dropped frame or a timestamp shift. The terms $\varepsilon$ only prevent division by a reference interval near zero.
+
+The implementation therefore forms six normalized penalties. The first three use a ratio of abnormal samples of $0.2$; the other three use their configured limits $r_{d,\max}=0.30$, $c_{t,\max}=0.25$, and $g_{t,\max}=2.5$:
+
+\[
+q_v=\min(1,r_v/0.2),
+\qquad
+q_a=\min(1,r_a/0.2),
+\qquad
+q_j=\min(1,r_j/0.2),
+\qquad
+q_d=\min(1,r_d/r_{d,\max}),
+\]
+
+\[
+q_c=\min(1,c_t/c_{t,\max}),
+\qquad
+q_g=\min\!\left(
+1,
+\frac{\max(0,g_t-1)}
+{\max(g_{t,\max}-1,\varepsilon)}
+\right).
+\]
+
+The quality score for one track is
+
+\[
+s_{\text{track}} =
+\operatorname{clip}\!\left(
+1-\frac{q_v+q_a+q_j+q_d+q_c+q_g}{6},
+0,1
+\right).
+\]
+
+Consequently, a smooth trajectory with regular sampling receives a score near one, whereas frequent kinematic spikes, direction reversals, irregular intervals, or large time gaps reduce the score. The corresponding reason codes are \texttt{high\_velocity\_spikes},
+\texttt{high\_acceleration\_spikes},
+\texttt{high\_jerk\_spikes},
+\texttt{high\_jitter},
+\texttt{irregular\_frame\_intervals}, and
+\texttt{drop\_frame\_or\_time\_shift}. Tracks with fewer than four samples, non-finite values, or non-increasing timestamps receive a score of zero and a corresponding validation reason.
+
+When multiple tracks are present, their scores are aggregated using either the minimum or the mean. The default is the minimum, so a single track with a poor rating is sufficient to drag down the complete sample's motion score. This is appropriate for strict data cleaning because a smooth root trajectory should not conceal an unstable hand trajectory. Mean aggregation is available when overall motion quality is more important than the weakest component.
 \subsection{Semantic Consistency Verification}
+
+Motion smoothness alone cannot determine whether a text describes the visual task correctly. The semantic channel submits all available views, together with the candidate description, to the multimodal verifier. A LIBERO sample is verified from its video of single agent view and eye in agent’s hand. A rendering module sample is verified jointly from the egocentric and fixed third-person views. The first-person view provides evidence of subject interaction, while the fixed view provides motions of full body and scene context. By treating these two videos as complementary observations of the same sample, the system can avoid making conflicting decisions for each camera.
+
+The verifier uses qwen3-vl-plus through an endpoint compatible for OpenAI. For each available view, a local video of no more than 18 MB can be encoded and sent directly. For a larger video, the system uniformly extracts eight temporally ordered JPEG frames at quality 85. The view name is retained when constructing the request so that evidence from the egocentric and fixed cameras can be distinguished.
+
+The verification prompt evaluates seven dimensions: actor correctness, object correctness, action correctness, temporal correctness, goal and final-state correctness, hallucination, and evidence sufficiency. The verifier makes decisions relying only on visible evidence. Ambiguous evidence produces an “uncertain” result, rather than an unsupported guess.
+
+The normalized output contains a label, which may be “consistent”, “uncertain” or “inconsistent”, a confidence value between zero and one, a list of error types, and a suggested replacement text. Confidence represents confidence in the assigned label. For example, “inconsistent” with high confidence indicates strong evidence of a mismatch. Error tags identify failures such as object\_mismatch, action\_mismatch, possible\_hallucination, and insufficient\_evidence.
+
 \subsection{Deterministic Cross-modal Alignment Checks}
+
+The final decision combines two quality channels conservatively. A sample is retained only when its semantic label is “consistent” and the motion score meets or exceeds the default threshold of 0.35. If no motion score is available, semantic consistency alone determines whether the sample can be retained.
+
+A sample with correct semantical descriptions is dropped when its motion score is below the threshold. A smooth trajectory is also dropped when its descriptions are uncertain or inconsistent. When motion is absent, the sample enters semantic-only mode and may still be kept if its semantic label is “consistent”. This procedure ensures that the entire process is operational while the condition that motion was not evaluated is explicitly recorded.
+
 \subsection{Fail-closed Refinement Decision and Explainable Outputs}
 
+Each result of refinement module records the sample identifier, motion-quality score, semantic label, semantic confidence, final decision, and a list of reason codes. It also retains the scores and abnormality ratios of per track, semantic error types, suggested text, and original candidate text. Results are saved as JSONL for downstream processing and as formatted JSONL for manual review. This output design makes rejection traceable. A drop decision may be attributed to a threshold failure such as “low\_motion\_score”, to an issue of a specific track such as “Hand\_R: high\_jitter”, or to a semantic problem such as “object\_mismatch”.
+
+The Refinement Module closes the engineering loop of four modules. The Rendering Module supplies visual and motion signals. The Perception Module extracts structured semantics. The Augmentation Module generates text variants. The Refinement Module determines whether the aligned sample is sufficiently reliable.
+
+
 \chapter{System Integration, Demonstration and Evaluation}
-\section{Research Questions}
+
+This chapter evaluates Semantic-Motion Engine as an integrated engineering system, rather than just four isolated models. The four stages follow the actual data flow. First, the Rending Module converts motion or simulation data into videos of first-person and third-person view. Second, the Perception Module extracts structured task semantics from related videos. Third, the Augmentation Module generates command variants. Fourthly, the Refinement Module evaluates the motion quality and semantic consistency of samples to determine whether to filter of retain them. The evaluation verifies the operation of the individual modules and the transfer of videos, motions and text between consecutive stages.
+
 \section{Integration Environment and Technology Stack}
+
+The integrated software pipeline was implemented in Python 3.10 or later. OpenCV is used for video decoding, frame sampling, and local video preprocessing. Structured data are defined as Python classes with fields and data types, and are exchanged between modules via JSON or JSONL files. YAML configuration files store motion thresholds, synchronization requirements, settings of semantic verifier, and model parameters. 
+
+The Rendering Module uses Blender to convert motion files into videos of egocentric and fixed view while exporting three-dimensional joint trajectories. Visual-language inference is implemented through a DashScope API compatible with OpenAI. API credentials, endpoint addresses, and model identifiers are supplied through environment variables rather than source files. This avoids embedding secrets in the repository and allows to change inference models without modifying project codes.
+
 \section{Module Integration and Interface Verification}
-\section{End-to-End Demonstration and Visualisation}
-\section{Evaluation Setup}
+
+The principle integration object is a view bundle. It associates a sample identifier with a shared time base, fixed and egocentric videos, a trajectory source, and source information. The views in a valid formal multi-view sample share the same frame rate, frame count, and duration, allowing observations from different cameras to be compared at corresponding times.
+
+The Perception Module processes the view bundle and produces a versioned video-task-record. This record contains corresponding video path, sampled multi-view frames, temporal task segments, macro-intents, micro-instructions, detected objects and spatial relations. The Augmentation Module receives the structured segment description, and every generated variant retains its relationship between source steps.
+
+Before refinement, the perception record is converted into a uniform sample, containing candidate texts, video views, segment boundaries and motion tracks. LIBERO’s positions of end effectors and Rendering Module’s trajectories of body joints are normalized into the track representation with the same name. This interface allows the motion scorer to operate without knowing the original dataset format.
+
+Interface verification was performed on the LIBERO sample “put\_the\_bowl\_on\_the\_plate”, which contains views of agent and eye in hand. Both views contain 90 frames at 20 frames per second and have a duration of 4.5 seconds. The synchronization check reports a valid sample of paired views. The first generated segment covers 0.00–3.35 seconds, and its end-effector trajectory covers the same interval. The second segment covers the remainder of the demonstration. The provenance records the dataset, source identifier, generator, and source revision. These checks show that visual, textual, temporal, and motion data remain associated after passing through multiple modules.
+
+Schema validation prevents several engineering failures. For example, a view cannot be detached from its trajectory without detection and motions in segment level cannot be evaluated against unrelated time intervals. Intermediate files in standard format and structured error codes also prove for observability at module boundaries.
+
+\section{End-to-End Demonstration}
+
+The main end-to-end demonstration uses the Module D jump\_down motion. The Rendering Module imports the action of motion capture into Blender, identifies it as a downward jump action, and places a platform relative to the character’s take-off position and movement direction. It renders Fixed\_View.mp4 from the scene camera and Ego\_View.mp4 from a camera attached to the head bone. At the same time, it exports jump\_down\_trajectory.json, which contains the world coordinate positions of Root, Hand\_R and Hand\_L at each animation frame. The resulting paired videos each contain 70 frames at 30 frames per second and last 2.33 seconds.
+
+The rendered files are indexed by manifest.json as one jump\_down view bundle. The Perception Module processes the fixed and egocentric videos jointly in the mode of fused view and associates the exported joint trajectory to the same record. It identifies a cut at frame 35 and produces two temporal segments. The first segment, from 0.00 to 1.17 seconds, is described as the humanoid crouching on a block, jumping upward, reaching with both hands, and catching a floating low-poly head-like object. The second segment, from 1.17 to 2.33 seconds, is described as a transition from standing to a low crouched posture supported by the hands and feet without interaction with other objects. The stored perception record was generated with qwen3-vl-plus.
+
+The Augmentation Module generates three rewritten instructions for each segment, producing six variants in total. These variants retain the associations with the four source microsteps in their respective segments and take strategies such as temporal compression, goal-oriented framing, stage-based decomposition and spatial context enhancement.
+
+Before refinement, prepare\_samples combines the two segment descriptions into one candidate in video level while retaining both source segment identifiers, video paths 30 FPS shared time base, and all three motion tracks. The synchronization check confirms that the fixed and egocentric videos both contain 70 frames and have matching 2.33 second durations. The Root, Hand\_R and Hand\_L tracks cover 0.00–2.30 seconds. The visual and motion evidence are temporally aligned.
+
+The Refinement Module evaluates the three tracks with the aggregation of minimum score. Root and Hand\_L each score approximately 0.5000, while Hand\_R scores 0.4918. Therefore the aggregate motion-quality score is 0.4918. All three tracks trigger high-velocity, high-acceleration, and high-jerk diagnostic codes, reflecting the rapid take-off and landing dynamics of the jump. Since the motion threshold is 0.35, the aggregate score under the default configuration still passes the motion gate. Joint multi-view semantic verification labels the combined task text “consistent” with confidence 0.95 and returns no semantic error types.
+
+The recorded refinement decision is “keep”. This decision follows the Refinement Module rule: a sample is retained only when the motion-quality score is not below the configured minimum and the semantic label is “consistent”. Otherwise it is dropped. In the present case, both conditions are satisfied, so the sample is kept even though the reason code contains spike diagnostic information of track.
+
 \section{Perception Module Evaluation}
+
+The static perception module benchmark was evaluated on 30 scenarios of robot tasks and structured ground truth. It evaluates object recognition, task classification, action sequence similarity, semantic similarity, and spatial reasoning.
+
+Six complementary metrics are used. Object recognition F1 measures set overlap between predicted and ground-truth object names after normalization. Task classification accuracy is a binary score that equals one only when the predicted task type matches the labelled type exactly. ROUGE-L of action sequence compares the longest common subsequence between the predicted and reference action plans and therefore rewards both content and order. Semantic similarity aggregates the predicted objects, task type, actions, and target into a single bag-of-words representation and computes cosine similarity against the corresponding ground-truth text. Spatial reasoning accuracy counts the fraction of labelled spatial relations recovered in the prediction through substring matching. The composite score is the equally weighted average of these five metrics, each contributing a weight of 0.2. The results are shown below.
+\begin{table}[htbp]
+  \centering
+  \label{tab:static-vlo-metrics}
+  \begin{tabular}{lc}
+    \hline
+    Metric & Score \\
+    \hline
+    Object recognition F1 & 0.7602 \\
+    Task classification accuracy & 1.0000 \\
+    Action-sequence ROUGE-L & 0.7176 \\
+    Semantic similarity & 0.9273 \\
+    Spatial reasoning accuracy & 0.6278 \\
+    Composite score & 0.8066 \\
+    \hline
+  \end{tabular}
+  \caption{Static Perception Module benchmark results on 30 scenarios using Qwen-VL-Plus.}
+\end{table}
+
+The model correctly classified the task type in all 30 synthetic scenes and achieved high overall semantic similarity. This indicates that the structured output format can represent broad task intent effectively. Object recognition and action-sequence matching were weaker but remained substantially above zero. Spatial reasoning produced the lowest score. Inspection of predictions shows that support surfaces and appliance subcomponents were often described too generically, causing mismatches even when the overall task was understood.
+
 \section{Pinned Video2Tasks Full-pipeline Comparison}
 \section{Refinement and Alignment Evaluation}
 \subsection{Human Gold Annotation Protocol}
