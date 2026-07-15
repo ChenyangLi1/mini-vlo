@@ -110,26 +110,46 @@
 \newcommand{\InstitutionName}[1]{\renewcommand{\sm@institution}{#1}}
 \newcommand{\SubmissionDate}[1]{\renewcommand{\sm@date}{#1}}
 
-\newcommand{\makeprojecttitle}{%
-  \hypersetup{pageanchor=false}
-  \begin{titlepage}
-    \centering
-    {\large \sm@institution\par}
-    \vspace{2.2cm}
-    {\Huge\bfseries\color{SMBlue}\sm@title\par}
-    \vspace{0.6cm}
-    {\Large\sm@subtitle\par}
-    \vfill
-    \begin{tabular}{@{}ll@{}}
-      Author: & \sm@author \\
-      Student ID: & \sm@studentid \\
-      Supervisor: & \sm@supervisor \\
-      Programme: & \sm@programme \\
-      Submission date: & \sm@date
-    \end{tabular}
-    \vfill
-  \end{titlepage}
-  \hypersetup{pageanchor=true}
+\def\ProjectTitle#1{\gdef\@ProjectTitle{#1}}
+\def\ProjectSubtitle#1{\gdef\@ProjectSubtitle{#1}}
+\def\AuthorName#1{\gdef\@AuthorName{#1}}
+\def\StudentID#1{\gdef\@StudentID{#1}}
+\def\SupervisorName#1{\gdef\@SupervisorName{#1}}
+\def\SubmissionDate#1{\gdef\@SubmissionDate{#1}}
+
+\newcommand{\makeprojecttitle}{
+    \begin{titlepage}
+        \centering 
+
+        \includegraphics[width=4.5cm]{hku_logo.png} \par
+        \vspace{0.8cm}
+
+        {\large The University of Hong Kong \par}
+        \vspace{0.2cm}
+        {\large School of Computing and Data Science \par}
+
+        \vspace{2.5cm} 
+
+        {\large COMP7705 \par}
+        \vspace{0.2cm}
+        {\large Project Report \par}
+        {\large \@ProjectTitle \par}
+
+        \vspace{2.5cm} 
+
+        {\normalsize Submitted in partial fulfillment of the requirements for the admission to the degree of \par}
+        {\normalsize Master of Science in Computer Science \par}
+
+        \vspace{2.5cm} 
+
+        {\normalsize By \par}
+        \vspace{0.5cm}
+        {\normalsize \@AuthorName\ (\@StudentID) \par}
+        \vspace{0.5cm}
+        {\normalsize Mentor: \@SupervisorName \par}
+        {\normalsize Date of submission: \@SubmissionDate \par}
+
+    \end{titlepage}
 }
 
 \newenvironment{projectabstract}
