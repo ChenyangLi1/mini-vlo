@@ -9,7 +9,7 @@ Semantic-Motion pipeline:
 2. Overlapping 16 s / 8 s macro windows and dense 1–3 s micro windows produce
    fused loco-manipulation semantics.
 3. An LLM rewriter generates variants behind a deterministic fact-preservation gate.
-4. Module C applies fail-closed sync, motion and independent semantic checks.
+4. Module C applies sync and motion checks plus joint multi-view semantic verification.
 
 The legacy single-video path remains for compatibility, but formal refinement
 requires paired views and real motion. Module D still needs Blender and was not
@@ -151,6 +151,7 @@ Each scenario includes a **generated schematic image** (top-down robot workspace
 ### Prerequisites
 
 - Python 3.10+
+- Node.js 20.19+ and npm (for the optional Web dashboard)
 - A DashScope API key ([get one here](https://dashscope.console.aliyun.com/))
 
 ### Installation
@@ -164,6 +165,42 @@ cp .env.example .env
 
 Set `DASHSCOPE_API_KEY`, `DASHSCOPE_BASE_URL`, and `VLM_MODEL` in the local
 `.env` file. The file is ignored by Git; do not commit real API keys.
+
+### Web dashboard setup
+
+The optional dashboard uses a FastAPI orchestration service and a React/Vite
+frontend. Install the Web API dependencies and start the backend from the
+repository root:
+
+```bash
+pip install fastapi uvicorn
+python app.py
+```
+
+In a second terminal, install and start the frontend:
+
+```bash
+cd dashboard
+npm install
+cp .env.example .env
+npm run dev
+```
+
+On Windows PowerShell, use `Copy-Item .env.example .env` instead of `cp`. Open
+the local URL printed by Vite (normally `http://localhost:5173`).
+
+The frontend development proxy uses `VITE_BACKEND_TARGET`, which defaults to
+`http://127.0.0.1:8000`. `VITE_API_BASE_URL` may be set when the browser should
+call a separately hosted API directly:
+
+```dotenv
+VITE_BACKEND_TARGET=http://127.0.0.1:8000
+VITE_API_BASE_URL=
+```
+
+Leave `VITE_API_BASE_URL` empty for the local Vite proxy. If it is set to a
+different origin in production, configure the FastAPI CORS policy for that
+specific frontend origin.
 
 ### 1. Generate Benchmark
 
@@ -220,7 +257,7 @@ If you already extracted frames, use:
 python run_video_task.py --frame-dir demos/task_frames --fps 2 --model qwen-vl-plus
 ```
 
-The output is saved to `results/video_task_*.json` as
+The output is saved to `results/perception_output/video_task_*.json` as
 `semantic-motion-video-task/v2`. It embeds the `ViewBundle`, synchronized
 evidence, task segments, fact-validation audit and reproducibility metadata.
 
@@ -228,40 +265,54 @@ evidence, task segments, fact-validation audit and reproducibility metadata.
 
 Module C converts `VideoTaskRecord` outputs into samples and applies three
 independent gates: deterministic synchronization/schema checks, 3D motion
-quality, and per-view semantic verification. Missing motion, API/parse failure,
-low confidence, missing paired views, mock verification, and dummy motion all
-drop by default.
+quality, and joint multi-view semantic verification. The current refinement
+implementation records failures and threshold diagnostics in `reason_codes`;
+quality gates are disabled, so `decision` remains `keep`.
 
-One-shot generate + filter:
+Run generation, sample preparation, and refinement as explicit stages. First,
+generate a named `VideoTaskRecord`:
 
 ```bash
-python run_generate_filter.py \
-  --manifest data/libero_goal/processed/manifest.json \
-  --sample-id put_the_bowl_on_the_plate_demo_0 \
+python run_video_task.py \
+  --manifest data/module_d_output/manifest.json \
+  --sample-id jump_down \
   --view-mode fused \
-  --vlm-model qwen3-vl-flash \
+  --model qwen3-vl-flash \
+  --rewriter llm \
   --rewrite-model qwen3-vl-flash \
-  --semantic-verifier qwen3-vl-flash \
-  --judge-model YOUR_INDEPENDENT_JUDGE_MODEL \
-  --refine-config configs/module_c_default.yaml \
-  --sample-level segment
+  --output results/perception_output/jump_down.json
 ```
 
-The manifest trajectory is used automatically. For a compatibility single-video
-debug run, pass real motion and explicitly disable only the paired-view gate:
+Next, convert the generated record into Module C samples and attach the real
+trajectory explicitly:
 
 ```bash
-python run_generate_filter.py \
-  --video demos/task.mp4 \
-  --vlm-model qwen3-vl-flash \
-  --motion-path path/to/trajectory_or_dir \
-  --allow-single-view-debug \
-  --sample-level segment
+python -m src.module_c.prepare_samples \
+  --perception-file results/perception_output/jump_down.json \
+  --motion-path data/module_d_output/jump_down/jump_down_trajectory.json \
+  --motion-fps 30 \
+  --motion-tracks Root,Hand_R,Hand_L \
+  --output results/c_prepare_sample/jump_down_samples.jsonl \
+  --pretty-output results/c_prepare_sample/jump_down_samples.pretty.json \
+  --sample-level video
 ```
 
-`--debug-dummy-motion`, `--allow-missing-motion`, `--allow-mock-debug`, and
-`--allow-single-view-debug` exist only for diagnostics. Outputs produced with
-those paths are excluded from formal evaluation.
+Finally, run synchronization, motion-quality, and joint multi-view semantic
+refinement. The semantic verifier is configured in
+`configs/module_c_default.yaml`:
+
+```bash
+python -m src.module_c.run_refinement \
+  --config configs/module_c_default.yaml \
+  --input results/c_prepare_sample/jump_down_samples.jsonl \
+  --output results/refinement_output/jump_down_refined.jsonl \
+  --pretty-output results/refinement_output/jump_down_refined.pretty.json
+```
+
+For a single-video debug run, use `run_video_task.py --video ...`, pass the real
+trajectory to `prepare_samples --motion-path ...`, and disable the paired-view
+requirement in a debug refinement config. Single-view or dummy-motion outputs
+must not be used as formal evaluation results.
 
 Outputs land in `results/`:
 
@@ -328,10 +379,10 @@ adjudicated:
 ```bash
 python tools/evaluate_semantic_motion.py \
   --gold data/gold/annotations/SAMPLE.json \
-  --prediction results/video_task_SAMPLE.json
+  --prediction results/perception_output/video_task_SAMPLE.json
 
 python -m src.module_c.evaluate \
-  --input results/refined_SAMPLE.jsonl \
+  --input results/refinement_output/refined_SAMPLE.jsonl \
   --output results/refinement_metrics.json
 
 python tools/evaluate_motion_corruptions.py \
@@ -368,11 +419,108 @@ python generate_charts.py
 
 Creates radar, bar, and heatmap charts in `assets/`.
 
+## Web-Based Pipeline Dashboard
+
+Mini-VLO includes an optional Web-based orchestration and monitoring layer built
+with **FastAPI** (`app.py`) and **React 19 + Vite + Tailwind CSS**
+(`dashboard/`). This layer exposes the existing manifest, perception, sample
+preparation, and refinement commands through a browser interface. It does not
+change the underlying evaluation methods, thresholds, model prompts, or output
+schemas.
+
+### Core capabilities
+
+- **Automated task control**: **Start Pipeline** submits an asynchronous
+  pipeline task. By default the backend processes every sample in
+  `data/module_d_output/manifest.json`; callers may pass
+  `target_sample_id` to process one named sample.
+- **Live status monitoring**: the frontend polls task state every 1.5 seconds
+  and displays overall progress, the current processing step, and the number of
+  completed log entries. The status API also returns captured `stdout`/`stderr`
+  for each completed subprocess stage for debugging clients.
+- **Evaluation visualization**: result cards and tables present Motion Quality,
+  Semantic Consistency, semantic confidence, and aggregate keep rate across all
+  available refined samples.
+- **Decision inspection**: `keep` and `drop` decisions are shown as
+  **Keep**/**Discard**, together with all `reason_codes` such as
+  `low_motion_score`, `high_jerk_spikes`, or
+  `semantic_not_consistent`.
+- **Independent artifacts**: every manifest sample retains separate perception,
+  prepared-sample, and refinement files. The API reads these artifacts for
+  display without rewriting them into a shared evaluation file.
+
+Motion Quality is displayed on a normalized 0–100 scale. The dashboard colors
+scores from 0–35 red, 36–59 amber, and 60–100 green. These colors are display
+categories only; formal keep/drop behavior remains controlled by
+`configs/module_c_default.yaml`.
+
+### Web workflow
+
+The browser provides a visual entry point to the same explicit pipeline
+described above:
+
+```text
+React dashboard
+  -> POST /run-pipeline
+  -> prepare_module_d_manifest.py
+  -> run_video_task.py (once per selected sample)
+  -> src.module_c.prepare_samples (with that sample's real trajectory)
+  -> src.module_c.run_refinement
+  -> GET /get-results
+  -> Motion Quality / Semantic Consistency / Keep-Discard table
+```
+
+For each `sample_id`, the backend writes:
+
+```text
+results/perception_output/<sample_id>.json
+results/c_prepare_sample/<sample_id>_samples.jsonl
+results/c_prepare_sample/<sample_id>_samples.pretty.json
+results/refinement_output/<sample_id>_refined.jsonl
+results/refinement_output/<sample_id>_refined.pretty.json
+```
+
+The trajectory passed to Module C is resolved and validated as
+`data/module_d_output/<sample_id>/<sample_id>_trajectory.json`. This preserves
+the paired-view synchronization and real-motion requirements documented in
+Module C.
+
+### Pipeline API
+
+Start all manifest samples:
+
+```http
+POST /run-pipeline
+```
+
+Start one sample:
+
+```http
+POST /run-pipeline?target_sample_id=jump_down
+```
+
+Both forms immediately return a `task_id`. Poll progress and retrieve available
+independent refinement results with:
+
+```http
+GET /get-status/<task_id>
+GET /get-results
+```
+
+Task status is currently held in an in-memory dictionary. It is suitable for a
+single-process local dashboard, but is cleared when the backend restarts and is
+not a durable distributed job queue. Production deployments should replace it
+with persistent task storage and a dedicated worker system.
+
 ## Project Structure
 
 ```
 mini-vlo/
 ├── README.md
+├── app.py                    # FastAPI pipeline orchestration and status API
+├── dashboard/                # React/Vite monitoring and control interface
+│   ├── src/App.jsx           # Pipeline controls and evaluation dashboard
+│   └── vite.config.js        # Tailwind integration and API development proxy
 ├── requirements.txt
 ├── generate_benchmark.py     # Generate synthetic benchmark images + ground truth
 ├── generate_charts.py        # Generate result visualization charts
@@ -414,6 +562,9 @@ mini-vlo/
   window aggregation, fact-preservation rejection, strict refinement, temporal
   and classification metrics, motion corruptions, and the pinned upstream
   adapter.
+- Web integration verified locally: FastAPI task creation/status endpoints,
+  per-sample artifact paths, React production builds, and result schema mapping.
+  End-to-end VLM execution still depends on the configured external API.
 - Available but API-dependent: Qwen perception, LLM rewriting and independent
   semantic judging.
 - Pending human work: the generated paired-view packets have not yet been
