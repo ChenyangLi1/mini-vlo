@@ -3,7 +3,7 @@
     "sample_id": "Fixed_View_video",
     "motion_quality_score": 0.49182838201522827,
     "semantic_label": "consistent",
-    "semantic_confidence": 0.95,
+    "semantic_confidence": 0.9,
     "decision": "keep",
     "reason_codes": [
       "Hand_L:high_acceleration_spikes",
@@ -14,8 +14,7 @@
       "Hand_R:high_velocity_spikes",
       "Root:high_acceleration_spikes",
       "Root:high_jerk_spikes",
-      "Root:high_velocity_spikes",
-      "quality_gates_disabled"
+      "Root:high_velocity_spikes"
     ],
     "aux": {
       "sync": {
@@ -99,9 +98,9 @@
       },
       "semantic": {
         "label": "consistent",
-        "confidence": 0.95,
+        "confidence": 0.9,
         "error_types": [],
-        "suggested_text": "The humanoid figure jumps from a block, reaches upward to catch a floating low-poly head-like object, then crouches down on the floor in a supported posture.",
+        "suggested_text": "Overall video task sequence:\n0.00s-1.07s: jump from the cube to the floor\n1.07s-2.33s: perform a jump followed by a crouch, ending in a low stance with hands on the ground.",
         "verifier": "qwen3-vl-flash",
         "fusion_strategy": "joint_multiview",
         "views": [
@@ -109,17 +108,17 @@
           "fixed"
         ]
       },
-      "text": "Overall video task sequence:\n0.00s-1.17s: the humanoid figure crouches on a block, jumps upward, reaches with both hands, and catches a floating low-poly head-like object.\n1.17s-2.33s: the humanoid figure transitions from standing to a low crouched posture supported by hands and feet, without interacting with other objects.",
+      "text": "Overall video task sequence:\n0.00s-1.07s: jump from the cube to the floor\n1.07s-2.33s: perform a jump followed by a crouch, ending in a low stance with hands on the ground.",
       "label": null,
       "views": {
-        "fixed": "D:\\MyCode\\11_project\\mini-vlo\\data\\module_d_output\\jump_down\\Fixed_View.mp4",
-        "ego": "D:\\MyCode\\11_project\\mini-vlo\\data\\module_d_output\\jump_down\\Ego_View.mp4"
+        "fixed": "C:\\Users\\lcy\\Desktop\\11_project\\data\\module_d_output\\jump_down\\Fixed_View.mp4",
+        "ego": "C:\\Users\\lcy\\Desktop\\11_project\\data\\module_d_output\\jump_down\\Ego_View.mp4"
       },
       "provenance": {
         "dataset": "Module D",
         "source_id": "jump_down",
         "generator": "src.semantic_motion.view_bundle",
-        "revision": "dab95c728b8c861a23f08723d22c4d3a5a97b047",
+        "revision": "4fe00f16fa6a81762d655a0c751a108edb5f48a9",
         "config": {},
         "checksums": {}
       }

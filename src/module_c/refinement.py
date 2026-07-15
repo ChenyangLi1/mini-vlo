@@ -223,7 +223,6 @@ def refine_samples(
                 )
             )
         )
-        decision = "keep"
 
         threshold_reasons: list[str] = []
         if is_motion_low:
@@ -234,7 +233,8 @@ def refine_samples(
             threshold_reasons.append("semantic_confidence_below_threshold")
         if is_mock_forbidden:
             threshold_reasons.append("mock_verifier_forbidden")
-        threshold_reasons.append("quality_gates_disabled")
+
+        decision = "drop" if (is_motion_low or is_semantic_mismatch) else "keep"
 
         results.append(
             RefinementResult(

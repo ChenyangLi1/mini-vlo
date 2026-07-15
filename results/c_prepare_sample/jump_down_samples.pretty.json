@@ -1,19 +1,19 @@
 [
   {
     "sample_id": "Fixed_View_video",
-    "video_path": "D:\\MyCode\\11_project\\mini-vlo\\data\\module_d_output\\jump_down\\Fixed_View.mp4",
-    "text": "Overall video task sequence:\n0.00s-1.17s: the humanoid figure crouches on a block, jumps upward, reaches with both hands, and catches a floating low-poly head-like object.\n1.17s-2.33s: the humanoid figure transitions from standing to a low crouched posture supported by hands and feet, without interacting with other objects.",
+    "video_path": "C:\\Users\\lcy\\Desktop\\11_project\\data\\module_d_output\\jump_down\\Fixed_View.mp4",
+    "text": "Overall video task sequence:\n0.00s-1.07s: jump from the cube to the floor\n1.07s-2.33s: perform a jump followed by a crouch, ending in a low stance with hands on the ground.",
     "source_segment_texts": [
-      "the humanoid figure crouches on a block, jumps upward, reaches with both hands, and catches a floating low-poly head-like object.",
-      "the humanoid figure transitions from standing to a low crouched posture supported by hands and feet, without interacting with other objects."
+      "jump from the cube to the floor",
+      "perform a jump followed by a crouch, ending in a low stance with hands on the ground."
     ],
     "source_segments": [
       "segment_000",
       "segment_001"
     ],
     "views": {
-      "fixed": "D:\\MyCode\\11_project\\mini-vlo\\data\\module_d_output\\jump_down\\Fixed_View.mp4",
-      "ego": "D:\\MyCode\\11_project\\mini-vlo\\data\\module_d_output\\jump_down\\Ego_View.mp4"
+      "fixed": "C:\\Users\\lcy\\Desktop\\11_project\\data\\module_d_output\\jump_down\\Fixed_View.mp4",
+      "ego": "C:\\Users\\lcy\\Desktop\\11_project\\data\\module_d_output\\jump_down\\Ego_View.mp4"
     },
     "fps": 30.0,
     "frame_count": 70,
@@ -23,7 +23,7 @@
       "dataset": "Module D",
       "source_id": "jump_down",
       "generator": "src.semantic_motion.view_bundle",
-      "revision": "dab95c728b8c861a23f08723d22c4d3a5a97b047",
+      "revision": "4fe00f16fa6a81762d655a0c751a108edb5f48a9",
       "config": {},
       "checksums": {}
     },

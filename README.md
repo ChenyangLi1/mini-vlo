@@ -151,6 +151,7 @@ Each scenario includes a **generated schematic image** (top-down robot workspace
 ### Prerequisites
 
 - Python 3.10+
+- Node.js 20.19+ and npm (for the optional Web dashboard)
 - A DashScope API key ([get one here](https://dashscope.console.aliyun.com/))
 
 ### Installation
@@ -164,6 +165,42 @@ cp .env.example .env
 
 Set `DASHSCOPE_API_KEY`, `DASHSCOPE_BASE_URL`, and `VLM_MODEL` in the local
 `.env` file. The file is ignored by Git; do not commit real API keys.
+
+### Web dashboard setup
+
+The optional dashboard uses a FastAPI orchestration service and a React/Vite
+frontend. Install the Web API dependencies and start the backend from the
+repository root:
+
+```bash
+pip install fastapi uvicorn
+python app.py
+```
+
+In a second terminal, install and start the frontend:
+
+```bash
+cd dashboard
+npm install
+cp .env.example .env
+npm run dev
+```
+
+On Windows PowerShell, use `Copy-Item .env.example .env` instead of `cp`. Open
+the local URL printed by Vite (normally `http://localhost:5173`).
+
+The frontend development proxy uses `VITE_BACKEND_TARGET`, which defaults to
+`http://127.0.0.1:8000`. `VITE_API_BASE_URL` may be set when the browser should
+call a separately hosted API directly:
+
+```dotenv
+VITE_BACKEND_TARGET=http://127.0.0.1:8000
+VITE_API_BASE_URL=
+```
+
+Leave `VITE_API_BASE_URL` empty for the local Vite proxy. If it is set to a
+different origin in production, configure the FastAPI CORS policy for that
+specific frontend origin.
 
 ### 1. Generate Benchmark
 
@@ -382,11 +419,108 @@ python generate_charts.py
 
 Creates radar, bar, and heatmap charts in `assets/`.
 
+## Web-Based Pipeline Dashboard
+
+Mini-VLO includes an optional Web-based orchestration and monitoring layer built
+with **FastAPI** (`app.py`) and **React 19 + Vite + Tailwind CSS**
+(`dashboard/`). This layer exposes the existing manifest, perception, sample
+preparation, and refinement commands through a browser interface. It does not
+change the underlying evaluation methods, thresholds, model prompts, or output
+schemas.
+
+### Core capabilities
+
+- **Automated task control**: **Start Pipeline** submits an asynchronous
+  pipeline task. By default the backend processes every sample in
+  `data/module_d_output/manifest.json`; callers may pass
+  `target_sample_id` to process one named sample.
+- **Live status monitoring**: the frontend polls task state every 1.5 seconds
+  and displays overall progress, the current processing step, and the number of
+  completed log entries. The status API also returns captured `stdout`/`stderr`
+  for each completed subprocess stage for debugging clients.
+- **Evaluation visualization**: result cards and tables present Motion Quality,
+  Semantic Consistency, semantic confidence, and aggregate keep rate across all
+  available refined samples.
+- **Decision inspection**: `keep` and `drop` decisions are shown as
+  **Keep**/**Discard**, together with all `reason_codes` such as
+  `low_motion_score`, `high_jerk_spikes`, or
+  `semantic_not_consistent`.
+- **Independent artifacts**: every manifest sample retains separate perception,
+  prepared-sample, and refinement files. The API reads these artifacts for
+  display without rewriting them into a shared evaluation file.
+
+Motion Quality is displayed on a normalized 0–100 scale. The dashboard colors
+scores from 0–35 red, 36–59 amber, and 60–100 green. These colors are display
+categories only; formal keep/drop behavior remains controlled by
+`configs/module_c_default.yaml`.
+
+### Web workflow
+
+The browser provides a visual entry point to the same explicit pipeline
+described above:
+
+```text
+React dashboard
+  -> POST /run-pipeline
+  -> prepare_module_d_manifest.py
+  -> run_video_task.py (once per selected sample)
+  -> src.module_c.prepare_samples (with that sample's real trajectory)
+  -> src.module_c.run_refinement
+  -> GET /get-results
+  -> Motion Quality / Semantic Consistency / Keep-Discard table
+```
+
+For each `sample_id`, the backend writes:
+
+```text
+results/perception_output/<sample_id>.json
+results/c_prepare_sample/<sample_id>_samples.jsonl
+results/c_prepare_sample/<sample_id>_samples.pretty.json
+results/refinement_output/<sample_id>_refined.jsonl
+results/refinement_output/<sample_id>_refined.pretty.json
+```
+
+The trajectory passed to Module C is resolved and validated as
+`data/module_d_output/<sample_id>/<sample_id>_trajectory.json`. This preserves
+the paired-view synchronization and real-motion requirements documented in
+Module C.
+
+### Pipeline API
+
+Start all manifest samples:
+
+```http
+POST /run-pipeline
+```
+
+Start one sample:
+
+```http
+POST /run-pipeline?target_sample_id=jump_down
+```
+
+Both forms immediately return a `task_id`. Poll progress and retrieve available
+independent refinement results with:
+
+```http
+GET /get-status/<task_id>
+GET /get-results
+```
+
+Task status is currently held in an in-memory dictionary. It is suitable for a
+single-process local dashboard, but is cleared when the backend restarts and is
+not a durable distributed job queue. Production deployments should replace it
+with persistent task storage and a dedicated worker system.
+
 ## Project Structure
 
 ```
 mini-vlo/
 ├── README.md
+├── app.py                    # FastAPI pipeline orchestration and status API
+├── dashboard/                # React/Vite monitoring and control interface
+│   ├── src/App.jsx           # Pipeline controls and evaluation dashboard
+│   └── vite.config.js        # Tailwind integration and API development proxy
 ├── requirements.txt
 ├── generate_benchmark.py     # Generate synthetic benchmark images + ground truth
 ├── generate_charts.py        # Generate result visualization charts
@@ -428,6 +562,9 @@ mini-vlo/
   window aggregation, fact-preservation rejection, strict refinement, temporal
   and classification metrics, motion corruptions, and the pinned upstream
   adapter.
+- Web integration verified locally: FastAPI task creation/status endpoints,
+  per-sample artifact paths, React production builds, and result schema mapping.
+  End-to-end VLM execution still depends on the configured external API.
 - Available but API-dependent: Qwen perception, LLM rewriting and independent
   semantic judging.
 - Pending human work: the generated paired-view packets have not yet been

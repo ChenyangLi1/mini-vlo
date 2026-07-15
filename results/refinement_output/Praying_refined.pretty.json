@@ -1,0 +1,120 @@
+[
+  {
+    "sample_id": "Fixed_View_video",
+    "motion_quality_score": 0.7845494151115417,
+    "semantic_label": "inconsistent",
+    "semantic_confidence": 0.85,
+    "decision": "drop",
+    "reason_codes": [
+      "Hand_L:high_jerk_spikes",
+      "Hand_R:high_jerk_spikes",
+      "Root:high_jerk_spikes",
+      "possible_hallucination",
+      "semantic_mismatch",
+      "semantic_not_consistent"
+    ],
+    "aux": {
+      "sync": {
+        "valid": true,
+        "views": {
+          "fixed": {
+            "fps": 30.0,
+            "frame_count": 207,
+            "duration_sec": 6.9
+          },
+          "ego": {
+            "fps": 30.0,
+            "frame_count": 207,
+            "duration_sec": 6.9
+          }
+        },
+        "motion_coverage": {
+          "Root": [
+            0.0,
+            6.866666666666666
+          ],
+          "Hand_R": [
+            0.0,
+            6.866666666666666
+          ],
+          "Hand_L": [
+            0.0,
+            6.866666666666666
+          ]
+        }
+      },
+      "motion": {
+        "aggregation": "min",
+        "track_count": 3.0,
+        "tracks": {
+          "Root": {
+            "score": 0.8197797536849976,
+            "velocity_ratio": 0.0,
+            "acceleration_ratio": 0.0,
+            "jerk_ratio": 0.2647058823529412,
+            "jitter_ratio": 0.024390243902439025,
+            "interval_cv": 2.7732971830118913e-06,
+            "time_gap_ratio": 1.000014305114746,
+            "reason_codes": [
+              "high_jerk_spikes"
+            ]
+          },
+          "Hand_R": {
+            "score": 0.7967445254325867,
+            "velocity_ratio": 0.0,
+            "acceleration_ratio": 0.014634146341463415,
+            "jerk_ratio": 0.6470588235294118,
+            "jitter_ratio": 0.04390243902439024,
+            "interval_cv": 2.7732971830118913e-06,
+            "time_gap_ratio": 1.000014305114746,
+            "reason_codes": [
+              "high_jerk_spikes"
+            ]
+          },
+          "Hand_L": {
+            "score": 0.7845494151115417,
+            "velocity_ratio": 0.0,
+            "acceleration_ratio": 0.03902439024390244,
+            "jerk_ratio": 0.6127450980392157,
+            "jitter_ratio": 0.02926829268292683,
+            "interval_cv": 2.7732971830118913e-06,
+            "time_gap_ratio": 1.000014305114746,
+            "reason_codes": [
+              "high_jerk_spikes"
+            ]
+          }
+        },
+        "input_spatial_unit": "meters",
+        "normalized_spatial_unit": "meters"
+      },
+      "semantic": {
+        "label": "inconsistent",
+        "confidence": 0.85,
+        "error_types": [
+          "possible_hallucination"
+        ],
+        "suggested_text": "A humanoid kneels on the floor near a gray low-poly object, then stands up and walks toward the object.",
+        "verifier": "qwen3-vl-flash",
+        "fusion_strategy": "joint_multiview",
+        "views": [
+          "ego",
+          "fixed"
+        ]
+      },
+      "text": "Overall video task sequence:\n0.00s-2.47s: analyze micro-action: humanoid remains kneeling while gray object moves upward in frame.\n2.47s-5.27s: analyze the micro-action temporal window showing alternating static kneeling pose and floating object states.\n5.27s-6.90s: walk toward the gray low-poly object and stand facing it.",
+      "label": null,
+      "views": {
+        "fixed": "C:\\Users\\lcy\\Desktop\\11_project\\data\\module_d_output\\Praying\\Fixed_View.mp4",
+        "ego": "C:\\Users\\lcy\\Desktop\\11_project\\data\\module_d_output\\Praying\\Ego_View.mp4"
+      },
+      "provenance": {
+        "dataset": "Module D",
+        "source_id": "Praying",
+        "generator": "src.semantic_motion.view_bundle",
+        "revision": "4fe00f16fa6a81762d655a0c751a108edb5f48a9",
+        "config": {},
+        "checksums": {}
+      }
+    }
+  }
+]

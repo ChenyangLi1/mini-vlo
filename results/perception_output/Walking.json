@@ -1,0 +1,3193 @@
+{
+  "schema_version": "semantic-motion-video-task/v2",
+  "video_path": "C:\\Users\\lcy\\Desktop\\11_project\\data\\module_d_output\\Walking\\Fixed_View.mp4",
+  "view_bundle": {
+    "schema_version": "semantic-motion-view-bundle/v1",
+    "sample_id": "Walking",
+    "timebase": {
+      "fps": 30.0,
+      "frame_count": 32,
+      "frame_start": 0,
+      "duration_sec": 1.0666666666666667,
+      "time_unit": "seconds",
+      "frame_map": {
+        "video_frame_start": 0,
+        "source_frame_start": 0,
+        "frame_count": 32,
+        "step": 1,
+        "explicit_source_frames": []
+      }
+    },
+    "views": {
+      "fixed": {
+        "view_id": "fixed",
+        "video_path": "C:\\Users\\lcy\\Desktop\\11_project\\data\\module_d_output\\Walking\\Fixed_View.mp4",
+        "camera_name": "",
+        "camera_type": "fixed",
+        "fps": 30.0,
+        "frame_count": 32,
+        "duration_sec": 1.0666666666666667,
+        "metadata": {}
+      },
+      "ego": {
+        "view_id": "ego",
+        "video_path": "C:\\Users\\lcy\\Desktop\\11_project\\data\\module_d_output\\Walking\\Ego_View.mp4",
+        "camera_name": "",
+        "camera_type": "egocentric",
+        "fps": 30.0,
+        "frame_count": 32,
+        "duration_sec": 1.0666666666666667,
+        "metadata": {}
+      }
+    },
+    "trajectory": {
+      "path": "C:\\Users\\lcy\\Desktop\\11_project\\data\\module_d_output\\Walking\\Walking_trajectory.json",
+      "source": "Module D",
+      "spatial_unit": "meters",
+      "coordinate_frame": "world",
+      "track_names": [
+        "Root",
+        "Hand_R",
+        "Hand_L"
+      ],
+      "metadata": {}
+    },
+    "provenance": {
+      "dataset": "Module D",
+      "source_id": "Walking",
+      "generator": "src.semantic_motion.view_bundle",
+      "revision": "4fe00f16fa6a81762d655a0c751a108edb5f48a9",
+      "config": {},
+      "checksums": {}
+    },
+    "metadata": {}
+  },
+  "source_instruction": "",
+  "frames": [],
+  "multi_view_frames": [
+    {
+      "frame_id": 0,
+      "timestamp_sec": 0.0,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 0,
+          "frame_index": 0,
+          "timestamp_sec": 0.0,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 0,
+          "frame_index": 0,
+          "timestamp_sec": 0.0,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "Walking_macro_000",
+        "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON floor",
+          "gray low-poly object ON floor",
+          "gray low-poly object TO the left of humanoid figure"
+        ],
+        "macro_intent": {
+          "task_type": "walk",
+          "target_object": "gray low-poly object",
+          "destination": "near gray low-poly object",
+          "confidence": 0.95,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "approach gray low-poly object",
+            "verb": "approach",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              2
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              2,
+              4
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "stop near gray low-poly object",
+            "verb": "stop",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              8
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "turn away from gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              8,
+              10
+            ]
+          },
+          {
+            "step_id": 6,
+            "text": "walk away from gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 7,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              12,
+              14
+            ]
+          },
+          {
+            "step_id": 8,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              16
+            ]
+          },
+          {
+            "step_id": 9,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              16,
+              18
+            ]
+          },
+          {
+            "step_id": 10,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              18,
+              20
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\"],\n  \"spatial_relations\": [\"humanoid figure ON floor\", \"gray low-poly object ON floor\", \"gray low-poly object TO the left of humanoid figure\"],\n  \"task_type\": \"walk\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"approach gray low-poly object\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop near gray low-poly object\",\n    \"turn away from gray low-poly object\",\n    \"walk away from gray low-poly object\",\n    \"stop\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"approach gray low-poly object\",\n      \"verb\": \"approach\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 2\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 2,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"stop near gray low-poly object\",\n      \"verb\": \"stop\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 8\n    },\n    {\n      \"text\": \"turn away from gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 8,\n      \"end_image_index\": 10\n    },\n    {\n      \"text\": \"walk away from gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 12,\n      \"end_image_index\": 14\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 16\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 16,\n      \"end_image_index\": 18\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 18,\n      \"end_image_index\": 20\n    }\n  ],\n  \"target_object\": \"gray low-poly object\",\n  \"destination\": \"near gray low-poly object\",\n  \"instruction\": \"Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.\",\n  \"transitions\": [2, 4, 6, 8, 10, 12, 14, 16, 18],\n  \"confidence\": 0.95\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.95,
+          "prediction_instruction": "Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.",
+          "transitions": [
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000031.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 1,
+      "timestamp_sec": 0.06666666666666667,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 1,
+          "frame_index": 2,
+          "timestamp_sec": 0.06666666666666667,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000002.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 1,
+          "frame_index": 2,
+          "timestamp_sec": 0.06666666666666667,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000002.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "Walking_macro_000",
+        "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON floor",
+          "gray low-poly object ON floor",
+          "gray low-poly object TO the left of humanoid figure"
+        ],
+        "macro_intent": {
+          "task_type": "walk",
+          "target_object": "gray low-poly object",
+          "destination": "near gray low-poly object",
+          "confidence": 0.95,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "approach gray low-poly object",
+            "verb": "approach",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              2
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              2,
+              4
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "stop near gray low-poly object",
+            "verb": "stop",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              8
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "turn away from gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              8,
+              10
+            ]
+          },
+          {
+            "step_id": 6,
+            "text": "walk away from gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 7,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              12,
+              14
+            ]
+          },
+          {
+            "step_id": 8,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              16
+            ]
+          },
+          {
+            "step_id": 9,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              16,
+              18
+            ]
+          },
+          {
+            "step_id": 10,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              18,
+              20
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\"],\n  \"spatial_relations\": [\"humanoid figure ON floor\", \"gray low-poly object ON floor\", \"gray low-poly object TO the left of humanoid figure\"],\n  \"task_type\": \"walk\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"approach gray low-poly object\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop near gray low-poly object\",\n    \"turn away from gray low-poly object\",\n    \"walk away from gray low-poly object\",\n    \"stop\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"approach gray low-poly object\",\n      \"verb\": \"approach\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 2\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 2,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"stop near gray low-poly object\",\n      \"verb\": \"stop\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 8\n    },\n    {\n      \"text\": \"turn away from gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 8,\n      \"end_image_index\": 10\n    },\n    {\n      \"text\": \"walk away from gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 12,\n      \"end_image_index\": 14\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 16\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 16,\n      \"end_image_index\": 18\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 18,\n      \"end_image_index\": 20\n    }\n  ],\n  \"target_object\": \"gray low-poly object\",\n  \"destination\": \"near gray low-poly object\",\n  \"instruction\": \"Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.\",\n  \"transitions\": [2, 4, 6, 8, 10, 12, 14, 16, 18],\n  \"confidence\": 0.95\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.95,
+          "prediction_instruction": "Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.",
+          "transitions": [
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000031.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 2,
+      "timestamp_sec": 0.16666666666666666,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 2,
+          "frame_index": 5,
+          "timestamp_sec": 0.16666666666666666,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000005.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 2,
+          "frame_index": 5,
+          "timestamp_sec": 0.16666666666666666,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000005.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "Walking_macro_000",
+        "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON floor",
+          "gray low-poly object ON floor",
+          "gray low-poly object TO the left of humanoid figure"
+        ],
+        "macro_intent": {
+          "task_type": "walk",
+          "target_object": "gray low-poly object",
+          "destination": "near gray low-poly object",
+          "confidence": 0.95,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "approach gray low-poly object",
+            "verb": "approach",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              2
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              2,
+              4
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "stop near gray low-poly object",
+            "verb": "stop",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              8
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "turn away from gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              8,
+              10
+            ]
+          },
+          {
+            "step_id": 6,
+            "text": "walk away from gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 7,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              12,
+              14
+            ]
+          },
+          {
+            "step_id": 8,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              16
+            ]
+          },
+          {
+            "step_id": 9,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              16,
+              18
+            ]
+          },
+          {
+            "step_id": 10,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              18,
+              20
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\"],\n  \"spatial_relations\": [\"humanoid figure ON floor\", \"gray low-poly object ON floor\", \"gray low-poly object TO the left of humanoid figure\"],\n  \"task_type\": \"walk\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"approach gray low-poly object\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop near gray low-poly object\",\n    \"turn away from gray low-poly object\",\n    \"walk away from gray low-poly object\",\n    \"stop\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"approach gray low-poly object\",\n      \"verb\": \"approach\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 2\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 2,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"stop near gray low-poly object\",\n      \"verb\": \"stop\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 8\n    },\n    {\n      \"text\": \"turn away from gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 8,\n      \"end_image_index\": 10\n    },\n    {\n      \"text\": \"walk away from gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 12,\n      \"end_image_index\": 14\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 16\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 16,\n      \"end_image_index\": 18\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 18,\n      \"end_image_index\": 20\n    }\n  ],\n  \"target_object\": \"gray low-poly object\",\n  \"destination\": \"near gray low-poly object\",\n  \"instruction\": \"Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.\",\n  \"transitions\": [2, 4, 6, 8, 10, 12, 14, 16, 18],\n  \"confidence\": 0.95\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.95,
+          "prediction_instruction": "Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.",
+          "transitions": [
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000031.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 3,
+      "timestamp_sec": 0.26666666666666666,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 3,
+          "frame_index": 8,
+          "timestamp_sec": 0.26666666666666666,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000008.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 3,
+          "frame_index": 8,
+          "timestamp_sec": 0.26666666666666666,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000008.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "Walking_macro_000",
+        "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON floor",
+          "gray low-poly object ON floor",
+          "gray low-poly object TO the left of humanoid figure"
+        ],
+        "macro_intent": {
+          "task_type": "walk",
+          "target_object": "gray low-poly object",
+          "destination": "near gray low-poly object",
+          "confidence": 0.95,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "approach gray low-poly object",
+            "verb": "approach",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              2
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              2,
+              4
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "stop near gray low-poly object",
+            "verb": "stop",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              8
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "turn away from gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              8,
+              10
+            ]
+          },
+          {
+            "step_id": 6,
+            "text": "walk away from gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 7,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              12,
+              14
+            ]
+          },
+          {
+            "step_id": 8,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              16
+            ]
+          },
+          {
+            "step_id": 9,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              16,
+              18
+            ]
+          },
+          {
+            "step_id": 10,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              18,
+              20
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\"],\n  \"spatial_relations\": [\"humanoid figure ON floor\", \"gray low-poly object ON floor\", \"gray low-poly object TO the left of humanoid figure\"],\n  \"task_type\": \"walk\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"approach gray low-poly object\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop near gray low-poly object\",\n    \"turn away from gray low-poly object\",\n    \"walk away from gray low-poly object\",\n    \"stop\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"approach gray low-poly object\",\n      \"verb\": \"approach\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 2\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 2,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"stop near gray low-poly object\",\n      \"verb\": \"stop\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 8\n    },\n    {\n      \"text\": \"turn away from gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 8,\n      \"end_image_index\": 10\n    },\n    {\n      \"text\": \"walk away from gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 12,\n      \"end_image_index\": 14\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 16\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 16,\n      \"end_image_index\": 18\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 18,\n      \"end_image_index\": 20\n    }\n  ],\n  \"target_object\": \"gray low-poly object\",\n  \"destination\": \"near gray low-poly object\",\n  \"instruction\": \"Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.\",\n  \"transitions\": [2, 4, 6, 8, 10, 12, 14, 16, 18],\n  \"confidence\": 0.95\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.95,
+          "prediction_instruction": "Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.",
+          "transitions": [
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000031.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 4,
+      "timestamp_sec": 0.36666666666666664,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 4,
+          "frame_index": 11,
+          "timestamp_sec": 0.36666666666666664,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000011.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 4,
+          "frame_index": 11,
+          "timestamp_sec": 0.36666666666666664,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000011.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "Walking_macro_000",
+        "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON floor",
+          "gray low-poly object ON floor",
+          "gray low-poly object TO the left of humanoid figure"
+        ],
+        "macro_intent": {
+          "task_type": "walk",
+          "target_object": "gray low-poly object",
+          "destination": "near gray low-poly object",
+          "confidence": 0.95,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "approach gray low-poly object",
+            "verb": "approach",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              2
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              2,
+              4
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "stop near gray low-poly object",
+            "verb": "stop",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              8
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "turn away from gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              8,
+              10
+            ]
+          },
+          {
+            "step_id": 6,
+            "text": "walk away from gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 7,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              12,
+              14
+            ]
+          },
+          {
+            "step_id": 8,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              16
+            ]
+          },
+          {
+            "step_id": 9,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              16,
+              18
+            ]
+          },
+          {
+            "step_id": 10,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              18,
+              20
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\"],\n  \"spatial_relations\": [\"humanoid figure ON floor\", \"gray low-poly object ON floor\", \"gray low-poly object TO the left of humanoid figure\"],\n  \"task_type\": \"walk\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"approach gray low-poly object\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop near gray low-poly object\",\n    \"turn away from gray low-poly object\",\n    \"walk away from gray low-poly object\",\n    \"stop\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"approach gray low-poly object\",\n      \"verb\": \"approach\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 2\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 2,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"stop near gray low-poly object\",\n      \"verb\": \"stop\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 8\n    },\n    {\n      \"text\": \"turn away from gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 8,\n      \"end_image_index\": 10\n    },\n    {\n      \"text\": \"walk away from gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 12,\n      \"end_image_index\": 14\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 16\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 16,\n      \"end_image_index\": 18\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 18,\n      \"end_image_index\": 20\n    }\n  ],\n  \"target_object\": \"gray low-poly object\",\n  \"destination\": \"near gray low-poly object\",\n  \"instruction\": \"Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.\",\n  \"transitions\": [2, 4, 6, 8, 10, 12, 14, 16, 18],\n  \"confidence\": 0.95\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.95,
+          "prediction_instruction": "Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.",
+          "transitions": [
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000031.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 5,
+      "timestamp_sec": 0.4666666666666667,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 5,
+          "frame_index": 14,
+          "timestamp_sec": 0.4666666666666667,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000014.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 5,
+          "frame_index": 14,
+          "timestamp_sec": 0.4666666666666667,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000014.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "Walking_macro_000",
+        "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON floor",
+          "gray low-poly object ON floor",
+          "gray low-poly object TO the left of humanoid figure"
+        ],
+        "macro_intent": {
+          "task_type": "walk",
+          "target_object": "gray low-poly object",
+          "destination": "near gray low-poly object",
+          "confidence": 0.95,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "approach gray low-poly object",
+            "verb": "approach",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              2
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              2,
+              4
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "stop near gray low-poly object",
+            "verb": "stop",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              8
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "turn away from gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              8,
+              10
+            ]
+          },
+          {
+            "step_id": 6,
+            "text": "walk away from gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 7,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              12,
+              14
+            ]
+          },
+          {
+            "step_id": 8,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              16
+            ]
+          },
+          {
+            "step_id": 9,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              16,
+              18
+            ]
+          },
+          {
+            "step_id": 10,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              18,
+              20
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\"],\n  \"spatial_relations\": [\"humanoid figure ON floor\", \"gray low-poly object ON floor\", \"gray low-poly object TO the left of humanoid figure\"],\n  \"task_type\": \"walk\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"approach gray low-poly object\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop near gray low-poly object\",\n    \"turn away from gray low-poly object\",\n    \"walk away from gray low-poly object\",\n    \"stop\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"approach gray low-poly object\",\n      \"verb\": \"approach\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 2\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 2,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"stop near gray low-poly object\",\n      \"verb\": \"stop\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 8\n    },\n    {\n      \"text\": \"turn away from gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 8,\n      \"end_image_index\": 10\n    },\n    {\n      \"text\": \"walk away from gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 12,\n      \"end_image_index\": 14\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 16\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 16,\n      \"end_image_index\": 18\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 18,\n      \"end_image_index\": 20\n    }\n  ],\n  \"target_object\": \"gray low-poly object\",\n  \"destination\": \"near gray low-poly object\",\n  \"instruction\": \"Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.\",\n  \"transitions\": [2, 4, 6, 8, 10, 12, 14, 16, 18],\n  \"confidence\": 0.95\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.95,
+          "prediction_instruction": "Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.",
+          "transitions": [
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000031.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 6,
+      "timestamp_sec": 0.5333333333333333,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 6,
+          "frame_index": 16,
+          "timestamp_sec": 0.5333333333333333,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000016.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 6,
+          "frame_index": 16,
+          "timestamp_sec": 0.5333333333333333,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000016.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "Walking_macro_000",
+        "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON floor",
+          "gray low-poly object ON floor",
+          "gray low-poly object TO the left of humanoid figure"
+        ],
+        "macro_intent": {
+          "task_type": "walk",
+          "target_object": "gray low-poly object",
+          "destination": "near gray low-poly object",
+          "confidence": 0.95,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "approach gray low-poly object",
+            "verb": "approach",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              2
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              2,
+              4
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "stop near gray low-poly object",
+            "verb": "stop",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              8
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "turn away from gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              8,
+              10
+            ]
+          },
+          {
+            "step_id": 6,
+            "text": "walk away from gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 7,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              12,
+              14
+            ]
+          },
+          {
+            "step_id": 8,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              16
+            ]
+          },
+          {
+            "step_id": 9,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              16,
+              18
+            ]
+          },
+          {
+            "step_id": 10,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              18,
+              20
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\"],\n  \"spatial_relations\": [\"humanoid figure ON floor\", \"gray low-poly object ON floor\", \"gray low-poly object TO the left of humanoid figure\"],\n  \"task_type\": \"walk\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"approach gray low-poly object\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop near gray low-poly object\",\n    \"turn away from gray low-poly object\",\n    \"walk away from gray low-poly object\",\n    \"stop\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"approach gray low-poly object\",\n      \"verb\": \"approach\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 2\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 2,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"stop near gray low-poly object\",\n      \"verb\": \"stop\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 8\n    },\n    {\n      \"text\": \"turn away from gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 8,\n      \"end_image_index\": 10\n    },\n    {\n      \"text\": \"walk away from gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 12,\n      \"end_image_index\": 14\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 16\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 16,\n      \"end_image_index\": 18\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 18,\n      \"end_image_index\": 20\n    }\n  ],\n  \"target_object\": \"gray low-poly object\",\n  \"destination\": \"near gray low-poly object\",\n  \"instruction\": \"Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.\",\n  \"transitions\": [2, 4, 6, 8, 10, 12, 14, 16, 18],\n  \"confidence\": 0.95\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.95,
+          "prediction_instruction": "Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.",
+          "transitions": [
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000031.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 7,
+      "timestamp_sec": 0.6333333333333333,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 7,
+          "frame_index": 19,
+          "timestamp_sec": 0.6333333333333333,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000019.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 7,
+          "frame_index": 19,
+          "timestamp_sec": 0.6333333333333333,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000019.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "Walking_macro_000",
+        "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON floor",
+          "gray low-poly object ON floor",
+          "gray low-poly object TO the left of humanoid figure"
+        ],
+        "macro_intent": {
+          "task_type": "walk",
+          "target_object": "gray low-poly object",
+          "destination": "near gray low-poly object",
+          "confidence": 0.95,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "approach gray low-poly object",
+            "verb": "approach",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              2
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              2,
+              4
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "stop near gray low-poly object",
+            "verb": "stop",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              8
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "turn away from gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              8,
+              10
+            ]
+          },
+          {
+            "step_id": 6,
+            "text": "walk away from gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 7,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              12,
+              14
+            ]
+          },
+          {
+            "step_id": 8,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              16
+            ]
+          },
+          {
+            "step_id": 9,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              16,
+              18
+            ]
+          },
+          {
+            "step_id": 10,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              18,
+              20
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\"],\n  \"spatial_relations\": [\"humanoid figure ON floor\", \"gray low-poly object ON floor\", \"gray low-poly object TO the left of humanoid figure\"],\n  \"task_type\": \"walk\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"approach gray low-poly object\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop near gray low-poly object\",\n    \"turn away from gray low-poly object\",\n    \"walk away from gray low-poly object\",\n    \"stop\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"approach gray low-poly object\",\n      \"verb\": \"approach\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 2\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 2,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"stop near gray low-poly object\",\n      \"verb\": \"stop\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 8\n    },\n    {\n      \"text\": \"turn away from gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 8,\n      \"end_image_index\": 10\n    },\n    {\n      \"text\": \"walk away from gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 12,\n      \"end_image_index\": 14\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 16\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 16,\n      \"end_image_index\": 18\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 18,\n      \"end_image_index\": 20\n    }\n  ],\n  \"target_object\": \"gray low-poly object\",\n  \"destination\": \"near gray low-poly object\",\n  \"instruction\": \"Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.\",\n  \"transitions\": [2, 4, 6, 8, 10, 12, 14, 16, 18],\n  \"confidence\": 0.95\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.95,
+          "prediction_instruction": "Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.",
+          "transitions": [
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000031.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 8,
+      "timestamp_sec": 0.7333333333333333,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 8,
+          "frame_index": 22,
+          "timestamp_sec": 0.7333333333333333,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000022.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 8,
+          "frame_index": 22,
+          "timestamp_sec": 0.7333333333333333,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000022.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "Walking_macro_000",
+        "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON floor",
+          "gray low-poly object ON floor",
+          "gray low-poly object TO the left of humanoid figure"
+        ],
+        "macro_intent": {
+          "task_type": "walk",
+          "target_object": "gray low-poly object",
+          "destination": "near gray low-poly object",
+          "confidence": 0.95,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "approach gray low-poly object",
+            "verb": "approach",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              2
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              2,
+              4
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "stop near gray low-poly object",
+            "verb": "stop",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              8
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "turn away from gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              8,
+              10
+            ]
+          },
+          {
+            "step_id": 6,
+            "text": "walk away from gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 7,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              12,
+              14
+            ]
+          },
+          {
+            "step_id": 8,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              16
+            ]
+          },
+          {
+            "step_id": 9,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              16,
+              18
+            ]
+          },
+          {
+            "step_id": 10,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              18,
+              20
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\"],\n  \"spatial_relations\": [\"humanoid figure ON floor\", \"gray low-poly object ON floor\", \"gray low-poly object TO the left of humanoid figure\"],\n  \"task_type\": \"walk\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"approach gray low-poly object\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop near gray low-poly object\",\n    \"turn away from gray low-poly object\",\n    \"walk away from gray low-poly object\",\n    \"stop\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"approach gray low-poly object\",\n      \"verb\": \"approach\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 2\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 2,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"stop near gray low-poly object\",\n      \"verb\": \"stop\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 8\n    },\n    {\n      \"text\": \"turn away from gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 8,\n      \"end_image_index\": 10\n    },\n    {\n      \"text\": \"walk away from gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 12,\n      \"end_image_index\": 14\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 16\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 16,\n      \"end_image_index\": 18\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 18,\n      \"end_image_index\": 20\n    }\n  ],\n  \"target_object\": \"gray low-poly object\",\n  \"destination\": \"near gray low-poly object\",\n  \"instruction\": \"Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.\",\n  \"transitions\": [2, 4, 6, 8, 10, 12, 14, 16, 18],\n  \"confidence\": 0.95\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.95,
+          "prediction_instruction": "Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.",
+          "transitions": [
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000031.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 9,
+      "timestamp_sec": 0.8333333333333334,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 9,
+          "frame_index": 25,
+          "timestamp_sec": 0.8333333333333334,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 9,
+          "frame_index": 25,
+          "timestamp_sec": 0.8333333333333334,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "Walking_macro_000",
+        "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON floor",
+          "gray low-poly object ON floor",
+          "gray low-poly object TO the left of humanoid figure"
+        ],
+        "macro_intent": {
+          "task_type": "walk",
+          "target_object": "gray low-poly object",
+          "destination": "near gray low-poly object",
+          "confidence": 0.95,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "approach gray low-poly object",
+            "verb": "approach",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              2
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              2,
+              4
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "stop near gray low-poly object",
+            "verb": "stop",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              8
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "turn away from gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              8,
+              10
+            ]
+          },
+          {
+            "step_id": 6,
+            "text": "walk away from gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 7,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              12,
+              14
+            ]
+          },
+          {
+            "step_id": 8,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              16
+            ]
+          },
+          {
+            "step_id": 9,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              16,
+              18
+            ]
+          },
+          {
+            "step_id": 10,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              18,
+              20
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\"],\n  \"spatial_relations\": [\"humanoid figure ON floor\", \"gray low-poly object ON floor\", \"gray low-poly object TO the left of humanoid figure\"],\n  \"task_type\": \"walk\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"approach gray low-poly object\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop near gray low-poly object\",\n    \"turn away from gray low-poly object\",\n    \"walk away from gray low-poly object\",\n    \"stop\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"approach gray low-poly object\",\n      \"verb\": \"approach\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 2\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 2,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"stop near gray low-poly object\",\n      \"verb\": \"stop\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 8\n    },\n    {\n      \"text\": \"turn away from gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 8,\n      \"end_image_index\": 10\n    },\n    {\n      \"text\": \"walk away from gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 12,\n      \"end_image_index\": 14\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 16\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 16,\n      \"end_image_index\": 18\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 18,\n      \"end_image_index\": 20\n    }\n  ],\n  \"target_object\": \"gray low-poly object\",\n  \"destination\": \"near gray low-poly object\",\n  \"instruction\": \"Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.\",\n  \"transitions\": [2, 4, 6, 8, 10, 12, 14, 16, 18],\n  \"confidence\": 0.95\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.95,
+          "prediction_instruction": "Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.",
+          "transitions": [
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000031.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 10,
+      "timestamp_sec": 0.9333333333333333,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 10,
+          "frame_index": 28,
+          "timestamp_sec": 0.9333333333333333,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000028.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 10,
+          "frame_index": 28,
+          "timestamp_sec": 0.9333333333333333,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000028.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "Walking_macro_000",
+        "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON floor",
+          "gray low-poly object ON floor",
+          "gray low-poly object TO the left of humanoid figure"
+        ],
+        "macro_intent": {
+          "task_type": "walk",
+          "target_object": "gray low-poly object",
+          "destination": "near gray low-poly object",
+          "confidence": 0.95,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "approach gray low-poly object",
+            "verb": "approach",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              2
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              2,
+              4
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "stop near gray low-poly object",
+            "verb": "stop",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              8
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "turn away from gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              8,
+              10
+            ]
+          },
+          {
+            "step_id": 6,
+            "text": "walk away from gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 7,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              12,
+              14
+            ]
+          },
+          {
+            "step_id": 8,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              16
+            ]
+          },
+          {
+            "step_id": 9,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              16,
+              18
+            ]
+          },
+          {
+            "step_id": 10,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              18,
+              20
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\"],\n  \"spatial_relations\": [\"humanoid figure ON floor\", \"gray low-poly object ON floor\", \"gray low-poly object TO the left of humanoid figure\"],\n  \"task_type\": \"walk\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"approach gray low-poly object\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop near gray low-poly object\",\n    \"turn away from gray low-poly object\",\n    \"walk away from gray low-poly object\",\n    \"stop\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"approach gray low-poly object\",\n      \"verb\": \"approach\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 2\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 2,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"stop near gray low-poly object\",\n      \"verb\": \"stop\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 8\n    },\n    {\n      \"text\": \"turn away from gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 8,\n      \"end_image_index\": 10\n    },\n    {\n      \"text\": \"walk away from gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 12,\n      \"end_image_index\": 14\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 16\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 16,\n      \"end_image_index\": 18\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 18,\n      \"end_image_index\": 20\n    }\n  ],\n  \"target_object\": \"gray low-poly object\",\n  \"destination\": \"near gray low-poly object\",\n  \"instruction\": \"Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.\",\n  \"transitions\": [2, 4, 6, 8, 10, 12, 14, 16, 18],\n  \"confidence\": 0.95\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.95,
+          "prediction_instruction": "Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.",
+          "transitions": [
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000031.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "frame_id": 11,
+      "timestamp_sec": 1.0333333333333334,
+      "view_frames": {
+        "fixed": {
+          "frame_id": 11,
+          "frame_index": 31,
+          "timestamp_sec": 1.0333333333333334,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+          "view_id": "fixed"
+        },
+        "ego": {
+          "frame_id": 11,
+          "frame_index": 31,
+          "timestamp_sec": 1.0333333333333334,
+          "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000031.jpg",
+          "view_id": "ego"
+        }
+      },
+      "view_annotations": {},
+      "fused_annotation": {
+        "scenario_id": "Walking_macro_000",
+        "image_path": "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+        "source_instruction": "",
+        "objects": [
+          "humanoid figure",
+          "gray low-poly object"
+        ],
+        "spatial_relations": [
+          "humanoid figure ON floor",
+          "gray low-poly object ON floor",
+          "gray low-poly object TO the left of humanoid figure"
+        ],
+        "macro_intent": {
+          "task_type": "walk",
+          "target_object": "gray low-poly object",
+          "destination": "near gray low-poly object",
+          "confidence": 0.95,
+          "domain": "locomotion"
+        },
+        "micro_instructions": [
+          {
+            "step_id": 1,
+            "text": "approach gray low-poly object",
+            "verb": "approach",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              0,
+              2
+            ]
+          },
+          {
+            "step_id": 2,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              2,
+              4
+            ]
+          },
+          {
+            "step_id": 3,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              4,
+              6
+            ]
+          },
+          {
+            "step_id": 4,
+            "text": "stop near gray low-poly object",
+            "verb": "stop",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              6,
+              8
+            ]
+          },
+          {
+            "step_id": 5,
+            "text": "turn away from gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              8,
+              10
+            ]
+          },
+          {
+            "step_id": 6,
+            "text": "walk away from gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              10,
+              12
+            ]
+          },
+          {
+            "step_id": 7,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              12,
+              14
+            ]
+          },
+          {
+            "step_id": 8,
+            "text": "turn toward gray low-poly object",
+            "verb": "turn",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "torso",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              14,
+              16
+            ]
+          },
+          {
+            "step_id": 9,
+            "text": "walk toward gray low-poly object",
+            "verb": "walk",
+            "object": "gray low-poly object",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "walking",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              16,
+              18
+            ]
+          },
+          {
+            "step_id": 10,
+            "text": "stop",
+            "verb": "stop",
+            "object": "none",
+            "confidence": 0.95,
+            "body_part": "legs",
+            "contact_state": "none",
+            "posture": "standing",
+            "observed_trajectory": null,
+            "evidence_frame_ids": [
+              18,
+              20
+            ]
+          }
+        ],
+        "raw_recognition": "{\n  \"objects\": [\"humanoid figure\", \"gray low-poly object\"],\n  \"spatial_relations\": [\"humanoid figure ON floor\", \"gray low-poly object ON floor\", \"gray low-poly object TO the left of humanoid figure\"],\n  \"task_type\": \"walk\",\n  \"domain\": \"locomotion\",\n  \"action_sequence\": [\n    \"approach gray low-poly object\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop near gray low-poly object\",\n    \"turn away from gray low-poly object\",\n    \"walk away from gray low-poly object\",\n    \"stop\",\n    \"turn toward gray low-poly object\",\n    \"walk toward gray low-poly object\",\n    \"stop\"\n  ],\n  \"action_details\": [\n    {\n      \"text\": \"approach gray low-poly object\",\n      \"verb\": \"approach\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 0,\n      \"end_image_index\": 2\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 2,\n      \"end_image_index\": 4\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 4,\n      \"end_image_index\": 6\n    },\n    {\n      \"text\": \"stop near gray low-poly object\",\n      \"verb\": \"stop\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 6,\n      \"end_image_index\": 8\n    },\n    {\n      \"text\": \"turn away from gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 8,\n      \"end_image_index\": 10\n    },\n    {\n      \"text\": \"walk away from gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 10,\n      \"end_image_index\": 12\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 12,\n      \"end_image_index\": 14\n    },\n    {\n      \"text\": \"turn toward gray low-poly object\",\n      \"verb\": \"turn\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"torso\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 14,\n      \"end_image_index\": 16\n    },\n    {\n      \"text\": \"walk toward gray low-poly object\",\n      \"verb\": \"walk\",\n      \"object\": \"gray low-poly object\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"walking\",\n      \"start_image_index\": 16,\n      \"end_image_index\": 18\n    },\n    {\n      \"text\": \"stop\",\n      \"verb\": \"stop\",\n      \"object\": \"none\",\n      \"body_part\": \"legs\",\n      \"contact_state\": \"none\",\n      \"posture\": \"standing\",\n      \"start_image_index\": 18,\n      \"end_image_index\": 20\n    }\n  ],\n  \"target_object\": \"gray low-poly object\",\n  \"destination\": \"near gray low-poly object\",\n  \"instruction\": \"Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.\",\n  \"transitions\": [2, 4, 6, 8, 10, 12, 14, 16, 18],\n  \"confidence\": 0.95\n}",
+        "view_id": "fused",
+        "metadata": {
+          "category": "video",
+          "recognition_confidence": 0.95,
+          "prediction_instruction": "Walk toward and stop near the gray low-poly object, then walk away and return to stop near it again.",
+          "transitions": [
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18
+          ],
+          "view_mode": "fused",
+          "evidence_paths": [
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\fixed\\frame_00000031.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000000.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000002.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000005.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000008.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000011.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000014.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000016.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000019.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000022.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000025.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000028.jpg",
+            "C:\\Users\\lcy\\Desktop\\11_project\\.semantic_motion_work\\Walking\\fused\\macro\\window_000\\ego\\frame_00000031.jpg"
+          ]
+        }
+      }
+    }
+  ],
+  "task_segments": [
+    {
+      "segment_id": "segment_000",
+      "start_time_sec": 0.0,
+      "end_time_sec": 1.0666666666666667,
+      "frame_ids": [
+        0,
+        10,
+        20,
+        31
+      ],
+      "task_instruction": "walk toward the gray low-poly object and stop facing it.",
+      "objects": [
+        "humanoid figure",
+        "gray low-poly object"
+      ],
+      "spatial_relations": [
+        "humanoid figure ON floor",
+        "gray low-poly object ON floor",
+        "gray low-poly object TO the left of humanoid figure"
+      ],
+      "macro_intent": {
+        "task_type": "walk",
+        "target_object": "gray low-poly object",
+        "destination": "near gray low-poly object",
+        "confidence": 0.95,
+        "domain": "locomotion"
+      },
+      "micro_instructions": [
+        {
+          "step_id": 1,
+          "text": "approach gray low-poly object",
+          "verb": "walk",
+          "object": "gray low-poly object",
+          "confidence": 0.95,
+          "body_part": "legs",
+          "contact_state": "approach",
+          "posture": "walking",
+          "observed_trajectory": {
+            "track_names": [
+              "Root",
+              "Hand_R",
+              "Hand_L"
+            ],
+            "start_time_sec": 0.0,
+            "end_time_sec": 1.0666666666666667,
+            "coordinate_frame": "world"
+          },
+          "evidence_frame_ids": [
+            0,
+            10,
+            20,
+            31
+          ]
+        },
+        {
+          "step_id": 2,
+          "text": "stop near gray low-poly object",
+          "verb": "stop",
+          "object": "gray low-poly object",
+          "confidence": 0.95,
+          "body_part": "legs",
+          "contact_state": "unknown",
+          "posture": "standing",
+          "observed_trajectory": {
+            "track_names": [
+              "Root",
+              "Hand_R",
+              "Hand_L"
+            ],
+            "start_time_sec": 0.0,
+            "end_time_sec": 1.0666666666666667,
+            "coordinate_frame": "world"
+          },
+          "evidence_frame_ids": [
+            0,
+            10,
+            20,
+            31
+          ]
+        },
+        {
+          "step_id": 3,
+          "text": "turn toward gray low-poly object",
+          "verb": "turn",
+          "object": "gray low-poly object",
+          "confidence": 0.95,
+          "body_part": "torso",
+          "contact_state": "unknown",
+          "posture": "standing",
+          "observed_trajectory": {
+            "track_names": [
+              "Root",
+              "Hand_R",
+              "Hand_L"
+            ],
+            "start_time_sec": 0.0,
+            "end_time_sec": 1.0666666666666667,
+            "coordinate_frame": "world"
+          },
+          "evidence_frame_ids": [
+            0,
+            10,
+            20,
+            31
+          ]
+        },
+        {
+          "step_id": 4,
+          "text": "stand facing gray low-poly object",
+          "verb": "stand",
+          "object": "gray low-poly object",
+          "confidence": 0.95,
+          "body_part": "legs",
+          "contact_state": "unknown",
+          "posture": "standing",
+          "observed_trajectory": {
+            "track_names": [
+              "Root",
+              "Hand_R",
+              "Hand_L"
+            ],
+            "start_time_sec": 0.0,
+            "end_time_sec": 1.0666666666666667,
+            "coordinate_frame": "world"
+          },
+          "evidence_frame_ids": [
+            0,
+            10,
+            20,
+            31
+          ]
+        }
+      ],
+      "augmented_instructions": [
+        {
+          "text": "Move forward until you are close to the gray low-poly object, then rotate your body so that you face it directly and come to a complete stop.",
+          "strategy": "decompose into movement + orientation + termination",
+          "source_step_ids": [
+            1,
+            3,
+            4
+          ],
+          "metadata": {
+            "rewriter": "llm",
+            "model": "qwen3-vl-flash",
+            "prompt_version": "ungated_rewriter_v1",
+            "prompt_file": "C:\\Users\\lcy\\Desktop\\11_project\\src\\semantic_motion\\llm_augmentation_prompt.txt",
+            "validation": "disabled",
+            "raw_response": "{\n  \"variants\": [\n    {\n      \"text\": \"Move forward until you are close to the gray low-poly object, then rotate your body so that you face it directly and come to a complete stop.\",\n      \"strategy\": \"decompose into movement + orientation + termination\",\n      \"source_step_ids\": [1, 3, 4]\n    },\n    {\n      \"text\": \"Walk from your current position toward the gray low-poly object on the left, halt when near it, and adjust your stance to face it squarely.\",\n      \"strategy\": \"emphasize spatial context (left) and posture adjustment\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    },\n    {\n      \"text\": \"Advance toward the gray low-poly object, pause just before reaching it, and turn your torso to align with the object¡ªthen hold your final standing pose facing it.\",\n      \"strategy\": \"highlight temporal sequencing: advance ¡ú pause ¡ú orient ¡ú hold\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    }\n  ]\n}"
+          }
+        },
+        {
+          "text": "Walk from your current position toward the gray low-poly object on the left, halt when near it, and adjust your stance to face it squarely.",
+          "strategy": "emphasize spatial context (left) and posture adjustment",
+          "source_step_ids": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "metadata": {
+            "rewriter": "llm",
+            "model": "qwen3-vl-flash",
+            "prompt_version": "ungated_rewriter_v1",
+            "prompt_file": "C:\\Users\\lcy\\Desktop\\11_project\\src\\semantic_motion\\llm_augmentation_prompt.txt",
+            "validation": "disabled",
+            "raw_response": "{\n  \"variants\": [\n    {\n      \"text\": \"Move forward until you are close to the gray low-poly object, then rotate your body so that you face it directly and come to a complete stop.\",\n      \"strategy\": \"decompose into movement + orientation + termination\",\n      \"source_step_ids\": [1, 3, 4]\n    },\n    {\n      \"text\": \"Walk from your current position toward the gray low-poly object on the left, halt when near it, and adjust your stance to face it squarely.\",\n      \"strategy\": \"emphasize spatial context (left) and posture adjustment\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    },\n    {\n      \"text\": \"Advance toward the gray low-poly object, pause just before reaching it, and turn your torso to align with the object¡ªthen hold your final standing pose facing it.\",\n      \"strategy\": \"highlight temporal sequencing: advance ¡ú pause ¡ú orient ¡ú hold\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    }\n  ]\n}"
+          }
+        },
+        {
+          "text": "Advance toward the gray low-poly object, pause just before reaching it, and turn your torso to align with the object¡ªthen hold your final standing pose facing it.",
+          "strategy": "highlight temporal sequencing: advance ¡ú pause ¡ú orient ¡ú hold",
+          "source_step_ids": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "metadata": {
+            "rewriter": "llm",
+            "model": "qwen3-vl-flash",
+            "prompt_version": "ungated_rewriter_v1",
+            "prompt_file": "C:\\Users\\lcy\\Desktop\\11_project\\src\\semantic_motion\\llm_augmentation_prompt.txt",
+            "validation": "disabled",
+            "raw_response": "{\n  \"variants\": [\n    {\n      \"text\": \"Move forward until you are close to the gray low-poly object, then rotate your body so that you face it directly and come to a complete stop.\",\n      \"strategy\": \"decompose into movement + orientation + termination\",\n      \"source_step_ids\": [1, 3, 4]\n    },\n    {\n      \"text\": \"Walk from your current position toward the gray low-poly object on the left, halt when near it, and adjust your stance to face it squarely.\",\n      \"strategy\": \"emphasize spatial context (left) and posture adjustment\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    },\n    {\n      \"text\": \"Advance toward the gray low-poly object, pause just before reaching it, and turn your torso to align with the object¡ªthen hold your final standing pose facing it.\",\n      \"strategy\": \"highlight temporal sequencing: advance ¡ú pause ¡ú orient ¡ú hold\",\n      \"source_step_ids\": [1, 2, 3, 4]\n    }\n  ]\n}"
+          }
+        }
+      ],
+      "confidence": 0.95,
+      "start_frame": 0,
+      "end_frame": 32,
+      "evidence_by_view": {
+        "fixed": [
+          0,
+          10,
+          20,
+          31
+        ],
+        "ego": [
+          0,
+          10,
+          20,
+          31
+        ]
+      },
+      "metadata": {
+        "micro_window_count": 1,
+        "view_mode": "fused",
+        "trajectory_linked": true,
+        "augmentation_audit": [
+          {
+            "text": "Move forward until you are close to the gray low-poly object, then rotate your body so that you face it directly and come to a complete stop.",
+            "included": true,
+            "validation": "disabled"
+          },
+          {
+            "text": "Walk from your current position toward the gray low-poly object on the left, halt when near it, and adjust your stance to face it squarely.",
+            "included": true,
+            "validation": "disabled"
+          },
+          {
+            "text": "Advance toward the gray low-poly object, pause just before reaching it, and turn your torso to align with the object¡ªthen hold your final standing pose facing it.",
+            "included": true,
+            "validation": "disabled"
+          }
+        ],
+        "alternative_micro_observations": []
+      }
+    }
+  ],
+  "metadata": {
+    "method": "paired_overlapping_macro_dense_micro_v1",
+    "view_mode": "fused",
+    "macro_window_sec": 16.0,
+    "macro_step_sec": 8.0,
+    "macro_frames": 12,
+    "micro_window_sec": 2.0,
+    "micro_step_sec": 1.0,
+    "micro_frames": 4,
+    "cut_frames": [],
+    "macro_window_count": 1,
+    "provenance": {
+      "dataset": "Module D",
+      "source_id": "Walking",
+      "generator": "src.semantic_motion.view_bundle",
+      "revision": "4fe00f16fa6a81762d655a0c751a108edb5f48a9",
+      "config": {},
+      "checksums": {}
+    },
+    "validation_diagnostics": [],
+    "validation_enforced": false,
+    "generation_model": "qwen3-vl-flash",
+    "rewriter": "LLMInstructionRewriter",
+    "rewrite_prompt_version": "ungated_rewriter_v1"
+  }
+}
